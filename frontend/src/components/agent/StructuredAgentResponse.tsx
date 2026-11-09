@@ -263,6 +263,69 @@ function renderFormattedInlineText(
   return parts;
 }
 
+/**
+ * Renders markdown pipe tables as clean, styled, scrollable tables
+ */
+function renderMarkdownTable(
+  tableText: string,
+  onOpenCitation?: (c: CitationItem) => void
+) {
+  const lines = tableText
+    .trim()
+    .split("\n")
+    .map((l) => l.trim())
+    .filter((l) => l.startsWith("|"));
+  if (lines.length < 2) return null;
+
+  const headerLine = lines[0];
+  const dataLines = lines.slice(1).filter((l) => !l.match(/^\|[-:\s|]+\|$/));
+
+  const parseRow = (line: string) =>
+    line
+      .split("|")
+      .slice(1, -1)
+      .map((c) => c.trim().replace(/<br\s*\/?>/gi, " "));
+
+  const headers = parseRow(headerLine);
+  if (headers.length === 0) return null;
+
+  return (
+    <div className="overflow-x-auto my-3 rounded-xl border border-white/10 bg-black/50 shadow-inner">
+      <table className="w-full text-left text-xs border-collapse min-w-[500px]">
+        <thead>
+          <tr className="border-b border-white/15 bg-white/[0.04]">
+            {headers.map((h, i) => (
+              <th
+                key={i}
+                className="py-2.5 px-3.5 font-mono font-semibold text-[11px] text-[#C6B9D8] uppercase tracking-wider"
+              >
+                {h}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-white/5 font-sans">
+          {dataLines.map((rowLine, rIdx) => {
+            const cells = parseRow(rowLine);
+            return (
+              <tr key={rIdx} className="hover:bg-white/[0.02] transition-colors">
+                {cells.map((cell, cIdx) => (
+                  <td
+                    key={cIdx}
+                    className="py-2.5 px-3.5 text-zinc-200 text-xs align-top leading-relaxed"
+                  >
+                    {renderFormattedInlineText(cell, onOpenCitation)}
+                  </td>
+                ))}
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
+    </div>
+  );
+}
+
 export function StructuredAgentResponse({
   content,
   isUser = false,
@@ -279,10 +342,10 @@ export function StructuredAgentResponse({
   }
 
   // -------------------------------------------------------------
-  // PATTERN 1: Modular Investigation (### WHAT WE FOUND, etc.)
+  // PATTERN 1: Generic Markdown Sections (### Heading)
   // -------------------------------------------------------------
-  if (content.includes("### WHAT WE FOUND") || content.includes("### HISTORICAL PATTERN")) {
-    const rawSections = content.split(/(?=###\s+[A-Z\s]+)/);
+  if (content.includes("### ")) {
+    const rawSections = content.split(/(?=###\s+)/);
 
     return (
       <div className="space-y-3.5 font-sans">
@@ -290,191 +353,97 @@ export function StructuredAgentResponse({
           const trimmed = sec.trim();
           if (!trimmed) return null;
 
-          // WHAT WE FOUND
-          if (trimmed.startsWith("### WHAT WE FOUND")) {
-            const body = trimmed.replace("### WHAT WE FOUND", "").trim();
-            return (
-              <div
-                key={idx}
-                className="p-3.5 sm:p-4 rounded-xl bg-[#14121a]/70 border border-[#C6B9D8]/25 shadow-subtle space-y-2"
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-md bg-[#C6B9D8]/20 flex items-center justify-center text-[#C6B9D8]">
-                    <Search className="w-3.5 h-3.5" />
-                  </div>
-                  <span className="text-[11px] font-bold tracking-wider uppercase text-[#C6B9D8] font-mono">
-                    What We Found
-                  </span>
-                </div>
-                <div className="text-xs sm:text-sm text-white leading-relaxed">
-                  {renderFormattedInlineText(body, onOpenCitation)}
-                </div>
-              </div>
-            );
+          const lines = trimmed.split("\n");
+          const headerLine = lines[0].replace(/^###\s+/, "").trim();
+          const body = lines.slice(1).join("\n").trim();
+          const titleLower = headerLine.toLowerCase();
+
+          // Determine Card Theme & Icon
+          let cardBg = "bg-[#121214] border-white/15";
+          let icon = <FileText className="w-3.5 h-3.5 text-white" />;
+          let iconBg = "bg-white/10 text-white";
+          let titleColor = "text-white";
+          let badge: string | null = null;
+
+          if (titleLower.includes("summary") || titleLower.includes("executive") || titleLower.includes("answer") || titleLower.includes("what we found")) {
+            cardBg = "bg-[#14121a]/70 border-[#C6B9D8]/25";
+            icon = <Sparkles className="w-3.5 h-3.5 text-[#C6B9D8]" />;
+            iconBg = "bg-[#C6B9D8]/20 text-[#C6B9D8]";
+            titleColor = "text-[#C6B9D8]";
+          } else if (titleLower.includes("finding") || titleLower.includes("evidence") || titleLower.includes("standard")) {
+            cardBg = "bg-[#111113] border-white/15";
+            icon = <Search className="w-3.5 h-3.5 text-[#D5A6B5]" />;
+            iconBg = "bg-[#D5A6B5]/20 text-[#D5A6B5]";
+            titleColor = "text-[#D5A6B5]";
+          } else if (titleLower.includes("memory") || titleLower.includes("hindsight") || titleLower.includes("pattern") || titleLower.includes("precedent") || titleLower.includes("recurrence")) {
+            cardBg = "bg-[#131217] border-[#C6B9D8]/20";
+            icon = <Brain className="w-3.5 h-3.5 text-[#C6B9D8]" />;
+            iconBg = "bg-[#C6B9D8]/20 text-[#C6B9D8]";
+            titleColor = "text-[#C6B9D8]";
+            badge = "Hindsight Memory Bank";
+          } else if (titleLower.includes("action") || titleLower.includes("recommend") || titleLower.includes("control") || titleLower.includes("solution")) {
+            cardBg = "bg-emerald-950/20 border-emerald-500/30";
+            icon = <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />;
+            iconBg = "bg-emerald-500/20 text-emerald-400";
+            titleColor = "text-emerald-400";
           }
 
-          // HISTORICAL PATTERN
-          if (trimmed.startsWith("### HISTORICAL PATTERN")) {
-            const body = trimmed.replace("### HISTORICAL PATTERN", "").trim();
-            const lines = body.split("\n").filter((l) => l.trim().length > 0);
+          // Check if body contains table
+          const hasTable = body.includes("|") && body.includes("---");
 
-            return (
-              <div
-                key={idx}
-                className="p-3.5 sm:p-4 rounded-xl bg-[#121214] border border-white/15 shadow-subtle space-y-2.5"
-              >
+          return (
+            <div
+              key={idx}
+              className={`p-3.5 sm:p-4 rounded-xl ${cardBg} shadow-subtle space-y-2.5`}
+            >
+              <div className="flex items-center justify-between gap-2 flex-wrap">
                 <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-md bg-[#D5A6B5]/20 flex items-center justify-center text-[#D5A6B5]">
-                    <History className="w-3.5 h-3.5" />
+                  <div className={`w-5 h-5 rounded-md ${iconBg} flex items-center justify-center`}>
+                    {icon}
                   </div>
-                  <span className="text-[11px] font-bold tracking-wider uppercase text-[#D5A6B5] font-mono">
-                    Historical Pattern & Recurrence
-                  </span>
-                </div>
-                <div className="space-y-1.5 pl-1">
-                  {lines.map((line, lidx) => (
-                    <div key={lidx} className="flex items-start gap-2 text-xs sm:text-sm text-zinc-200">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#D5A6B5] mt-1.5 shrink-0" />
-                      <div className="flex-1 leading-relaxed">
-                        {renderFormattedInlineText(line.replace(/^-\s*/, ""), onOpenCitation)}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          }
-
-          // POSSIBLE EXPLANATION
-          if (trimmed.startsWith("### POSSIBLE EXPLANATION")) {
-            const body = trimmed.replace("### POSSIBLE EXPLANATION", "").trim();
-            return (
-              <div
-                key={idx}
-                className="p-3.5 sm:p-4 rounded-xl bg-[#181312]/60 border border-[#F3D0C0]/25 shadow-subtle space-y-2"
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-md bg-[#F3D0C0]/20 flex items-center justify-center text-[#F3D0C0]">
-                    <Brain className="w-3.5 h-3.5" />
-                  </div>
-                  <span className="text-[11px] font-bold tracking-wider uppercase text-[#F3D0C0] font-mono">
-                    Root Cause Analysis & Mechanism
-                  </span>
-                </div>
-                <div className="text-xs sm:text-sm text-zinc-100 leading-relaxed">
-                  {renderFormattedInlineText(body, onOpenCitation)}
-                </div>
-              </div>
-            );
-          }
-
-          // RECOMMENDED NEXT STEP
-          if (trimmed.startsWith("### RECOMMENDED NEXT STEP")) {
-            const body = trimmed.replace("### RECOMMENDED NEXT STEP", "").trim();
-            const requiresHumanApproval =
-              body.toLowerCase().includes("human approval") ||
-              body.toLowerCase().includes("requires human");
-
-            return (
-              <div
-                key={idx}
-                className="p-3.5 sm:p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/30 shadow-subtle space-y-2.5"
-              >
-                <div className="flex items-center justify-between flex-wrap gap-2">
-                  <div className="flex items-center gap-2">
-                    <div className="w-5 h-5 rounded-md bg-emerald-500/20 flex items-center justify-center text-emerald-400">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
-                    </div>
-                    <span className="text-[11px] font-bold tracking-wider uppercase text-emerald-400 font-mono">
-                      Recommended Next Action
-                    </span>
-                  </div>
-
-                  {requiresHumanApproval && (
-                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-mono font-bold bg-amber-950/50 text-amber-300 border border-amber-500/40">
-                      <Lock className="w-2.5 h-2.5" />
-                      Human Approval Gate Enforced
-                    </span>
-                  )}
-                </div>
-                <div className="text-xs sm:text-sm text-zinc-100 leading-relaxed">
-                  {renderFormattedInlineText(body, onOpenCitation)}
-                </div>
-              </div>
-            );
-          }
-
-          // EVIDENCE
-          if (trimmed.startsWith("### EVIDENCE")) {
-            const body = trimmed.replace("### EVIDENCE", "").trim();
-            const lines = body.split("\n").filter((l) => l.trim().length > 0);
-            const memoryLine = lines.find((l) => l.toLowerCase().includes("historical memory used"));
-            const otherLines = lines.filter((l) => !l.toLowerCase().includes("historical memory used"));
-
-            return (
-              <div
-                key={idx}
-                className="p-3.5 sm:p-4 rounded-xl bg-[#111113] border border-white/15 shadow-subtle space-y-2.5"
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-5 h-5 rounded-md bg-white/15 flex items-center justify-center text-white">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                  </div>
-                  <span className="text-[11px] font-bold tracking-wider uppercase text-white font-mono">
-                    Evidentiary Grounding
+                  <span className={`text-[11px] font-bold tracking-wider uppercase font-mono ${titleColor}`}>
+                    {headerLine}
                   </span>
                 </div>
 
-                <div className="space-y-1.5 pl-1">
-                  {otherLines.map((line, oidx) => (
-                    <div key={oidx} className="flex items-start gap-2 text-xs text-zinc-300">
-                      <span className="w-1.5 h-1.5 rounded-full bg-white/40 mt-1.5 shrink-0" />
-                      <div className="flex-1 leading-relaxed">
-                        {renderFormattedInlineText(line.replace(/^-\s*/, ""), onOpenCitation)}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Expandable Historical Memory Pill */}
-                {memoryLine && (
-                  <div className="pt-2 border-t border-white/10">
-                    <button
-                      type="button"
-                      onClick={() => setMemoryExpanded((prev) => !prev)}
-                      className="w-full flex items-center justify-between p-2 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-left transition cursor-pointer text-xs"
-                    >
-                      <div className="flex items-center gap-2">
-                        <Brain className="w-3.5 h-3.5 text-[#C6B9D8]" />
-                        <span className="font-mono text-[11px] text-[#C6B9D8] font-semibold">
-                          Historical Memory Used: Hindsight Episodic Bank
-                        </span>
-                      </div>
-                      {memoryExpanded ? (
-                        <ChevronUp className="w-3.5 h-3.5 text-zinc-400" />
-                      ) : (
-                        <ChevronDown className="w-3.5 h-3.5 text-zinc-400" />
-                      )}
-                    </button>
-
-                    {memoryExpanded && (
-                      <div className="mt-2 p-2.5 rounded-lg bg-[#14121a] border border-[#C6B9D8]/30 text-xs text-zinc-200 leading-relaxed font-sans">
-                        {renderFormattedInlineText(
-                          memoryLine.replace(/^-\s*/, "").replace(/^Historical memory used:\s*/i, ""),
-                          onOpenCitation
-                        )}
-                      </div>
-                    )}
-                  </div>
+                {badge && (
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-[#C6B9D8]/10 text-[#C6B9D8] border border-[#C6B9D8]/20">
+                    {badge}
+                  </span>
                 )}
               </div>
-            );
-          }
 
-          // Fallback generic section
-          return (
-            <div key={idx} className="text-xs sm:text-sm text-zinc-100 leading-relaxed">
-              {renderFormattedInlineText(trimmed, onOpenCitation)}
+              {/* Render Table if present */}
+              {hasTable ? (
+                renderMarkdownTable(body, onOpenCitation)
+              ) : (
+                /* Render Paragraphs or Bullet Points */
+                <div className="space-y-2 text-xs sm:text-sm text-zinc-100 leading-relaxed">
+                  {body.split("\n\n").map((para, pIdx) => {
+                    const trimmedPara = para.trim();
+                    if (trimmedPara.startsWith("- ") || trimmedPara.startsWith("* ") || trimmedPara.startsWith("• ")) {
+                      const bullets = trimmedPara.split("\n").filter((b) => b.trim().length > 0);
+                      return (
+                        <div key={pIdx} className="space-y-1.5 pl-1">
+                          {bullets.map((bullet, bIdx) => (
+                            <div key={bIdx} className="flex items-start gap-2">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#C6B9D8] mt-1.5 shrink-0" />
+                              <div className="flex-1 leading-relaxed text-zinc-200">
+                                {renderFormattedInlineText(bullet.replace(/^[-*•]\s*/, ""), onOpenCitation)}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      );
+                    }
+                    return (
+                      <div key={pIdx}>
+                        {renderFormattedInlineText(trimmedPara, onOpenCitation)}
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
             </div>
           );
         })}

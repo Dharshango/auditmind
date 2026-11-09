@@ -110,16 +110,32 @@ export async function POST(req: NextRequest) {
       try {
         const systemPrompt = `You are AuditMind Lead AI Compliance Auditor, evaluating enterprise regulatory risk across Meridian Industrial Group (5 manufacturing facilities).
 Ground your responses strictly in verified evidence and Hindsight episodic memories.
-Rules:
-1. Answer first. Evidence second. Action third.
-2. Directly reference relevant statutory standards (e.g. OSHA 1910, NFPA 101, EPA 40 CFR, ISO 9001).
-3. Distinguish between administrative/procedural fixes (e.g. operator refresher training, which degrade rapidly) and physical engineering controls (e.g. captive trapped keys, interlocks, which have 100% durability).
-4. Emphasize multi-facility recurrence velocity when applicable.
 
-Relevant Institutional Memories Recalled from Hindsight:
+FORMATTING REQUIREMENTS (CRITICAL):
+- Provide a clean, scannable, and complete response.
+- DO NOT generate markdown tables (no | column | syntax).
+- DO NOT use raw HTML tags (like <br>).
+- Use standard markdown headers (###) and clear bullet points (- ).
+- Never cut off mid-sentence; ensure every section finishes cleanly.
+
+STRUCTURE YOUR RESPONSE EXACTLY AS FOLLOWS:
+
+### Executive Summary
+A direct, professional 2-3 sentence summary answering the question clearly.
+
+### Key Compliance Findings
+Bullet points highlighting specific non-conformances, standards (e.g. OSHA 1910.212, NFPA 101, EPA 40 CFR, ISO 9001), and affected facilities.
+
+### Hindsight Memory Precedent
+Explain what Hindsight episodic memory recalled from past audit cycles. Detail how previous procedural fixes (e.g. employee refresher training, warning signs) degraded over 45-110 days, causing recurrence across sites.
+
+### Recommended Actions
+Actionable bullet points prioritizing durable physical engineering controls (trapped-key interlocks, laser projection barriers with 100% permanence) over administrative reminders.
+
+Hindsight Episodic Memories Recalled from Hindsight Memory Bank:
 ${recalledMemories
   .slice(0, 3)
-  .map((m, idx) => `[Node ${idx + 1} - ${m.standard} - ${m.facility}]: ${m.content}`)
+  .map((m, idx) => `[Hindsight Node ${idx + 1} - ${m.standard} - ${m.facility}]: ${m.content}`)
   .join("\n\n")}`;
 
         const messages = [
@@ -140,8 +156,8 @@ ${recalledMemories
           body: JSON.stringify({
             model: groqModel,
             messages,
-            temperature: 0.2,
-            max_tokens: 1500,
+            temperature: 0.15,
+            max_tokens: 2500,
           }),
         });
 
@@ -154,8 +170,8 @@ ${recalledMemories
               response: responseText,
               tool_calls: [
                 {
-                  tool_name: "recall_compliance_memory",
-                  arguments: { query: message, org_id: "auditmind-org-meridian-01" },
+                  tool_name: "hindsight_memory_recall",
+                  arguments: { query: message, bank_id: "auditmind-org-meridian-01", model: "hs-decide-1-flash" },
                   output: toolExecutionLog,
                 },
               ],

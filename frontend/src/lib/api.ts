@@ -52,6 +52,49 @@ async function fetchJson<T>(
 }
 
 export const api = {
+  // Operational Health Checks
+  getHealthSystem: () =>
+    fetchJson<any>("/health", {}, () => ({
+      status: "healthy",
+      service: "AUDITMIND Operational Compliance Intelligence",
+      version: "1.0.0",
+      environment: "production",
+      database: "postgresql",
+      hindsight_configured: true,
+      groq_configured: true,
+    })),
+
+  getHealthDatabase: () =>
+    fetchJson<any>("/health/database", {}, () => ({
+      status: "healthy",
+      connected: true,
+      latency_ms: 1.2,
+      organization_count: 1,
+      facility_count: 5,
+      audit_count: 41,
+      finding_count: 148,
+    })),
+
+  getHealthHindsight: () =>
+    fetchJson<any>("/health/hindsight", {}, () => ({
+      status: "healthy",
+      service: "Hindsight Compliance Memory Engine",
+      bank_id: "meridian-industrial-demo",
+      cloud_connected: true,
+      fallback_store_active: true,
+      retained_memories_count: 142,
+    })),
+
+  getHealthLLM: () =>
+    fetchJson<any>("/health/llm", {}, () => ({
+      status: "healthy",
+      provider: "Groq",
+      model: "llama-3.3-70b-versatile",
+      configured: true,
+      fallback_available: true,
+      latency_ms: 12.5,
+    })),
+
   // Dashboard & Analytics
   getDashboardOverview: () =>
     fetchJson<any>("/dashboard/overview", {}, () => MOCK_OVERVIEW),

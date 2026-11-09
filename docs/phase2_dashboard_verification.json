@@ -1,0 +1,122 @@
+{
+  "title": "Executive Overview",
+  "subtitle": "Your operations, at a glance.",
+  "healthNodes": [
+    "BACKEND:OPERATIONAL (v1.0.0)",
+    "DATABASE:CONNECTED (19.42ms)",
+    "HINDSIGHT:LOCAL MEMORY BANK ACTIVE",
+    "AI AGENT:DETERMINISTIC ENGINE"
+  ],
+  "metricBoxes": [
+    {
+      "label": "Total Facilities",
+      "value": "5",
+      "sub": "5 operating nodes"
+    },
+    {
+      "label": "Total Audits",
+      "value": "41",
+      "sub": "89.9% avg adherence"
+    },
+    {
+      "label": "Open Findings",
+      "value": "47",
+      "sub": "Active remediation ledger"
+    },
+    {
+      "label": "Critical Findings",
+      "value": "42",
+      "sub": "Immediate statutory liability"
+    },
+    {
+      "label": "Overdue Actions",
+      "value": "32",
+      "sub": "Failed 90-day verification"
+    },
+    {
+      "label": "Recurring Failures",
+      "value": "28",
+      "sub": "23% recurrence rate"
+    }
+  ],
+  "priorityCount": 5,
+  "priorityData": [
+    {
+      "title": "Stamping Press Safety Interlock Bypass",
+      "explanation": "Mechanical limit switch override recurred 110 days after operator refresher training closed CAPA-2026-003.",
+      "badge": "CRITICAL RECURRENCE",
+      "facility": "CRITICAL RECURRENCE"
+    },
+    {
+      "title": "Emergency Egress Route Staging Obstruction",
+      "explanation": "Direct violation of OSHA 1910.37 with pallet staging boxes obstructing panic door paths during month-end inventory rush.",
+      "badge": "STATUTORY LIABILITY",
+      "facility": "STATUTORY LIABILITY"
+    },
+    {
+      "title": "Machine Guarding LOTO Procedural Training Ineffective",
+      "explanation": "CAPA-2026-048 failed 90-day verification gate due to operator ergonomic press cycle-speed bottlenecks.",
+      "badge": "FAILED VERIFICATION",
+      "facility": "FAILED VERIFICATION"
+    },
+    {
+      "title": "Chemical Containment Sump Ultrasonic Telemetry",
+      "explanation": "Engineered HDPE containment liner reconstruction currently 74 days clean with zero recurring concrete seam leaks.",
+      "badge": "MONITORED DURABILITY",
+      "facility": "MONITORED DURABILITY"
+    },
+    {
+      "title": "Apex Manufacturing Plant A Structural Risk Surge",
+      "explanation": "Composite risk index elevated to 58.5 driven by 12 critical non-conformances and 4 chronic failure cycles.",
+      "badge": "HIGH ATTRITION",
+      "facility": "HIGH ATTRITION"
+    }
+  ],
+  "facilityCount": 5,
+  "facilityData": [
+    {
+      "name": "Vanguard Manufacturing Plant B",
+      "code": "FAC-002",
+      "risk": "Manufacturing Plant•24 findings (9 critical)•6 recurring"
+    },
+    {
+      "name": "Summit Warehouse B",
+      "code": "FAC-004",
+      "risk": "Warehouse•24 findings (8 critical)•6 recurring"
+    },
+    {
+      "name": "Apex Manufacturing Plant A",
+      "code": "FAC-001",
+      "risk": "Manufacturing Plant•26 findings (9 critical)•4 recurring"
+    },
+    {
+      "name": "Metro Distribution Center C",
+      "code": "FAC-005",
+      "risk": "Distribution Center•24 findings (8 critical)•6 recurring"
+    },
+    {
+      "name": "Keystone Warehouse A",
+      "code": "FAC-003",
+      "risk": "Warehouse•24 findings (8 critical)•6 recurring"
+    }
+  ],
+  "capaBoxes": [
+    {
+      "label": "Completed Tasks",
+      "value": "60"
+    },
+    {
+      "label": "Pending Gate",
+      "value": "18"
+    },
+    {
+      "label": "Verified Durable",
+      "value": "28"
+    },
+    {
+      "label": "Failed Verification",
+      "value": "32"
+    }
+  ],
+  "durabilityRate": "46.7%"
+}

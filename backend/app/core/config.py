@@ -23,17 +23,22 @@ class Settings(BaseSettings):
         validation_alias=AliasChoices("HINDSIGHT_BASE_URL", "HINDSIGHT_API_URL"),
         description="Hindsight API Base URL alias"
     )
+    HINDSIGHT_INFERENCE_URL: str = Field(
+        default="https://inference.hindsight.vectorize.io/v1",
+        validation_alias=AliasChoices("HINDSIGHT_INFERENCE_URL", "HINDSIGHT_INFERENCE_BASE_URL"),
+        description="Hindsight Inference API Base URL (embeddings & reranking)"
+    )
     HINDSIGHT_DEFAULT_BANK_PREFIX: str = "auditmind-org"
 
     # Groq / LLM
     GROQ_API_KEY: str = Field(default="", description="Groq API key for tool calling & inference")
     GROQ_MODEL: str = Field(
-        default="llama-3.3-70b-versatile",
+        default="openai/gpt-oss-120b",
         validation_alias=AliasChoices("GROQ_MODEL", "LLM_MODEL"),
         description="LLM model name"
     )
     LLM_MODEL: str = Field(
-        default="llama-3.3-70b-versatile",
+        default="openai/gpt-oss-120b",
         validation_alias=AliasChoices("LLM_MODEL", "GROQ_MODEL"),
         description="LLM model alias"
     )

@@ -162,7 +162,7 @@ export default function SettingsPage() {
               <input
                 type="text"
                 readOnly
-                defaultValue="llama-3.3-70b-versatile"
+                defaultValue="openai/gpt-oss-120b"
                 className="w-full px-3.5 py-2.5 rounded-xl bg-[#141416]/50 border border-white/10 text-white font-mono text-xs"
               />
             </div>

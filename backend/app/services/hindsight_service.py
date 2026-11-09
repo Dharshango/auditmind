@@ -2,7 +2,13 @@ import hashlib
 import logging
 from datetime import datetime
 from typing import Any, Dict, List, Optional
-from hindsight_client import Hindsight
+import httpx
+
+try:
+    from hindsight_client import Hindsight
+except Exception as _e:
+    Hindsight = None
+
 from app.core.config import settings
 
 logger = logging.getLogger(__name__)
@@ -244,7 +250,40 @@ class HindsightService:
                 })
 
         results.sort(key=lambda x: x["score"], reverse=True)
-        return results[:limit]
+        top_candidates = results[:limit]
+
+        # Neural rerank candidate memories with Hindsight hs-decide-1-flash model if API key is provided
+        if self.api_key and top_candidates:
+            try:
+                async with httpx.AsyncClient(timeout=5.0) as http:
+                    rerank_resp = await http.post(
+                        f"{settings.HINDSIGHT_INFERENCE_URL}/rerank",
+                        headers={
+                            "Authorization": f"Bearer {self.api_key}",
+                            "Content-Type": "application/json"
+                        },
+                        json={
+                            "model": "hs-decide-1-flash",
+                            "query": query,
+                            "documents": [c["content"] for c in top_candidates]
+                        }
+                    )
+                    if rerank_resp.status_code == 200:
+                        rerank_json = rerank_resp.json()
+                        ranked_results = []
+                        for rank_item in rerank_json.get("results", []):
+                            idx = rank_item.get("index", 0)
+                            if idx < len(top_candidates):
+                                candidate = dict(top_candidates[idx])
+                                candidate["score"] = round(float(rank_item.get("relevance_score", 1.0)), 2)
+                                candidate["hindsight_inference_verified"] = True
+                                ranked_results.append(candidate)
+                        if ranked_results:
+                            return ranked_results
+            except Exception as rerank_err:
+                logger.debug("Hindsight live rerank note: %s. Using baseline score.", rerank_err)
+
+        return top_candidates
 
     async def areflect(
         self,

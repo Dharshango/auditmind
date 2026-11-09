@@ -80,7 +80,7 @@ export default function ProductPage() {
                 Autonomous Compliance Agent
               </h3>
               <p className="text-xs text-[#8E8E8E] leading-relaxed">
-                Empowers compliance officers with multi-facility chat, citation cross-referencing, evidence retrieval, and executive reflection powered by Groq LLaMA 3.3 70B inference.
+                Empowers compliance officers with multi-facility chat, citation cross-referencing, evidence retrieval, and executive reflection powered by Groq GPT-OSS 120B inference.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-white/5 flex items-center justify-between text-[11px] font-mono text-[#C4C2C3]">
@@ -113,7 +113,7 @@ export default function ProductPage() {
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-6">
             <div>
               <div className="text-[11px] font-mono text-[#8E8E8E] uppercase">Inference Engine</div>
-              <div className="text-sm font-semibold text-white mt-1">Groq LLaMA 3.3 70B</div>
+              <div className="text-sm font-semibold text-white mt-1">Groq GPT-OSS 120B</div>
               <div className="text-[11px] text-[#71717A] mt-0.5">&lt;120ms Latency</div>
             </div>
             <div>

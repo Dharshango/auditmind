@@ -84,14 +84,14 @@ export default function CaseStudiesPage() {
               <div className="flex items-center justify-between">
                 <span className="text-[11px] font-mono text-[#8E8E8E]">DEPLOYMENT</span>
                 <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-white border border-white/20">
-                  AUDITMIND
+                  AuditMind
                 </span>
               </div>
               <div className="font-semibold text-white text-sm">
                 Cross-Plant Memory Recall
               </div>
               <p className="text-xs text-[#8E8E8E] leading-relaxed">
-                Hindsight memory banks ingested all historical non-conformances. When Gary Engine entered its Q2 audit, AUDITMIND proactively surfaced the pattern and triggered corrective actions in 48 hours.
+                Hindsight memory banks ingested all historical non-conformances. When Gary Engine entered its Q2 audit, AuditMind proactively surfaced the pattern and triggered corrective actions in 48 hours.
               </p>
             </div>
           </div>
@@ -124,7 +124,7 @@ export default function CaseStudiesPage() {
 
           <div className="bg-[#111113]/80 border border-white/20 rounded-2xl p-6 shadow-[0_0_25px_rgba(255,255,255,0.05)]">
             <div className="text-xs font-mono text-white uppercase tracking-wider mb-2">
-              AUDITMIND Cognitive Engine
+              AuditMind Cognitive Engine
             </div>
             <h3 className="text-lg font-semibold text-white mb-4">
               Permanent Cross-Plant Recall
@@ -160,7 +160,7 @@ export default function CaseStudiesPage() {
 
       {/* Footer */}
       <footer className="w-full max-w-5xl text-center py-6 text-xs text-[#71717A] border-t border-white/5 z-10">
-        © 2026 AUDITMIND Operational Compliance Intelligence • Production System
+        © 2026 AuditMind Operational Compliance Intelligence • Production System
       </footer>
     </div>
   );

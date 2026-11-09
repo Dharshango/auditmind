@@ -53,14 +53,14 @@ export default function LoginPage() {
           <div className="w-10 h-10 rounded-full bg-white flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
             <Image
               src="/assets/logo.svg"
-              alt="AUDITMIND"
+              alt="AuditMind"
               width={24}
               height={24}
               className="object-contain"
             />
           </div>
           <span className="font-semibold text-sm tracking-tight text-white group-hover:text-neutral-300 transition-colors">
-            AUDITMIND
+            AuditMind
           </span>
         </Link>
 
@@ -229,7 +229,7 @@ export default function LoginPage() {
 
       {/* Footer */}
       <footer className="w-full max-w-5xl text-center py-4 text-[11px] text-[#A1A1AA] z-20">
-        <span>© 2026 AUDITMIND Operational Compliance Intelligence • </span>
+        <span>© 2026 AuditMind Operational Compliance Intelligence • </span>
         <span className="font-mono">Tenant: Meridian Industrial Group</span>
       </footer>
     </div>

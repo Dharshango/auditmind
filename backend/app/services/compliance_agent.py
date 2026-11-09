@@ -11,7 +11,7 @@ from app.services.hindsight_service import hindsight_service
 
 logger = logging.getLogger(__name__)
 
-SYSTEM_PROMPT = """You are AUDITMIND, a professional organizational compliance intelligence assistant for enterprise industrial facilities.
+SYSTEM_PROMPT = """You are AuditMind, a professional organizational compliance intelligence assistant for enterprise industrial facilities.
 Tagline: Remembering failures. Understanding patterns. Preventing recurrence.
 
 CORE COMMUNICATION PRINCIPLE:
@@ -166,7 +166,7 @@ class ComplianceAgent:
         # -------------------------------------------------------------
         if "system override" in q_lower or "ignore all prior" in q_lower or "dump all database" in q_lower or "jwt secret" in q_lower:
             synthesis = (
-                "### AUDITMIND Security Governance Gate\n\n"
+                "### AuditMind Security Governance Gate\n\n"
                 "1. **Finding**:\n"
                 "Unauthorized instruction override attempt detected. Direct security policy deviation rejected.\n\n"
                 "2. **Historical Context**:\n"
@@ -201,7 +201,7 @@ class ComplianceAgent:
             tools_invoked.append({"tool": "recall_organizational_memory", "args": {"query": "machine guard"}, "output": mem})
 
             synthesis = (
-                "### AUDITMIND Compliance Investigation Report\n\n"
+                "### AuditMind Compliance Investigation Report\n\n"
                 "1. **Finding**:\n"
                 "Safety interlock bypass switch engaged on mechanical stamping press in Apex Manufacturing Plant A (FAC-001).\n\n"
                 "2. **Historical Context**:\n"
@@ -532,7 +532,7 @@ class ComplianceAgent:
 
             synthesis = (
                 "**No. The agent cannot schedule or commit a physical engineering retrofit without human authorization.**\n\n"
-                "- **Governing Rule**: AUDITMIND enforces a strict Human-in-the-Loop governance policy for all physical engineering modifications and budget commitments.\n"
+                "- **Governing Rule**: AuditMind enforces a strict Human-in-the-Loop governance policy for all physical engineering modifications and budget commitments.\n"
                 "- **Proposed Action**: The agent has generated proposal `TASK-2026-ENG-04` for stamping line #4 under Finding `FIND-2026-003` (OSHA 1910.212).\n"
                 "- **Status**: `PROPOSED_AWAITING_HUMAN_APPROVAL`.\n"
                 "- **Required Authorizer**: Plant General Manager or Director of Environmental Health & Safety.\n"

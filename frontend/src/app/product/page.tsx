@@ -26,7 +26,7 @@ export default function ProductPage() {
 
         <p className="text-[#D0D0D0] text-base sm:text-lg text-center max-w-2xl opacity-80 mb-12 animate-reveal">
           Standard audit software forgets findings the moment a report is closed.
-          AUDITMIND establishes permanent organizational memory across every facility,
+          AuditMind establishes permanent organizational memory across every facility,
           detecting systemic drift before regulatory interventions occur.
         </p>
 
@@ -137,7 +137,7 @@ export default function ProductPage() {
 
       {/* Footer */}
       <footer className="w-full max-w-5xl text-center py-6 text-xs text-[#71717A] border-t border-white/5 z-10">
-        © 2026 AUDITMIND Operational Compliance Intelligence • Production System
+        © 2026 AuditMind Operational Compliance Intelligence • Production System
       </footer>
     </div>
   );

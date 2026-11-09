@@ -154,47 +154,42 @@ export function Navigation({
           <button
             onClick={toggle}
             aria-label="Expand sidebar rail"
-            className="hidden lg:flex items-center justify-center absolute -right-3 top-4 w-6 h-6 rounded-full bg-[#18181B] border border-white/20 text-[#A1A1AA] hover:text-white hover:bg-white/20 hover:border-white/40 hover:scale-110 active:scale-95 transition-all shadow-[0_2px_8px_rgba(0,0,0,0.6)] z-50 group cursor-pointer"
+            className="hidden lg:flex items-center justify-center absolute -right-3 top-5 w-6 h-6 rounded-full bg-[#18181B] border border-white/20 text-[#A1A1AA] hover:text-white hover:bg-white/20 hover:border-white/40 hover:scale-110 active:scale-95 transition-all shadow-[0_2px_8px_rgba(0,0,0,0.6)] z-50 group cursor-pointer"
             title="Expand sidebar"
           >
             <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
           </button>
         )}
 
-        {/* 1. BRAND HEADER — Balanced, Centered When Collapsed, Generous Clearance */}
-        <div className={`h-14 ${isCollapsed ? "px-0 justify-center" : "px-3.5 justify-between"} border-b border-white/10 bg-white/[0.02] flex items-center shrink-0`}>
+        {/* 1. BRAND HEADER — Height 64px (h-16), perfectly matches TopNav height */}
+        <div className={`h-16 ${isCollapsed ? "px-0 justify-center" : "px-4 justify-between"} border-b border-white/10 bg-white/[0.02] flex items-center shrink-0`}>
           <Link
             href="/dashboard"
             onClick={onCloseMobile}
-            className={`flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] rounded-lg p-1 ${
+            className={`flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] rounded-lg p-1 ${
               isCollapsed ? "justify-center" : ""
             }`}
             title="AuditMind Command Center"
           >
             {/* White Circular Monogram Icon */}
-            <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-black shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-105">
-              <div className="w-3.5 h-3.5 relative flex items-center justify-center">
+            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-black shrink-0 shadow-[0_2px_10px_rgba(255,255,255,0.15)] transition-transform duration-200 group-hover:scale-105">
+              <div className="w-4 h-4 relative flex items-center justify-center">
                 <Image
                   src="/assets/logo.svg"
-                  alt="AUDITMIND Logo"
-                  width={14}
-                  height={14}
+                  alt="AuditMind Logo"
+                  width={16}
+                  height={16}
                   className="object-contain"
                   priority
                 />
               </div>
             </div>
 
-            {/* Typography — Crisp, Non-Truncated & Fully Visible */}
+            {/* Brand Wordmark — Clean, Premium, No Enterprise Tag */}
             {!isCollapsed && (
-              <div className="flex items-center gap-2 shrink-0">
-                <span className="font-bold text-[13.5px] tracking-[0.03em] text-white leading-none font-sans">
-                  AUDITMIND
-                </span>
-                <span className="text-[8.5px] font-mono px-1.5 py-0.5 bg-white/10 text-[#C6B9D8] rounded border border-white/10 font-semibold tracking-wider shrink-0">
-                  ENTERPRISE
-                </span>
-              </div>
+              <span className="font-semibold text-[15px] tracking-tight text-white leading-none font-sans">
+                AuditMind
+              </span>
             )}
           </Link>
 
@@ -203,7 +198,7 @@ export function Navigation({
             <button
               onClick={toggle}
               aria-label="Collapse sidebar rail"
-              className="hidden lg:flex p-1.5 rounded-lg text-[#8E8E93] hover:text-white hover:bg-white/10 transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] shrink-0 ml-auto"
+              className="hidden lg:flex items-center justify-center w-7 h-7 rounded-lg text-[#8E8E93] hover:text-white hover:bg-white/10 transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] shrink-0 ml-auto"
               title="Collapse sidebar"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -230,12 +225,12 @@ export function Navigation({
             <div key={group.group} className="space-y-0.5">
               {/* Compact Section Header */}
               {!isCollapsed && (
-                <div className="px-3 pb-0.5 text-[9.5px] font-mono font-semibold uppercase tracking-[0.1em] text-white/40">
+                <div className="px-3 pt-2 pb-1 text-[9.5px] font-mono font-semibold uppercase tracking-[0.12em] text-white/35">
                   {group.group}
                 </div>
               )}
 
-              {/* Group Nav Items — Glassy Aesthetic */}
+              {/* Group Nav Items — Premium Obsidian Aesthetic */}
               {group.items.map((item) => {
                 const isActive = normalizedPathname === item.href;
                 const Icon = item.icon;
@@ -256,15 +251,20 @@ export function Navigation({
                       href={item.href}
                       onClick={onCloseMobile}
                       aria-current={isActive ? "page" : undefined}
-                      className={`flex items-center gap-2.5 min-h-[35px] py-1.5 px-3 rounded-lg transition-colors duration-100 relative font-sans text-[13px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
+                      className={`flex items-center gap-2.5 min-h-[36px] py-1.5 px-3 rounded-xl transition-all duration-150 relative font-sans text-[13px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
                         isActive
-                          ? "bg-white/[0.14] text-white font-semibold border-l-[3px] border-[#C6B9D8] border-r border-t border-b border-white/20 shadow-[0_2px_10px_rgba(255,255,255,0.06)]"
-                          : "text-white/70 hover:text-white bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.04] hover:border-white/15"
+                          ? "bg-white/[0.12] text-white font-semibold border border-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_2px_8px_rgba(0,0,0,0.3)]"
+                          : "text-white/70 hover:text-white hover:bg-white/[0.06]"
                       }`}
                     >
+                      {/* Active indicator bar */}
+                      {isActive && (
+                        <span className="absolute left-1 top-1/2 -translate-y-1/2 w-1 h-3.5 rounded-full bg-[#C6B9D8]" />
+                      )}
+
                       {/* Icon */}
                       <Icon
-                        className={`w-4 h-4 shrink-0 transition-colors duration-100 ${
+                        className={`w-4 h-4 shrink-0 transition-colors duration-150 ${
                           isActive
                             ? "text-white"
                             : item.highlight
@@ -297,7 +297,7 @@ export function Navigation({
 
         {/* 3. BOTTOM SECTION: Notifications, Settings, Profile */}
         <div className="p-2.5 border-t border-white/10 bg-black/20 backdrop-blur-md space-y-1 shrink-0">
-          {/* Notifications & Settings Links — Glassy */}
+          {/* Notifications & Settings Links */}
           <div className="space-y-0.5">
             {BOTTOM_ITEMS.map((item) => {
               const isActive = normalizedPathname === item.href;
@@ -319,10 +319,10 @@ export function Navigation({
                     href={item.href}
                     onClick={onCloseMobile}
                     aria-current={isActive ? "page" : undefined}
-                    className={`flex items-center gap-2.5 min-h-[33px] py-1 px-3 rounded-lg transition-colors duration-100 relative font-sans text-[12.5px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
+                    className={`flex items-center gap-2.5 min-h-[34px] py-1 px-3 rounded-xl transition-all duration-150 relative font-sans text-[12.5px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
                       isActive
-                        ? "bg-white/[0.14] text-white font-semibold border-l-[3px] border-[#C6B9D8] border-r border-t border-b border-white/20"
-                        : "text-[#A1A1AA] hover:text-white bg-white/[0.02] hover:bg-white/[0.08] border border-white/[0.04] hover:border-white/15"
+                        ? "bg-white/[0.12] text-white font-semibold border border-white/15 shadow-sm"
+                        : "text-[#A1A1AA] hover:text-white hover:bg-white/[0.06]"
                     }`}
                   >
                     <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? "text-white" : "text-[#A1A1AA]"}`} />
@@ -346,7 +346,7 @@ export function Navigation({
           {onOpenCommand && !isCollapsed && (
             <button
               onClick={onOpenCommand}
-              className="w-full flex items-center justify-between px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/10 text-xs text-[#A1A1AA] hover:text-white hover:border-white/20 hover:bg-white/[0.08] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8]"
+              className="w-full flex items-center justify-between px-3 py-1.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-[#A1A1AA] hover:text-white hover:border-white/20 hover:bg-white/[0.08] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8]"
             >
               <span className="flex items-center gap-2">
                 <Command className="w-3 h-3 text-white" />

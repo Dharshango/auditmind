@@ -105,7 +105,7 @@ export function CommandPalette({
     },
     {
       id: "nav-agent",
-      name: "AUDITMIND AI Compliance Agent",
+      name: "AuditMind AI Compliance Agent",
       category: "Navigation",
       href: "/agent",
       icon: <BotMessageSquare className="w-4 h-4" />,
@@ -267,7 +267,7 @@ export function CommandPalette({
         {/* Footer */}
         <div className="px-4 py-2.5 border-t border-zinc-800 bg-zinc-900/60 flex items-center justify-between text-[11px] text-zinc-400">
           <span>Navigate with ↑ ↓ and ↵ to select</span>
-          <span className="font-mono text-[10px] text-zinc-500">AUDITMIND CLI</span>
+          <span className="font-mono text-[10px] text-zinc-500">AuditMind CLI</span>
         </div>
       </div>
     </div>

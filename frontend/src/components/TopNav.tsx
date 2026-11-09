@@ -45,7 +45,7 @@ export function TopNav({
 
   const routeInfo = ROUTE_NAMES[pathname] || {
     title: "Command Center",
-    category: "AUDITMIND",
+    category: "AuditMind",
   };
 
   return (

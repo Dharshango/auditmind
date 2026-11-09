@@ -13,7 +13,7 @@ from app.api import api_router, api_v1_router
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     # Startup actions
-    print(f"[*] AUDITMIND Backend starting in {settings.ENVIRONMENT} mode")
+    print(f"[*] AuditMind Backend starting in {settings.ENVIRONMENT} mode")
     print(f"[*] Initializing database schema...")
     await init_db()
 
@@ -29,11 +29,11 @@ async def lifespan(app: FastAPI):
     print(f"[*] Hindsight Service configured (Base URL: {settings.HINDSIGHT_BASE_URL})")
     yield
     # Shutdown actions
-    print("[*] AUDITMIND Backend shutting down")
+    print("[*] AuditMind Backend shutting down")
 
 
 app = FastAPI(
-    title="AUDITMIND API",
+    title="AuditMind API",
     description="The Self-Learning Operational Compliance Intelligence Agent API",
     version="1.0.0",
     lifespan=lifespan
@@ -57,7 +57,7 @@ app.include_router(api_v1_router)
 async def health_check():
     return {
         "status": "healthy",
-        "service": "AUDITMIND Operational Compliance Intelligence",
+        "service": "AuditMind Operational Compliance Intelligence",
         "version": "1.0.0",
         "environment": settings.ENVIRONMENT,
         "database": settings.DATABASE_URL.split("///")[0],
@@ -69,7 +69,7 @@ async def health_check():
 @app.get("/", tags=["System"])
 async def root():
     return {
-        "name": "AUDITMIND",
+        "name": "AuditMind",
         "tagline": "Remembering failures. Understanding patterns. Preventing recurrence.",
         "category": "Compliance & Audit Agent",
         "docs_url": "/docs",

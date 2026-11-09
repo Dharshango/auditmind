@@ -2,7 +2,7 @@
   "name": "auditmind",
   "version": "2.0.0",
   "private": true,
-  "description": "AUDITMIND — Autonomous Compliance Intelligence & Recurrence Attribution Runtime",
+  "description": "AuditMind — Autonomous Compliance Intelligence & Recurrence Attribution Runtime",
   "workspaces": [
     "frontend"
   ],

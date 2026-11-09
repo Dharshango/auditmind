@@ -56,7 +56,7 @@ export const api = {
   getHealthSystem: () =>
     fetchJson<any>("/health", {}, () => ({
       status: "healthy",
-      service: "AUDITMIND Operational Compliance Intelligence",
+      service: "AuditMind Operational Compliance Intelligence",
       version: "1.0.0",
       environment: "production",
       database: "postgresql",

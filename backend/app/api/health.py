@@ -21,10 +21,10 @@ router = APIRouter(prefix="/health", tags=["Health & Diagnostics"])
 @router.get("", response_model=SystemHealthResponse)
 @router.get("/", response_model=SystemHealthResponse)
 async def get_system_health():
-    """Returns general health and configuration state of AUDITMIND."""
+    """Returns general health and configuration state of AuditMind."""
     return {
         "status": "healthy",
-        "service": "AUDITMIND Operational Compliance Intelligence",
+        "service": "AuditMind Operational Compliance Intelligence",
         "version": "1.0.0",
         "environment": settings.ENVIRONMENT,
         "database": settings.DATABASE_URL.split("///")[0],

@@ -19,7 +19,7 @@ from app.schemas.agent import (
 )
 
 logger = logging.getLogger("auditmind.agent")
-router = APIRouter(prefix="/agent", tags=["AUDITMIND Compliance Agent"])
+router = APIRouter(prefix="/agent", tags=["AuditMind Compliance Agent"])
 
 
 @router.post("/chat", response_model=AgentChatResponse)
@@ -27,7 +27,7 @@ async def chat_with_compliance_agent(
     payload: AgentChatRequest = Body(...),
     org_id: str = Depends(get_current_org_id)
 ):
-    """Executes AUDITMIND Compliance Agent with Groq tool calling, Hindsight memory recall, and 8-point structured response."""
+    """Executes AuditMind Compliance Agent with Groq tool calling, Hindsight memory recall, and 8-point structured response."""
     history_dicts = [{"role": m.role, "content": m.content} for m in payload.history]
     result = await compliance_agent.run(
         org_id=org_id,

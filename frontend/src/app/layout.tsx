@@ -10,7 +10,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AUDITMIND — Operational Compliance Intelligence",
+  title: "AuditMind — Operational Compliance Intelligence",
   description: "Remembering failures. Understanding patterns. Preventing recurrence.",
 };
 

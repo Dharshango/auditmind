@@ -147,7 +147,7 @@ async def create_corrective_action(
         status=payload.status.upper(),
         effectiveness_status="PENDING",
         recurrence_detected=False,
-        outcome_notes=f"Created via AUDITMIND Compliance API for finding {finding.finding_code}."
+        outcome_notes=f"Created via AuditMind Compliance API for finding {finding.finding_code}."
     )
     db.add(new_ca)
     await db.commit()

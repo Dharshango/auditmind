@@ -39,7 +39,7 @@ export default function ContactPage() {
         </h1>
 
         <p className="text-[#D0D0D0] text-base sm:text-lg text-center max-w-xl opacity-80 mb-12 animate-reveal">
-          Connect your multi-facility network to AUDITMIND. Request architecture documentation or discuss enterprise deployment with our compliance engineers.
+          Connect your multi-facility network to AuditMind. Request architecture documentation or discuss enterprise deployment with our compliance engineers.
         </p>
 
         {/* Form or Success Box */}
@@ -53,7 +53,7 @@ export default function ContactPage() {
                 Inquiry Successfully Logged
               </h3>
               <p className="text-xs text-[#8E8E8E] max-w-md mx-auto leading-relaxed">
-                Thank you for contacting AUDITMIND. A compliance solutions architect will review your facility profile and reach out within 4 business hours.
+                Thank you for contacting AuditMind. A compliance solutions architect will review your facility profile and reach out within 4 business hours.
               </p>
               <div className="pt-4">
                 <Link
@@ -174,7 +174,7 @@ export default function ContactPage() {
 
       {/* Footer */}
       <footer className="w-full max-w-5xl text-center py-6 text-xs text-[#A1A1AA] border-t border-white/5 z-10">
-        © 2026 AUDITMIND Operational Compliance Intelligence • Production System
+        © 2026 AuditMind Operational Compliance Intelligence • Production System
       </footer>
     </div>
   );

@@ -19,7 +19,7 @@ async def test_health_apis():
         assert r1.status_code == 200
         d1 = r1.json()
         assert d1["status"] == "healthy"
-        assert "AUDITMIND" in d1["service"]
+        assert "AuditMind" in d1["service"]
 
         # 2. GET /api/health/database
         r2 = await ac.get("/api/health/database")

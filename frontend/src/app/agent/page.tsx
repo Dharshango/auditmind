@@ -1067,7 +1067,7 @@ export default function AgentPage() {
                       <div className="flex items-center justify-between text-[11px] opacity-80 border-b border-white/10 pb-2">
                         <div className="flex items-center gap-2 flex-wrap">
                           <span className="font-semibold font-sans">
-                            {isUser ? "Safety Director" : "AUDITMIND Agent"}
+                            {isUser ? "Safety Director" : "AuditMind Agent"}
                           </span>
 
                           {/* Scope Badges on User Message */}

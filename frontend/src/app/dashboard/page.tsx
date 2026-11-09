@@ -129,25 +129,25 @@ export default function DashboardPage() {
           "Mechanical limit switch override recurred 110 days after operator refresher training closed CAPA-2026-003.",
         facility: "Apex Plant A",
         facilityCode: "FAC-001",
-        priority: "CRITICAL RECURRENCE",
+        priority: "Critical Recurrence",
         priorityType: "critical",
-        date: "2026-07-15",
+        date: "Jul 15, 2026",
         standard: "OSHA 1910.212",
-        linkText: "Investigate finding",
+        linkText: "Investigate with AI",
         href: "/agent?query=stamping+press+interlock",
       },
       {
         id: "pi-02",
         title: "Emergency Egress Route Staging Obstruction",
         explanation:
-          "Direct violation of OSHA 1910.37 with pallet staging boxes obstructing panic door paths during month-end inventory rush.",
+          "Pallet staging boxes obstructing panic door paths during month-end fulfillment rush, violating OSHA 1910.37.",
         facility: "Summit Warehouse B",
         facilityCode: "FAC-004",
-        priority: "STATUTORY LIABILITY",
+        priority: "Statutory Risk",
         priorityType: "critical",
-        date: "2026-09-12",
+        date: "Sep 12, 2026",
         standard: "NFPA 101 • OSHA 1910.37",
-        linkText: "View statutory record",
+        linkText: "View Finding",
         href: "/findings",
       },
       {
@@ -157,11 +157,11 @@ export default function DashboardPage() {
           "CAPA-2026-048 failed 90-day verification gate due to operator ergonomic press cycle-speed bottlenecks.",
         facility: "Vanguard Plant B",
         facilityCode: "FAC-002",
-        priority: "FAILED VERIFICATION",
+        priority: "Verification Failed",
         priorityType: "warning",
-        date: "2026-08-20",
+        date: "Aug 20, 2026",
         standard: "OSHA 1910.147",
-        linkText: "Inspect failed CAPA",
+        linkText: "Inspect Action",
         href: "/capa",
       },
       {
@@ -169,27 +169,27 @@ export default function DashboardPage() {
         title: "Chemical Containment Sump Ultrasonic Telemetry",
         explanation:
           "Engineered HDPE containment liner reconstruction currently 74 days clean with zero recurring concrete seam leaks.",
-        facility: "Crestview Plant C",
+        facility: "Keystone Warehouse A",
         facilityCode: "FAC-003",
-        priority: "MONITORED DURABILITY",
+        priority: "Verified Durable",
         priorityType: "success",
-        date: "2026-10-02",
+        date: "Oct 2, 2026",
         standard: "EPA 40 CFR 264.175",
-        linkText: "Inspect Hindsight memory",
+        linkText: "View Memory",
         href: "/memory",
       },
       {
         id: "pi-05",
-        title: "Apex Manufacturing Plant A Structural Risk Surge",
+        title: "Apex Manufacturing Plant A Risk Index Surge",
         explanation:
-          "Composite risk index elevated to 58.5 driven by 12 critical non-conformances and 4 chronic failure cycles.",
+          "Composite risk score elevated to 58.5 driven by 12 open non-conformances and 4 chronic failure cycles.",
         facility: "Apex Plant A",
         facilityCode: "FAC-001",
-        priority: "HIGH ATTRITION",
+        priority: "Elevated Risk",
         priorityType: "critical",
-        date: "Active Telemetry",
+        date: "Recent",
         standard: "Multi-Standard",
-        linkText: "Review facility network",
+        linkText: "Inspect Facility",
         href: "/facilities",
       },
     ];
@@ -202,29 +202,29 @@ export default function DashboardPage() {
   if (loading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
-        <RefreshCw className="w-8 h-8 text-[#C6B9D8] animate-spin" />
-        <p className="text-xs text-[#8E8E93] font-mono tracking-tight">
-          Synthesizing real-time compliance telemetry from PostgreSQL &amp; Hindsight...
+        <RefreshCw className="w-8 h-8 text-white animate-spin" />
+        <p className="text-xs text-[#8E8E8E] font-mono tracking-tight">
+          Loading executive compliance overview...
         </p>
       </div>
     );
   }
 
   return (
-    <div className="space-y-7 pb-16 animate-reveal select-none font-sans">
-      {/* 1. EXECUTIVE HEADER — Crisp, Authoritative, Functional Controls */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 pb-6 border-b border-white/[0.08]">
+    <div className="space-y-8 pb-16 animate-reveal select-none">
+      {/* 1. TOP HERO AREA — Sleek Executive Typography & Harmonized Controls */}
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-white/10">
         <div>
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-white leading-tight font-sans">
             Executive Overview
           </h1>
-          <p className="text-sm text-[#8E8E93] mt-1.5 font-sans">
-            Your operations, at a glance.
+          <p className="text-sm text-[#C8C8C8] mt-1.5 max-w-2xl leading-relaxed">
+            Operational compliance status, multi-facility performance, and priority actions at a glance.
           </p>
         </div>
 
         {/* Header Controls & Quick Action */}
-        <div className="flex items-center gap-2.5 flex-wrap">
+        <div className="flex items-center gap-3 shrink-0 flex-wrap">
           {/* Facility Filter */}
           <div className="relative">
             <button
@@ -232,9 +232,9 @@ export default function DashboardPage() {
                 setShowFacilityDropdown(!showFacilityDropdown);
                 setShowDateDropdown(false);
               }}
-              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.06] backdrop-blur-xl border border-white/15 hover:bg-white/[0.12] hover:border-white/25 text-xs text-[#EDEDED] font-medium transition shadow-sm"
+              className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#101010] border border-white/10 hover:border-white/25 text-xs text-[#EDEDED] font-medium transition shadow-sm"
             >
-              <Building2 className="w-3.5 h-3.5 text-[#8E8E93]" />
+              <Building2 className="w-3.5 h-3.5 text-[#8E8E8E]" />
               <span className="font-sans">
                 {selectedFacility === "ALL"
                   ? "All Facilities (5 Sites)"
@@ -248,13 +248,13 @@ export default function DashboardPage() {
                   ? "Summit Warehouse B (Columbus)"
                   : "Metro Distribution C (Charlotte)"}
               </span>
-              <ChevronDown className="w-3 h-3 text-[#8E8E93]" />
+              <ChevronDown className="w-3 h-3 text-[#8E8E8E]" />
             </button>
 
             {showFacilityDropdown && (
-              <div className="absolute right-0 mt-2 w-64 rounded-xl bg-black/80 backdrop-blur-2xl border border-white/15 p-1.5 shadow-2xl z-50 text-xs text-[#EDEDED] animate-reveal">
-                <div className="px-2.5 py-1.5 text-[10px] font-mono text-[#8E8E93] uppercase tracking-wider border-b border-white/10">
-                  Select Operating Node
+              <div className="absolute right-0 mt-2 w-64 rounded-xl bg-[#101010] border border-white/15 p-1.5 shadow-2xl z-50 text-xs text-[#EDEDED] animate-reveal">
+                <div className="px-2.5 py-1.5 text-[10px] font-mono text-[#8E8E8E] uppercase tracking-wider border-b border-white/10">
+                  Select Facility Scope
                 </div>
                 {[
                   { code: "ALL", label: "All Facilities (5 Sites)" },
@@ -291,9 +291,9 @@ export default function DashboardPage() {
                 setShowDateDropdown(!showDateDropdown);
                 setShowFacilityDropdown(false);
               }}
-              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.06] backdrop-blur-xl border border-white/15 hover:bg-white/[0.12] hover:border-white/25 text-xs text-[#EDEDED] font-medium transition shadow-sm"
+              className="flex items-center gap-2 px-3.5 py-2 rounded-full bg-[#101010] border border-white/10 hover:border-white/25 text-xs text-[#EDEDED] font-medium transition shadow-sm"
             >
-              <Calendar className="w-3.5 h-3.5 text-[#8E8E93]" />
+              <Calendar className="w-3.5 h-3.5 text-[#8E8E8E]" />
               <span className="font-sans">
                 {selectedDateRange === "90D"
                   ? "Last 90 Days"
@@ -303,17 +303,17 @@ export default function DashboardPage() {
                   ? "Trailing 12 Months"
                   : "Year-to-Date"}
               </span>
-              <ChevronDown className="w-3 h-3 text-[#8E8E93]" />
+              <ChevronDown className="w-3 h-3 text-[#8E8E8E]" />
             </button>
 
             {showDateDropdown && (
-              <div className="absolute right-0 mt-2 w-52 rounded-xl bg-black/80 backdrop-blur-2xl border border-white/15 p-1.5 shadow-2xl z-50 text-xs text-[#EDEDED] animate-reveal">
-                <div className="px-2.5 py-1.5 text-[10px] font-mono text-[#8E8E93] uppercase tracking-wider border-b border-white/10">
-                  Observation Window
+              <div className="absolute right-0 mt-2 w-52 rounded-xl bg-[#101010] border border-white/15 p-1.5 shadow-2xl z-50 text-xs text-[#EDEDED] animate-reveal">
+                <div className="px-2.5 py-1.5 text-[10px] font-mono text-[#8E8E8E] uppercase tracking-wider border-b border-white/10">
+                  Time Horizon
                 </div>
                 {[
-                  { id: "90D", label: "Last 90 Days (Statutory Gate)" },
-                  { id: "Q4", label: "Active Quarter (Surveillance)" },
+                  { id: "90D", label: "Last 90 Days" },
+                  { id: "Q4", label: "Active Quarter" },
                   { id: "T12M", label: "Trailing 12 Months" },
                   { id: "YTD", label: "Year-to-Date" },
                 ].map((item) => (
@@ -337,20 +337,20 @@ export default function DashboardPage() {
             )}
           </div>
 
-          {/* Manual Telemetry Refresh */}
+          {/* Sync Button */}
           <button
             onClick={() => loadData(true)}
             disabled={refreshing}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/[0.06] backdrop-blur-xl border border-white/15 hover:bg-white/[0.12] hover:border-white/25 text-xs text-[#A1A1AA] hover:text-white transition shadow-sm"
-            title="Refresh Telemetry Stream"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#101010] border border-white/10 hover:border-white/25 text-xs text-[#A1A1AA] hover:text-white transition shadow-sm"
+            title="Refresh Overview"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? "animate-spin text-[#C6B9D8]" : ""}`} />
-            <span className="hidden sm:inline">Sync</span>
+            <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? "animate-spin" : ""}`} />
+            <span>Sync</span>
           </button>
 
           {/* Primary Action Button */}
           <Link href="/agent">
-            <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 hover:bg-white text-black font-semibold text-xs transition shadow-[0_0_20px_rgba(255,255,255,0.15)] backdrop-blur-sm group">
+            <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition shadow-sm group">
               <Sparkles className="w-3.5 h-3.5 text-black group-hover:rotate-12 transition-transform" />
               <span>Launch AI Investigation</span>
             </button>
@@ -358,81 +358,81 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* 2. EXECUTIVE METRICS STRIP — Precision Numerals with Hairline Dividers */}
-      <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-4 sm:p-5 shadow-2xl">
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-y lg:divide-y-0 lg:divide-x divide-white/[0.08]">
-          {/* Metric 1: Total Facilities */}
-          <div className="p-3 sm:p-4 space-y-1">
-            <div className="text-[10px] font-mono text-[#8E8E93] uppercase tracking-[0.12em]">
+      {/* 2. KPI METRICS STRIP */}
+      <div className="bg-[#101010] border border-white/10 rounded-2xl p-4 md:p-6 shadow-2xl">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-y sm:divide-y-0 sm:divide-x divide-white/10">
+          {/* Metric 1 */}
+          <div className="p-3 md:p-4 space-y-1">
+            <div className="text-[10px] font-mono text-[#8E8E8E] uppercase tracking-[0.12em]">
               Total Facilities
             </div>
-            <div className="text-2xl sm:text-3xl font-mono font-semibold text-white tracking-tight">
+            <div className="text-2xl md:text-3xl font-mono font-semibold text-white tracking-tight">
               {filteredMetrics.totalFacilities}
             </div>
-            <div className="text-[11px] text-[#8E8E93] font-sans">
-              {selectedFacility === "ALL" ? "5 operating nodes" : "Isolated site scope"}
+            <div className="text-[11px] text-[#A1A1AA]">
+              {selectedFacility === "ALL" ? "5 active sites" : "Selected facility"}
             </div>
           </div>
 
-          {/* Metric 2: Total Audits */}
-          <div className="p-3 sm:p-4 space-y-1">
-            <div className="text-[10px] font-mono text-[#8E8E93] uppercase tracking-[0.12em]">
+          {/* Metric 2 */}
+          <div className="p-3 md:p-4 space-y-1">
+            <div className="text-[10px] font-mono text-[#8E8E8E] uppercase tracking-[0.12em]">
               Total Audits
             </div>
-            <div className="text-2xl sm:text-3xl font-mono font-semibold text-white tracking-tight">
+            <div className="text-2xl md:text-3xl font-mono font-semibold text-white tracking-tight">
               {filteredMetrics.totalAudits}
             </div>
-            <div className="text-[11px] text-[#A1A1AA] font-sans">
-              {overview?.avg_compliance_score || 89.9}% avg adherence
+            <div className="text-[11px] text-[#A1A1AA]">
+              {overview?.avg_compliance_score || 89.9}% avg compliance
             </div>
           </div>
 
-          {/* Metric 3: Open Findings */}
-          <div className="p-3 sm:p-4 space-y-1">
-            <div className="text-[10px] font-mono text-[#8E8E93] uppercase tracking-[0.12em]">
+          {/* Metric 3 */}
+          <div className="p-3 md:p-4 space-y-1">
+            <div className="text-[10px] font-mono text-[#8E8E8E] uppercase tracking-[0.12em]">
               Open Findings
             </div>
-            <div className="text-2xl sm:text-3xl font-mono font-semibold text-white tracking-tight">
+            <div className="text-2xl md:text-3xl font-mono font-semibold text-white tracking-tight">
               {filteredMetrics.openFindings}
             </div>
-            <div className="text-[11px] text-[#8E8E93] font-sans">
-              Active remediation ledger
+            <div className="text-[11px] text-[#A1A1AA]">
+              Active remediation items
             </div>
           </div>
 
-          {/* Metric 4: Critical Findings */}
-          <div className="p-3 sm:p-4 space-y-1">
-            <div className="text-[10px] font-mono text-[#8E8E93] uppercase tracking-[0.12em]">
-              Critical Findings
+          {/* Metric 4 */}
+          <div className="p-3 md:p-4 space-y-1">
+            <div className="text-[10px] font-mono text-[#8E8E8E] uppercase tracking-[0.12em]">
+              Critical Deviations
             </div>
-            <div className="text-2xl sm:text-3xl font-mono font-semibold text-white tracking-tight flex items-baseline gap-2">
+            <div className="text-2xl md:text-3xl font-mono font-semibold text-white tracking-tight flex items-baseline gap-2">
               <span className="text-red-400">{filteredMetrics.criticalFindings}</span>
               <span className="w-1.5 h-1.5 rounded-full bg-red-400 animate-pulse" />
             </div>
             <div className="text-[11px] text-red-400/90 font-mono">
-              Immediate statutory liability
+              High statutory priority
             </div>
           </div>
 
-          {/* Metric 5: Overdue / Failed Actions */}
-          <div className="p-3 sm:p-4 space-y-1">
-            <div className="text-[10px] font-mono text-[#8E8E93] uppercase tracking-[0.12em]">
+          {/* Metric 5 */}
+          <div className="p-3 md:p-4 space-y-1">
+            <div className="text-[10px] font-mono text-[#8E8E8E] uppercase tracking-[0.12em]">
               Overdue Actions
             </div>
-            <div className="text-2xl sm:text-3xl font-mono font-semibold text-white tracking-tight">
+            <div className="text-2xl md:text-3xl font-mono font-semibold text-white tracking-tight">
               {filteredMetrics.failedCapas}
             </div>
             <div className="text-[11px] text-amber-400/90 font-mono">
-              Failed 90-day verification
+              Pending verification gate
             </div>
           </div>
 
-          {/* Metric 6: Recurring Failures */}
-          <div className="p-3 sm:p-4 space-y-1">
-            <div className="text-[10px] font-mono text-[#8E8E93] uppercase tracking-[0.12em]">
+          {/* Metric 6 */}
+          <div className="p-3 md:p-4 space-y-1">
+            <div className="text-[10px] font-mono text-[#8E8E8E] uppercase tracking-[0.12em]">
               Recurring Failures
             </div>
-            <div className="text-2xl sm:text-3xl font-mono font-semibold text-[#D5A6B5] tracking-tight">
+            <div className="text-2xl md:text-3xl font-mono font-semibold text-[#D5A6B5] tracking-tight">
               {filteredMetrics.recurringFindings}
             </div>
             <div className="text-[11px] text-[#C6B9D8] font-mono">
@@ -442,21 +442,21 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* 3. MAIN COMPOSITION: Priority Intelligence (7 cols) + CAPA Effectiveness (5 cols) */}
+      {/* 3. MAIN COMPOSITION: Priority Action Items (7 cols) + CAPA Durability (5 cols) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Left: Priority Intelligence Section (7 cols) */}
-        <div className="lg:col-span-7 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
+        {/* Left: Priority Action Items (7 cols) */}
+        <div className="lg:col-span-7 bg-[#101010] border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <div>
-              <div className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#C6B9D8] font-semibold">
-                HIGH-CONSEQUENCE ATTRIBUTION
-              </div>
-              <h2 className="text-lg font-semibold text-white tracking-tight font-sans mt-0.5">
-                Priority Intelligence
+              <h2 className="text-base font-semibold text-white tracking-tight font-sans">
+                Priority Action Items
               </h2>
+              <p className="text-xs text-[#A1A1AA] mt-0.5">
+                Key findings and open issues requiring management attention
+              </p>
             </div>
-            <span className="text-[10px] font-mono text-[#8E8E93] px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
-              {priorityItems.length} ACTIONABLE ITEMS
+            <span className="text-[11px] font-mono text-[#8E8E8E] px-2.5 py-1 rounded-full bg-white/5 border border-white/10">
+              {priorityItems.length} active items
             </span>
           </div>
 
@@ -464,7 +464,7 @@ export default function DashboardPage() {
             {priorityItems.map((item) => (
               <div
                 key={item.id}
-                className="p-4 rounded-xl bg-white/[0.04] backdrop-blur-md border border-white/10 hover:border-white/20 transition-colors space-y-2 group"
+                className="p-4 rounded-xl bg-white/[0.04] border border-white/10 hover:border-white/20 transition-colors space-y-2 group"
               >
                 <div className="flex items-center justify-between gap-2 flex-wrap">
                   <div className="flex items-center gap-2">
@@ -481,7 +481,7 @@ export default function DashboardPage() {
                     </span>
                     <span className="text-xs text-white/50 font-mono">{item.standard}</span>
                   </div>
-                  <div className="text-[11px] text-[#8E8E93] font-mono">{item.date}</div>
+                  <div className="text-[11px] text-[#8E8E8E] font-mono">{item.date}</div>
                 </div>
 
                 <h3 className="text-sm font-semibold text-white font-sans group-hover:text-[#C6B9D8] transition-colors">
@@ -492,8 +492,8 @@ export default function DashboardPage() {
                 </p>
 
                 <div className="pt-1 flex items-center justify-between text-xs">
-                  <span className="font-mono text-[11px] text-[#8E8E93] flex items-center gap-1.5">
-                    <Building2 className="w-3.5 h-3.5 text-[#8E8E93]" />
+                  <span className="font-mono text-[11px] text-[#8E8E8E] flex items-center gap-1.5">
+                    <Building2 className="w-3.5 h-3.5 text-[#8E8E8E]" />
                     <span>{item.facility}</span>
                   </span>
                   <Link
@@ -509,52 +509,52 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Right: Corrective Action Effectiveness Analytical Summary (5 cols) */}
+        {/* Right: Corrective Action Durability (5 cols) */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
+          <div className="bg-[#101010] border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#8E8E93]">
-                  90-DAY VERIFICATION HORIZON
-                </div>
-                <h2 className="text-lg font-semibold text-white tracking-tight font-sans mt-0.5">
-                  Corrective Action Effectiveness
+                <h2 className="text-base font-semibold text-white tracking-tight font-sans">
+                  Corrective Action Durability
                 </h2>
+                <p className="text-xs text-[#A1A1AA] mt-0.5">
+                  Verification of closed issues over a 90-day observation window
+                </p>
               </div>
               <Link
                 href="/capa"
-                className="text-xs text-white hover:text-[#C6B9D8] font-medium flex items-center gap-1 transition-colors"
+                className="text-xs text-[#C6B9D8] hover:underline font-mono flex items-center gap-1 transition-colors"
               >
                 <span>All CAPAs</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
-            {/* Breakdown Cards: Completed vs Verified */}
+            {/* Breakdown Cards */}
             <div className="grid grid-cols-2 gap-3 pt-1">
-              <div className="p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-md border border-white/10 space-y-1">
-                <div className="text-[10px] font-mono text-[#8E8E93] uppercase tracking-wider">
-                  Completed Tasks
+              <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 space-y-1">
+                <div className="text-[10px] font-mono text-[#8E8E8E] uppercase tracking-wider">
+                  Completed Actions
                 </div>
                 <div className="text-2xl font-mono font-semibold text-white">
                   {overview?.completed_capas || 60}
                 </div>
                 <div className="text-[10px] text-[#A1A1AA] font-sans">
-                  Procedural administrative sign-off
+                  Procedurally closed
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-md border border-amber-500/20 space-y-1">
+              <div className="p-3.5 rounded-xl bg-white/[0.04] border border-amber-500/20 space-y-1">
                 <div className="text-[10px] font-mono text-amber-400 uppercase tracking-wider">
-                  Pending Gate
+                  In Verification
                 </div>
                 <div className="text-2xl font-mono font-semibold text-amber-400">18</div>
                 <div className="text-[10px] text-amber-400/80 font-sans">
-                  Within 90-day observation window
+                  Within 90-day gate
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-md border border-emerald-500/20 space-y-1">
+              <div className="p-3.5 rounded-xl bg-white/[0.04] border border-emerald-500/20 space-y-1">
                 <div className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider">
                   Verified Durable
                 </div>
@@ -562,28 +562,28 @@ export default function DashboardPage() {
                   {overview?.effective_capas || 28}
                 </div>
                 <div className="text-[10px] text-emerald-400/80 font-sans">
-                  0 recurrence over 90+ days
+                  Zero recurrences
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-md border border-red-500/20 space-y-1">
+              <div className="p-3.5 rounded-xl bg-white/[0.04] border border-red-500/20 space-y-1">
                 <div className="text-[10px] font-mono text-red-400 uppercase tracking-wider">
-                  Failed Verification
+                  Failed / Recurred
                 </div>
                 <div className="text-2xl font-mono font-semibold text-red-400">
                   {overview?.failed_recurred_capas || 32}
                 </div>
                 <div className="text-[10px] text-red-400/80 font-sans">
-                  Recurred under operational stress
+                  Re-occurred in operation
                 </div>
               </div>
             </div>
 
-            {/* True Empirical Durability Gauge */}
-            <div className="p-4 rounded-xl bg-white/[0.04] backdrop-blur-md border border-white/10 space-y-2.5">
+            {/* Durability Rate Gauge */}
+            <div className="p-4 rounded-xl bg-white/[0.04] border border-white/10 space-y-2.5">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-[#C8C8C8] font-medium font-sans">
-                  True Empirical Durability Rate
+                  Durability Success Rate
                 </span>
                 <span className="font-mono text-white font-bold text-sm">
                   {overview?.effectiveness_rate_percent || 46.7}%
@@ -595,19 +595,19 @@ export default function DashboardPage() {
                   style={{ width: `${overview?.effectiveness_rate_percent || 46.7}%` }}
                 />
               </div>
-              <p className="text-[11px] text-[#8E8E93] leading-relaxed font-sans">
-                Notice: 53.3% of corrective actions recur when relying on procedural training reminders rather than physical engineering controls.
+              <p className="text-[11px] text-[#8E8E8E] leading-relaxed font-sans">
+                Actions reinforced with physical engineering controls demonstrate significantly higher permanence than procedural reminder training alone.
               </p>
             </div>
           </div>
 
-          {/* Organizational Intelligence Insights (Hindsight) */}
-          <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-3.5">
+          {/* Compliance Precedent Insights */}
+          <div className="bg-[#101010] border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-3.5">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <div className="flex items-center gap-2">
                 <BrainCircuit className="w-4 h-4 text-[#C6B9D8]" />
                 <h3 className="text-sm font-semibold text-white font-sans">
-                  Episodic Precedent Insights
+                  Compliance Precedent Insights
                 </h3>
               </div>
               <Link href="/memory" className="text-xs text-[#C6B9D8] hover:underline font-mono">
@@ -616,16 +616,16 @@ export default function DashboardPage() {
             </div>
 
             <div className="space-y-2.5 text-xs text-[#A1A1AA] font-sans">
-              <div className="p-3 rounded-xl bg-white/[0.04] backdrop-blur-md border border-white/5 space-y-1">
-                <div className="font-semibold text-white">Machine Guarding Ergonomics Rule</div>
-                <p className="text-[11px] text-[#8E8E93] leading-relaxed">
-                  Interlock bypasses correlate directly with rapid line changeovers. Procedural sign-offs degrade after 42 operating days.
+              <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 space-y-1">
+                <div className="font-semibold text-white">Machine Guarding Ergonomics</div>
+                <p className="text-[11px] text-[#8E8E8E] leading-relaxed">
+                  Interlock bypasses correlate with rapid line changeovers. Trapped-key interlocks ensure physical compliance without relying on procedure.
                 </p>
               </div>
-              <div className="p-3 rounded-xl bg-white/[0.04] backdrop-blur-md border border-white/5 space-y-1">
-                <div className="font-semibold text-white">Seasonal Logistics Surge Trap</div>
-                <p className="text-[11px] text-[#8E8E93] leading-relaxed">
-                  Emergency egress blockages spike by 40% in late-quarter fulfillment periods across Reno and Charlotte distribution nodes.
+              <div className="p-3 rounded-xl bg-white/[0.04] border border-white/5 space-y-1">
+                <div className="font-semibold text-white">Seasonal Warehouse Ingress</div>
+                <p className="text-[11px] text-[#8E8E8E] leading-relaxed">
+                  Emergency egress paths experience recurring blockages during high-volume periods. Floor line demarcation permanently eliminates staging conflicts.
                 </p>
               </div>
             </div>
@@ -633,22 +633,22 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* 4. FACILITY PERFORMANCE MATRIX & HISTORICAL ACTIVITY */}
+      {/* 4. FACILITY PERFORMANCE MATRIX & RECENT ACTIVITY */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-        {/* Left: Facility Performance Comparison Section (7 cols) */}
-        <div className="lg:col-span-7 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
+        {/* Left: Facility Performance Comparison (7 cols) */}
+        <div className="lg:col-span-7 bg-[#101010] border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <div>
-              <div className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#8E8E93]">
-                CROSS-FACILITY RISK BENCHMARK
-              </div>
-              <h2 className="text-lg font-semibold text-white tracking-tight font-sans mt-0.5">
-                Facility Performance Matrix
+              <h2 className="text-base font-semibold text-white tracking-tight font-sans">
+                Facility Performance Comparison
               </h2>
+              <p className="text-xs text-[#A1A1AA] mt-0.5">
+                Compliance scores, non-conformance volume, and risk index by site
+              </p>
             </div>
             <Link
               href="/facilities"
-              className="text-xs text-white hover:text-[#C6B9D8] font-medium flex items-center gap-1 transition-colors font-sans"
+              className="text-xs text-[#C6B9D8] hover:underline font-mono flex items-center gap-1 transition-colors"
             >
               <span>Facility Network</span>
               <ArrowRight className="w-3.5 h-3.5" />
@@ -664,11 +664,11 @@ export default function DashboardPage() {
                 <div
                   key={fac.facility_code}
                   className={`py-3.5 px-3 rounded-xl transition-colors flex items-center justify-between gap-4 ${
-                    isSelected ? "bg-white/[0.1] backdrop-blur-md border border-white/20" : "hover:bg-white/[0.04]"
+                    isSelected ? "bg-white/[0.1] border border-white/20" : "hover:bg-white/[0.04]"
                   }`}
                 >
                   <div className="flex items-center gap-3.5 min-w-0">
-                    <span className="font-mono text-xs text-[#8E8E93] w-5">
+                    <span className="font-mono text-xs text-[#8E8E8E] w-5">
                       0{idx + 1}
                     </span>
                     <div className="min-w-0">
@@ -676,11 +676,11 @@ export default function DashboardPage() {
                         <span className="font-semibold text-sm text-white truncate font-sans">
                           {fac.name}
                         </span>
-                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[#8E8E93]">
+                        <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/10 text-[#8E8E8E]">
                           {fac.facility_code}
                         </span>
                       </div>
-                      <div className="text-xs text-[#8E8E93] font-mono mt-0.5 flex items-center gap-2 flex-wrap">
+                      <div className="text-xs text-[#8E8E8E] font-mono mt-0.5 flex items-center gap-2 flex-wrap">
                         <span>{fac.facility_type}</span>
                         <span>•</span>
                         <span>{fac.findings_count} findings ({fac.critical_count} critical)</span>
@@ -709,20 +709,20 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Right: Historical Activity Timeline (5 cols) */}
-        <div className="lg:col-span-5 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
+        {/* Right: Recent Activity Timeline (5 cols) */}
+        <div className="lg:col-span-5 bg-[#101010] border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <div>
-              <div className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#8E8E93]">
-                IMMUTABLE AUDIT TRAIL
-              </div>
-              <h2 className="text-lg font-semibold text-white tracking-tight font-sans mt-0.5">
-                Historical Activity
+              <h2 className="text-base font-semibold text-white tracking-tight font-sans">
+                Recent Activity
               </h2>
+              <p className="text-xs text-[#A1A1AA] mt-0.5">
+                Audit logs, finding detections, and verification status
+              </p>
             </div>
-            <span className="text-[10px] font-mono text-[#8E8E93] flex items-center gap-1.5">
+            <span className="text-[10px] font-mono text-[#8E8E8E] flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              LIVE TELEMETRY
+              Live Updates
             </span>
           </div>
 
@@ -730,7 +730,7 @@ export default function DashboardPage() {
             {[
               {
                 id: "act-01",
-                badge: "AUDIT INGESTED",
+                badge: "Audit Ingested",
                 title: "OSHA Fall Protection & Machine Safeguards Ingested",
                 desc: "Audit AUD-2026-041 parsed with 14 findings and 8 photographic attachments indexed.",
                 time: "2 hours ago",
@@ -738,7 +738,7 @@ export default function DashboardPage() {
               },
               {
                 id: "act-02",
-                badge: "RECURRENCE DETECTED",
+                badge: "Recurrence Detected",
                 title: "Stamping Press Interlock Bypass Logged",
                 desc: "FIND-2026-039 logged with vector match against past CAPA-2026-003.",
                 time: "1 day ago",
@@ -746,25 +746,25 @@ export default function DashboardPage() {
               },
               {
                 id: "act-03",
-                badge: "ACTION COMPLETED",
+                badge: "Action Completed",
                 title: "Double-walled HDPE Containment Tub Certified",
-                desc: "PE-stamped drawings and SCADA telemetry attached to CAPA-2026-005.",
+                desc: "Engineering drawings and sensor telemetry attached to CAPA-2026-005.",
                 time: "3 days ago",
                 color: "text-emerald-400",
               },
               {
                 id: "act-04",
-                badge: "VERIFICATION PERFORMED",
+                badge: "Verification Passed",
                 title: "90-Day Ultrasonic Re-inspection Passed",
-                desc: "Verification confirmed zero chemical leaks over the 90-day stress window.",
+                desc: "Verification confirmed zero chemical leaks over the 90-day observation window.",
                 time: "5 days ago",
                 color: "text-emerald-400",
               },
               {
                 id: "act-05",
-                badge: "MEMORY RETAINED",
-                title: "Episodic Precedent Formed",
-                desc: "Trapped-key captive interlock pattern retained across facility memory banks.",
+                badge: "Memory Retained",
+                title: "Precedent Formed",
+                desc: "Captive-key interlock safety pattern retained across organizational memory.",
                 time: "1 week ago",
                 color: "text-[#C6B9D8]",
               },
@@ -775,7 +775,7 @@ export default function DashboardPage() {
                   <span className={`font-semibold tracking-wider ${ev.color}`}>
                     {ev.badge}
                   </span>
-                  <span className="text-[#8E8E93]">{ev.time}</span>
+                  <span className="text-[#8E8E8E]">{ev.time}</span>
                 </div>
                 <div className="text-xs font-semibold text-white font-sans">{ev.title}</div>
                 <div className="text-[11px] text-[#A1A1AA] leading-relaxed font-sans">{ev.desc}</div>

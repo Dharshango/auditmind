@@ -138,7 +138,7 @@ export function Navigation({
       {/* Primary Sidebar Rail — Glassy, Compact & Fully Responsive */}
       <aside
         className={`fixed top-0 bottom-0 left-0 z-50 flex flex-col bg-black/40 backdrop-blur-2xl border-r border-white/10 text-white font-sans transition-all duration-200 select-none shadow-[0_8px_32px_rgba(0,0,0,0.5)] ${
-          isCollapsed ? "w-[72px]" : "w-[260px]"
+          isCollapsed ? "w-[72px]" : "w-[272px]"
         } ${
           mobileOpen
             ? "translate-x-0"
@@ -161,37 +161,37 @@ export function Navigation({
           </button>
         )}
 
-        {/* 1. BRAND HEADER — Balanced, Centered When Collapsed */}
+        {/* 1. BRAND HEADER — Balanced, Centered When Collapsed, Generous Clearance */}
         <div className={`h-14 ${isCollapsed ? "px-0 justify-center" : "px-3.5 justify-between"} border-b border-white/10 bg-white/[0.02] flex items-center shrink-0`}>
           <Link
             href="/dashboard"
             onClick={onCloseMobile}
-            className={`flex items-center gap-2.5 overflow-hidden group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] rounded-lg p-1 ${
+            className={`flex items-center gap-2 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] rounded-lg p-1 ${
               isCollapsed ? "justify-center" : ""
             }`}
             title="AuditMind Command Center"
           >
             {/* White Circular Monogram Icon */}
-            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-black shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-105">
-              <div className="w-4 h-4 relative flex items-center justify-center">
+            <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-black shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-105">
+              <div className="w-3.5 h-3.5 relative flex items-center justify-center">
                 <Image
                   src="/assets/logo.svg"
                   alt="AUDITMIND Logo"
-                  width={16}
-                  height={16}
+                  width={14}
+                  height={14}
                   className="object-contain"
                   priority
                 />
               </div>
             </div>
 
-            {/* Typography */}
+            {/* Typography — Crisp, Non-Truncated & Fully Visible */}
             {!isCollapsed && (
-              <div className="flex items-baseline gap-2 overflow-hidden min-w-0">
-                <span className="font-bold text-[14px] tracking-[0.04em] text-white leading-none font-sans">
+              <div className="flex items-center gap-2 shrink-0">
+                <span className="font-bold text-[13.5px] tracking-[0.03em] text-white leading-none font-sans">
                   AUDITMIND
                 </span>
-                <span className="text-[8.5px] font-mono px-1.5 py-0.5 bg-white/10 text-[#C6B9D8] rounded border border-white/10 font-semibold tracking-wider">
+                <span className="text-[8.5px] font-mono px-1.5 py-0.5 bg-white/10 text-[#C6B9D8] rounded border border-white/10 font-semibold tracking-wider shrink-0">
                   ENTERPRISE
                 </span>
               </div>
@@ -203,7 +203,7 @@ export function Navigation({
             <button
               onClick={toggle}
               aria-label="Collapse sidebar rail"
-              className="hidden lg:flex p-1.5 rounded-lg text-[#8E8E93] hover:text-white hover:bg-white/10 transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8]"
+              className="hidden lg:flex p-1.5 rounded-lg text-[#8E8E93] hover:text-white hover:bg-white/10 transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] shrink-0 ml-auto"
               title="Collapse sidebar"
             >
               <ChevronLeft className="w-4 h-4" />

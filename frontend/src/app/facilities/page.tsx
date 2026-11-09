@@ -269,16 +269,16 @@ export default function FacilitiesPage() {
           <div className="lg:col-span-8 bg-[#101010] border border-white/10 rounded-2xl p-6 shadow-2xl space-y-4 relative overflow-hidden">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <div>
-                <div className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#8E8E8E]">
-                  CROSS-FACILITY CORRELATION CONSTELLATION
-                </div>
                 <h3 className="text-base font-semibold text-white tracking-tight font-sans">
-                  Shared Non-Conformance Vectors Across Operating Sites
+                  Facility Risk Topology Map
                 </h3>
+                <p className="text-xs text-[#A1A1AA] mt-0.5">
+                  Correlations and shared compliance non-conformance vectors across operating sites
+                </p>
               </div>
               <div className="text-[11px] font-mono text-[#A1A1AA] flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-[#C6B9D8]" />
-                <span>Select node to inspect facility profile</span>
+                <span>Click a node to inspect facility</span>
               </div>
             </div>
 
@@ -322,31 +322,32 @@ export default function FacilitiesPage() {
                   return (
                     <g
                       key={fac.facility_code}
-                      onClick={() => openFacilityDetail(fac.facility_code)}
+                      onClick={() => setActiveNode(fac.facility_code)}
                       className="cursor-pointer group"
                     >
-                      {/* Pulse ring on selected */}
+                      {/* Selection indicator ring */}
                       {isSelected && (
                         <circle
                           cx={pos.x}
                           cy={pos.y}
-                          r={34}
+                          r={36}
                           fill="none"
                           stroke="#C6B9D8"
                           strokeWidth={1.5}
-                          className="animate-ping opacity-30"
+                          strokeDasharray="4 4"
+                          opacity={0.8}
                         />
                       )}
 
-                      {/* Outer glow ring */}
+                      {/* Outer node circle */}
                       <circle
                         cx={pos.x}
                         cy={pos.y}
                         r={28}
-                        fill={isSelected ? "rgba(198, 185, 216, 0.15)" : "#171717"}
+                        fill={isSelected ? "rgba(198, 185, 216, 0.2)" : "#18181B"}
                         stroke={isSelected ? "#FFFFFF" : "rgba(255,255,255,0.25)"}
                         strokeWidth={isSelected ? 2 : 1}
-                        className="transition-all duration-200 group-hover:stroke-white group-hover:scale-105"
+                        className="transition-colors duration-200 group-hover:stroke-white"
                       />
 
                       {/* Inner Dot */}
@@ -355,6 +356,7 @@ export default function FacilitiesPage() {
                         cy={pos.y}
                         r={6}
                         fill={isSelected ? "#FFFFFF" : "#8E8E8E"}
+                        className="transition-colors duration-200"
                       />
 
                       {/* Code Label */}
@@ -375,8 +377,10 @@ export default function FacilitiesPage() {
                         x={pos.x}
                         y={pos.y + 44}
                         textAnchor="middle"
-                        fill="#A1A1AA"
+                        fill={isSelected ? "#FFFFFF" : "#A1A1AA"}
                         fontSize={10}
+                        fontWeight={isSelected ? "500" : "400"}
+                        className="transition-colors duration-200"
                       >
                         {fac.name.length > 22 ? fac.name.substring(0, 22) + "..." : fac.name}
                       </text>
@@ -387,8 +391,7 @@ export default function FacilitiesPage() {
 
               {/* Legend overlay */}
               <div className="absolute bottom-3 left-4 text-[10px] font-mono text-[#8E8E8E] bg-[#101010]/90 backdrop-blur-md px-3 py-1.5 rounded-lg border border-white/10 space-y-0.5">
-                <div>Vectors represent shared recurring compliance non-conformances</div>
-                <div className="text-white/60">Source: Hindsight Cross-Facility Graph Engine</div>
+                <div>Dashed lines show shared compliance risks across facilities</div>
               </div>
             </div>
           </div>

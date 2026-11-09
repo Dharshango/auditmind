@@ -11,7 +11,9 @@ import {
   MOCK_AGENT_EVENTS,
 } from "./mockData";
 
-export const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+export const API_BASE =
+  process.env.NEXT_PUBLIC_API_URL ||
+  (typeof window !== "undefined" ? "/api" : "http://localhost:8000/api");
 export const DEMO_ORG_ID = "00000000-0000-0000-0000-000000000001";
 
 async function fetchJson<T>(

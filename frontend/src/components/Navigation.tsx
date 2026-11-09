@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   LayoutDashboard,
   Building2,
@@ -17,14 +17,9 @@ import {
   BotMessageSquare,
   ChevronLeft,
   ChevronRight,
-  Command,
-  LogOut,
   Sparkles,
-  Bell,
-  Settings,
   X,
 } from "lucide-react";
-import { api } from "@/lib/api";
 
 export interface NavItem {
   name: string;
@@ -77,11 +72,6 @@ export const NAV_GROUPS: { group: string; items: NavItem[] }[] = [
   },
 ];
 
-const BOTTOM_ITEMS: NavItem[] = [
-  { name: "Notifications", href: "/notifications", icon: Bell, badge: "2" },
-  { name: "Settings", href: "/settings", icon: Settings },
-];
-
 export function Navigation({
   collapsed,
   onToggleCollapse,
@@ -96,7 +86,6 @@ export function Navigation({
   onCloseMobile?: () => void;
 }) {
   const pathname = usePathname();
-  const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(collapsed || false);
   const [hoveredItem, setHoveredItem] = useState<{ name: string; y: number } | null>(null);
   const [optimisticPath, setOptimisticPath] = useState<string | null>(null);
@@ -125,11 +114,6 @@ export function Navigation({
     const next = !isCollapsed;
     setIsCollapsed(next);
     if (onToggleCollapse) onToggleCollapse();
-  };
-
-  const handleLogout = async () => {
-    await api.logout();
-    router.push("/login");
   };
 
   return (
@@ -305,101 +289,6 @@ export function Navigation({
             </div>
           ))}
         </nav>
-
-        {/* 3. BOTTOM SECTION: Notifications, Settings, Profile */}
-        <div className="p-2.5 border-t border-white/10 bg-black/20 backdrop-blur-md space-y-1 shrink-0">
-          {/* Notifications & Settings Links */}
-          <div className="space-y-0.5">
-            {BOTTOM_ITEMS.map((item) => {
-              const isActive = currentPath === item.href;
-              const Icon = item.icon;
-
-              return (
-                <div
-                  key={item.href}
-                  className="relative"
-                  onMouseEnter={(e) => {
-                    if (isCollapsed) {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      setHoveredItem({ name: item.name, y: rect.top + rect.height / 2 });
-                    }
-                  }}
-                  onMouseLeave={() => setHoveredItem(null)}
-                >
-                  <Link
-                    href={item.href}
-                    onClick={() => {
-                      setOptimisticPath(item.href);
-                      if (onCloseMobile) onCloseMobile();
-                    }}
-                    aria-current={isActive ? "page" : undefined}
-                    className={`flex items-center gap-2.5 min-h-[34px] py-1 px-3 rounded-xl transition-all duration-150 relative font-sans text-[12.5px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
-                      isActive
-                        ? "bg-white/[0.12] text-white font-semibold shadow-sm"
-                        : "text-[#A1A1AA] hover:text-white hover:bg-white/[0.06]"
-                    }`}
-                  >
-                    <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? "text-white" : "text-[#A1A1AA]"}`} />
-                    {!isCollapsed && (
-                      <span className="truncate flex-1 tracking-normal font-sans">
-                        {item.name}
-                      </span>
-                    )}
-                    {!isCollapsed && item.badge && (
-                      <span className="text-[9px] font-mono px-1.5 py-0.2 rounded-full bg-white/10 text-[#EDEDED] font-semibold">
-                        {item.badge}
-                      </span>
-                    )}
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* Quick Command Palette Button */}
-          {onOpenCommand && !isCollapsed && (
-            <button
-              onClick={onOpenCommand}
-              className="w-full flex items-center justify-between px-3 py-1.5 rounded-xl bg-white/[0.03] border border-white/10 text-xs text-[#A1A1AA] hover:text-white hover:border-white/20 hover:bg-white/[0.08] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8]"
-            >
-              <span className="flex items-center gap-2">
-                <Command className="w-3 h-3 text-white" />
-                <span className="font-sans text-[11.5px] font-medium">Command Palette</span>
-              </span>
-              <kbd className="px-1.5 py-0.2 font-mono text-[9px] bg-white/10 text-white rounded border border-white/20">
-                ⌘K
-              </kbd>
-            </button>
-          )}
-
-          {/* User Profile & Sign Out Bar */}
-          <div className="pt-1 border-t border-white/[0.06]">
-            <button
-              onClick={handleLogout}
-              className={`w-full flex items-center ${
-                isCollapsed ? "justify-center" : "justify-between"
-              } px-2.5 py-1.5 rounded-lg text-xs text-[#A1A1AA] hover:text-white hover:bg-white/[0.06] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8]`}
-              title="Sign out of active auditor session"
-            >
-              <div className="flex items-center gap-2 min-w-0">
-                <div className="w-5 h-5 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-[9px] font-semibold text-white shrink-0">
-                  SJ
-                </div>
-                {!isCollapsed && (
-                  <div className="text-left min-w-0">
-                    <div className="text-[11.5px] font-medium text-white truncate font-sans">
-                      Sarah Jenkins
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {!isCollapsed && (
-                <LogOut className="w-3.5 h-3.5 text-[#8E8E93] hover:text-white shrink-0 ml-2" />
-              )}
-            </button>
-          </div>
-        </div>
       </aside>
 
       {/* Floating Hover Tooltip for Collapsed Sidebar */}

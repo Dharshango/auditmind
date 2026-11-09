@@ -26,17 +26,11 @@ export default function SettingsPage() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-white/10">
         <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#A1A1AA] font-semibold flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-white" />
-              SYSTEM GOVERNANCE &amp; TENANT CONFIGURATION
-            </span>
-          </div>
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-white leading-tight font-sans">
             Organization &amp; System Settings
           </h1>
-          <p className="text-sm text-[#C8C8C8] mt-2 max-w-3xl leading-relaxed">
-            Configure enterprise tenant profiles, Hindsight memory bank parameters, Groq AI inference endpoints, and automated 90-day verification gates.
+          <p className="text-sm text-[#C8C8C8] mt-1.5 max-w-3xl leading-relaxed">
+            Configure enterprise tenant profiles, system preferences, and security settings.
           </p>
         </div>
 

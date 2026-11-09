@@ -98,7 +98,6 @@ export function Navigation({
   const pathname = usePathname();
   const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(collapsed || false);
-  const [optimisticHref, setOptimisticHref] = useState<string | null>(null);
   const [hoveredItem, setHoveredItem] = useState<{ name: string; y: number } | null>(null);
 
   // Sync internal collapsed state with parent prop if provided
@@ -108,18 +107,11 @@ export function Navigation({
     }
   }, [collapsed]);
 
-  // Synchronize optimistic state with real pathname
-  useEffect(() => {
-    setOptimisticHref(null);
-  }, [pathname]);
-
   const normalizedPathname = pathname
     ? pathname.length > 1 && pathname.endsWith("/")
       ? pathname.slice(0, -1)
       : pathname
     : "";
-
-  const effectivePath = optimisticHref || normalizedPathname;
 
   const toggle = () => {
     const next = !isCollapsed;
@@ -130,15 +122,6 @@ export function Navigation({
   const handleLogout = async () => {
     await api.logout();
     router.push("/login");
-  };
-
-  const handleItemClick = (href: string) => {
-    if (effectivePath !== href) {
-      setOptimisticHref(href);
-    }
-    if (onCloseMobile) {
-      onCloseMobile();
-    }
   };
 
   return (
@@ -166,15 +149,30 @@ export function Navigation({
           fontStretch: "normal",
         }}
       >
-        {/* 1. BRAND HEADER */}
-        <div className="h-14 px-3.5 border-b border-white/10 bg-white/[0.02] flex items-center justify-between shrink-0">
+        {/* Floating Expand Pill on Sidebar Rail Border — Only Visible When Collapsed */}
+        {isCollapsed && (
+          <button
+            onClick={toggle}
+            aria-label="Expand sidebar rail"
+            className="hidden lg:flex items-center justify-center absolute -right-3 top-4 w-6 h-6 rounded-full bg-[#18181B] border border-white/20 text-[#A1A1AA] hover:text-white hover:bg-white/20 hover:border-white/40 hover:scale-110 active:scale-95 transition-all shadow-[0_2px_8px_rgba(0,0,0,0.6)] z-50 group cursor-pointer"
+            title="Expand sidebar"
+          >
+            <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+          </button>
+        )}
+
+        {/* 1. BRAND HEADER — Balanced, Centered When Collapsed */}
+        <div className={`h-14 ${isCollapsed ? "px-0 justify-center" : "px-3.5 justify-between"} border-b border-white/10 bg-white/[0.02] flex items-center shrink-0`}>
           <Link
             href="/dashboard"
-            onClick={() => handleItemClick("/dashboard")}
-            className="flex items-center gap-2.5 overflow-hidden group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] rounded-lg p-1"
+            onClick={onCloseMobile}
+            className={`flex items-center gap-2.5 overflow-hidden group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] rounded-lg p-1 ${
+              isCollapsed ? "justify-center" : ""
+            }`}
+            title="AuditMind Command Center"
           >
             {/* White Circular Monogram Icon */}
-            <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-black shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-105">
+            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-black shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-105">
               <div className="w-4 h-4 relative flex items-center justify-center">
                 <Image
                   src="/assets/logo.svg"
@@ -200,30 +198,26 @@ export function Navigation({
             )}
           </Link>
 
-          {/* Desktop Collapse Toggle / Mobile Close Button */}
-          <div className="flex items-center">
-            {/* Mobile close button */}
-            <button
-              onClick={onCloseMobile}
-              aria-label="Close mobile navigation"
-              className="p-1 rounded-lg text-[#8E8E93] hover:text-white hover:bg-white/10 transition lg:hidden"
-            >
-              <X className="w-4 h-4" />
-            </button>
-
-            {/* Desktop collapse toggle */}
+          {/* Desktop collapse button when expanded */}
+          {!isCollapsed && (
             <button
               onClick={toggle}
-              aria-label={isCollapsed ? "Expand sidebar rail" : "Collapse sidebar rail"}
-              className="hidden lg:flex p-1 rounded-lg text-[#8E8E93] hover:text-white hover:bg-white/10 transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8]"
+              aria-label="Collapse sidebar rail"
+              className="hidden lg:flex p-1.5 rounded-lg text-[#8E8E93] hover:text-white hover:bg-white/10 transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8]"
+              title="Collapse sidebar"
             >
-              {isCollapsed ? (
-                <ChevronRight className="w-3.5 h-3.5" />
-              ) : (
-                <ChevronLeft className="w-3.5 h-3.5" />
-              )}
+              <ChevronLeft className="w-4 h-4" />
             </button>
-          </div>
+          )}
+
+          {/* Mobile close button */}
+          <button
+            onClick={onCloseMobile}
+            aria-label="Close mobile navigation"
+            className="p-1 rounded-lg text-[#8E8E93] hover:text-white hover:bg-white/10 transition lg:hidden"
+          >
+            <X className="w-4 h-4" />
+          </button>
         </div>
 
         {/* 2. COMPACT NAVIGATION GROUPS CONTAINER — Zero Scroll Required */}
@@ -243,7 +237,7 @@ export function Navigation({
 
               {/* Group Nav Items — Glassy Aesthetic */}
               {group.items.map((item) => {
-                const isActive = effectivePath === item.href;
+                const isActive = normalizedPathname === item.href;
                 const Icon = item.icon;
 
                 return (
@@ -260,17 +254,17 @@ export function Navigation({
                   >
                     <Link
                       href={item.href}
-                      onClick={() => handleItemClick(item.href)}
+                      onClick={onCloseMobile}
                       aria-current={isActive ? "page" : undefined}
-                      className={`flex items-center gap-2.5 min-h-[35px] py-1.5 px-3 rounded-lg transition-all duration-150 relative font-sans text-[13px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
+                      className={`flex items-center gap-2.5 min-h-[35px] py-1.5 px-3 rounded-lg transition-colors duration-100 relative font-sans text-[13px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
                         isActive
-                          ? "bg-white/[0.14] backdrop-blur-md text-white font-semibold border-l-[3px] border-[#C6B9D8] border-r border-t border-b border-white/20 shadow-[0_2px_10px_rgba(255,255,255,0.06)]"
-                          : "text-white/70 hover:text-white bg-white/[0.03] hover:bg-white/[0.08] hover:backdrop-blur-md border border-white/[0.04] hover:border-white/15"
+                          ? "bg-white/[0.14] text-white font-semibold border-l-[3px] border-[#C6B9D8] border-r border-t border-b border-white/20 shadow-[0_2px_10px_rgba(255,255,255,0.06)]"
+                          : "text-white/70 hover:text-white bg-white/[0.03] hover:bg-white/[0.08] border border-white/[0.04] hover:border-white/15"
                       }`}
                     >
                       {/* Icon */}
                       <Icon
-                        className={`w-4 h-4 shrink-0 transition-colors duration-150 ${
+                        className={`w-4 h-4 shrink-0 transition-colors duration-100 ${
                           isActive
                             ? "text-white"
                             : item.highlight
@@ -306,7 +300,7 @@ export function Navigation({
           {/* Notifications & Settings Links — Glassy */}
           <div className="space-y-0.5">
             {BOTTOM_ITEMS.map((item) => {
-              const isActive = effectivePath === item.href;
+              const isActive = normalizedPathname === item.href;
               const Icon = item.icon;
 
               return (
@@ -323,9 +317,9 @@ export function Navigation({
                 >
                   <Link
                     href={item.href}
-                    onClick={() => handleItemClick(item.href)}
+                    onClick={onCloseMobile}
                     aria-current={isActive ? "page" : undefined}
-                    className={`flex items-center gap-2.5 min-h-[33px] py-1 px-3 rounded-lg transition-all duration-150 relative font-sans text-[12.5px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
+                    className={`flex items-center gap-2.5 min-h-[33px] py-1 px-3 rounded-lg transition-colors duration-100 relative font-sans text-[12.5px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
                       isActive
                         ? "bg-white/[0.14] text-white font-semibold border-l-[3px] border-[#C6B9D8] border-r border-t border-b border-white/20"
                         : "text-[#A1A1AA] hover:text-white bg-white/[0.02] hover:bg-white/[0.08] border border-white/[0.04] hover:border-white/15"

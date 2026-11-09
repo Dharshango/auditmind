@@ -45,17 +45,11 @@ export default function IntelligencePage() {
       {/* Header */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-white/10">
         <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#A1A1AA] font-semibold flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C6B9D8] animate-pulse" />
-              INTELLIGENCE MATRIX • CROSS-SITE RISK TOPOGRAPHY
-            </span>
-          </div>
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-white leading-tight font-sans">
-            Compliance Intelligence &amp; Drift Radar
+            Compliance Intelligence
           </h1>
-          <p className="text-sm text-[#C8C8C8] mt-2 max-w-3xl leading-relaxed">
-            Algorithmic attribution across distributed facilities. Cross-correlating Hindsight experiential memory, statutory audit records, and recurrence velocity to isolate systemic non-conformance vectors.
+          <p className="text-sm text-[#C8C8C8] mt-1.5 max-w-3xl leading-relaxed">
+            Predictive drift analysis, cross-facility risk attribution, and compliance velocity.
           </p>
         </div>
 

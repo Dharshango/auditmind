@@ -154,20 +154,11 @@ export default function CapaPage() {
       {/* 1. TOP HERO AREA — Sleek Executive Typography */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-white/10">
         <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#A1A1AA] font-semibold flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              OPERATIONAL REMEDIATION • THE 90-DAY VERIFICATION HORIZON
-            </span>
-            <span className="text-white/20">•</span>
-            <span className="text-[10px] text-[#A1A1AA] font-mono">CONTINUOUS STATUTORY ASSURANCE</span>
-          </div>
-
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-white leading-tight font-sans">
-            Corrective &amp; Preventive Action (CAPA) Governance
+            Corrective Actions (CAPA)
           </h1>
-          <p className="text-sm text-[#C8C8C8] mt-2 max-w-2xl leading-relaxed">
-            Enforcing evidence-based durability. Moving beyond administrative task completion to empirically verify that operational risks are permanently eliminated.
+          <p className="text-sm text-[#C8C8C8] mt-1.5 max-w-2xl leading-relaxed">
+            Remediation tracking, preventative controls, and durability verification.
           </p>
         </div>
 

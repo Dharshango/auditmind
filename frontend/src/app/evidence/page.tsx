@@ -208,20 +208,11 @@ export default function EvidenceExplorerPage() {
       {/* 1. TOP HERO AREA — Sleek Executive Typography */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-white/10">
         <div>
-          <div className="flex items-center gap-2 mb-2">
-            <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#A1A1AA] font-semibold flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-              FORENSIC EXHIBIT VAULT • CRYPTOGRAPHIC PROVENANCE ARCHIVE
-            </span>
-            <span className="text-white/20">•</span>
-            <span className="text-[10px] text-[#A1A1AA] font-mono">TAMPER-EVIDENT REGULATORY REPOSITORY</span>
-          </div>
-
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-white leading-tight font-sans">
-            Evidence Explorer &amp; Forensic Vault
+            Evidence Explorer
           </h1>
-          <p className="text-sm text-[#C8C8C8] mt-2 max-w-2xl leading-relaxed">
-            Immutable photographic exhibits, laboratory certifications, and original PDF source documentation bound with SHA-256 cryptographic hashes for regulatory defense.
+          <p className="text-sm text-[#C8C8C8] mt-1.5 max-w-2xl leading-relaxed">
+            Inspection photographs, laboratory reports, and source documentation.
           </p>
         </div>
 

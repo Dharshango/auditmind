@@ -809,22 +809,12 @@ export default function AgentPage() {
           ========================================================================= */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
         <div>
-          <div className="flex items-center gap-2 mb-1.5">
-            <span className="text-[11px] font-mono font-semibold text-white uppercase tracking-[0.12em] flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              COGNITIVE REASONING ENGINE • RUNTIME OPERATIONAL
-            </span>
-            <span className="text-white/20">•</span>
-            <span className="text-[11px] text-[#A3A3A3] font-mono">
-              Groq LLaMA 3.3 70B Versatile
-            </span>
-          </div>
           <h1 className="text-2xl sm:text-3xl font-sans font-semibold text-white tracking-[-0.03em] flex items-center gap-2.5">
             <Bot className="w-7 h-7 text-white" />
-            Autonomous Compliance &amp; Forensic Investigation Agent
+            AI Compliance Agent
           </h1>
           <p className="text-sm text-[#A3A3A3] mt-1 leading-relaxed max-w-3xl">
-            Autonomous statutory compliance reasoning, episodic institutional memory recall, cross-facility recurrence diagnosis, and 90-day CAPA durability verification.
+            Autonomous compliance analysis, audit cross-referencing, and recurrence diagnosis.
           </p>
         </div>
 

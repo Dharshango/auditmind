@@ -32,7 +32,7 @@ const ROUTE_NAMES: Record<string, { title: string; category: string }> = {
   "/evidence": { title: "Evidence Explorer", category: "Operations" },
   "/agent": { title: "AI Compliance Agent", category: "Cognitive AI" },
   "/notifications": { title: "Compliance Alerts", category: "Operations" },
-  "/settings": { title: "System Governance", category: "Configuration" },
+  "/settings": { title: "System Settings", category: "Settings" },
 };
 
 export function TopNav({

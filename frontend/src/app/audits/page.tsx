@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useMemo } from "react";
 import { api } from "@/lib/api";
+import { MOCK_AUDITS, MOCK_FACILITIES } from "@/lib/mockData";
 import {
   FileText,
   Upload,
@@ -46,9 +47,9 @@ interface AuditRecord {
 }
 
 export default function AuditsPage() {
-  const [audits, setAudits] = useState<AuditRecord[]>([]);
-  const [facilities, setFacilities] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [audits, setAudits] = useState<AuditRecord[]>(MOCK_AUDITS as any);
+  const [facilities, setFacilities] = useState<any[]>(MOCK_FACILITIES);
+  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -144,17 +145,6 @@ export default function AuditsPage() {
     return ["ALL", ...Array.from(set)];
   }, [audits]);
 
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
-        <RefreshCw className="w-8 h-8 text-white animate-spin" />
-        <p className="text-xs text-[#8E8E8E] font-mono tracking-tight">
-          Loading audit documents and finding telemetry...
-        </p>
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-8 pb-16 animate-reveal select-none">
       {/* 1. TOP HERO AREA — Sleek Executive Typography */}
@@ -234,48 +224,51 @@ export default function AuditsPage() {
         </div>
       </div>
 
-      {/* 3. SEARCH & FILTERS BAR */}
-      <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between">
-        <div className="relative flex-1 max-w-md">
-          <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8E8E8E]" />
-          <input
-            type="text"
-            placeholder="Search audit title, protocol code, lead auditor, or facility..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-[#101010] border border-white/10 rounded-xl pl-10 pr-4 py-2 text-xs text-white placeholder-[#8E8E8E] focus:outline-none focus:border-white/30"
-          />
+      {/* 3. SEARCH & FILTERS BAR — Properly placed controls without any sliding bar */}
+      <div className="space-y-3">
+        <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between">
+          <div className="relative flex-1 max-w-md">
+            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-[#8E8E8E]" />
+            <input
+              type="text"
+              placeholder="Search audit title, protocol code, lead auditor, or facility..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full bg-[#101010] border border-white/10 rounded-xl pl-10 pr-4 py-2.5 text-xs text-white placeholder-[#8E8E8E] focus:outline-none focus:border-white/30"
+            />
+          </div>
+
+          <div className="flex items-center gap-2 shrink-0">
+            <select
+              value={selectedFacility}
+              onChange={(e) => setSelectedFacility(e.target.value)}
+              className="bg-[#101010] border border-white/10 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-white/30 cursor-pointer"
+            >
+              <option value="ALL">All Operating Sites</option>
+              {facilities.map((f: any) => (
+                <option key={f.id || f.facility_code} value={f.facility_code}>
+                  {f.facility_code} — {f.name}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2 overflow-x-auto pb-1 md:pb-0">
-          <select
-            value={selectedFacility}
-            onChange={(e) => setSelectedFacility(e.target.value)}
-            className="bg-[#101010] border border-white/10 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-white/30"
-          >
-            <option value="ALL">All Operating Sites</option>
-            {facilities.map((f: any) => (
-              <option key={f.id || f.facility_code} value={f.facility_code}>
-                {f.facility_code} — {f.name}
-              </option>
-            ))}
-          </select>
-
-          <div className="flex gap-1.5">
-            {auditTypes.map((type) => (
-              <button
-                key={type}
-                onClick={() => setSelectedType(type)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-colors shrink-0 ${
-                  selectedType === type
-                    ? "bg-white text-black font-semibold"
-                    : "bg-[#101010] text-[#8E8E8E] hover:text-white border border-white/10"
-                }`}
-              >
-                {type}
-              </button>
-            ))}
-          </div>
+        {/* Filter Buttons — Naturally wrap cleanly without horizontal scrollbars */}
+        <div className="flex flex-wrap items-center gap-2 pt-0.5">
+          {auditTypes.map((type) => (
+            <button
+              key={type}
+              onClick={() => setSelectedType(type)}
+              className={`px-3.5 py-1.5 rounded-full text-xs font-medium transition-all cursor-pointer ${
+                selectedType === type
+                  ? "bg-white text-black font-semibold shadow-sm"
+                  : "bg-white/[0.06] text-[#A1A1AA] hover:text-white hover:bg-white/[0.1] border border-white/10"
+              }`}
+            >
+              {type}
+            </button>
+          ))}
         </div>
       </div>
 

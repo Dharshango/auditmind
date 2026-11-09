@@ -24,6 +24,7 @@ import {
   FileCheck2,
 } from "lucide-react";
 import { api } from "@/lib/api";
+import { MOCK_FACILITIES } from "@/lib/mockData";
 import { Modal } from "@/components/ui/Modal";
 import Link from "next/link";
 
@@ -63,28 +64,26 @@ interface FacilityDetail extends Facility {
 }
 
 export default function FacilitiesPage() {
-  const [facilities, setFacilities] = useState<Facility[]>([]);
+  const [facilities, setFacilities] = useState<Facility[]>(MOCK_FACILITIES as any);
   const [selectedFacility, setSelectedFacility] = useState<FacilityDetail | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [detailLoading, setDetailLoading] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedType, setSelectedType] = useState<string>("ALL");
   const [refreshing, setRefreshing] = useState(false);
   const [viewMode, setViewMode] = useState<"network" | "list">("network");
-  const [activeNode, setActiveNode] = useState<string | null>(null);
+  const [activeNode, setActiveNode] = useState<string | null>("FAC-001");
 
   const fetchFacilities = async () => {
     try {
       setRefreshing(true);
       const data = await api.getFacilities();
-      setFacilities(data.facilities || []);
-      if (data.facilities?.length > 0 && !activeNode) {
-        setActiveNode(data.facilities[0].facility_code);
+      if (data.facilities && data.facilities.length > 0) {
+        setFacilities(data.facilities);
       }
     } catch (err) {
       console.error("Error loading facilities:", err);
     } finally {
-      setLoading(false);
       setRefreshing(false);
     }
   };
@@ -154,17 +153,6 @@ export default function FacilitiesPage() {
     { from: "FAC-001", to: "FAC-002", reason: "Common ISO 9001 Stamping Press Operations" },
     { from: "FAC-003", to: "FAC-005", reason: "Shared Logistics Hazmat Handling Procedures" },
   ];
-
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
-        <RefreshCw className="w-8 h-8 text-white animate-spin" />
-        <p className="text-xs text-[#8E8E8E] font-mono tracking-tight">
-          Loading facility network topology...
-        </p>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-8 pb-16 animate-reveal select-none">

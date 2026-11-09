@@ -30,14 +30,20 @@ import {
   Cpu,
 } from "lucide-react";
 import { api } from "@/lib/api";
+import {
+  MOCK_OVERVIEW,
+  MOCK_DRIFT_MATRIX,
+  MOCK_FACILITIES,
+  MOCK_AGENT_EVENTS,
+} from "@/lib/mockData";
 
 export default function DashboardPage() {
   // Data states
-  const [overview, setOverview] = useState<any>(null);
-  const [driftMatrix, setDriftMatrix] = useState<any[]>([]);
-  const [facilities, setFacilities] = useState<any[]>([]);
-  const [recentEvents, setRecentEvents] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [overview, setOverview] = useState<any>(MOCK_OVERVIEW);
+  const [driftMatrix, setDriftMatrix] = useState<any[]>(MOCK_DRIFT_MATRIX.drift_matrix);
+  const [facilities, setFacilities] = useState<any[]>(MOCK_FACILITIES);
+  const [recentEvents, setRecentEvents] = useState<any[]>(MOCK_AGENT_EVENTS);
+  const [loading, setLoading] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
 
   // Filter states
@@ -50,7 +56,6 @@ export default function DashboardPage() {
   const loadData = async (isManualRefresh = false) => {
     try {
       if (isManualRefresh) setRefreshing(true);
-      else setLoading(true);
 
       const [ovData, driftData, facData, eventsData] =
         await Promise.allSettled([
@@ -60,10 +65,10 @@ export default function DashboardPage() {
           api.getAgentEvents(10),
         ]);
 
-      if (ovData.status === "fulfilled") setOverview(ovData.value);
-      if (driftData.status === "fulfilled") setDriftMatrix(driftData.value?.drift_matrix || []);
-      if (facData.status === "fulfilled") setFacilities(facData.value?.facilities || []);
-      if (eventsData.status === "fulfilled") setRecentEvents(eventsData.value?.events || []);
+      if (ovData.status === "fulfilled" && ovData.value) setOverview(ovData.value);
+      if (driftData.status === "fulfilled" && driftData.value?.drift_matrix) setDriftMatrix(driftData.value.drift_matrix);
+      if (facData.status === "fulfilled" && facData.value?.facilities) setFacilities(facData.value.facilities);
+      if (eventsData.status === "fulfilled" && eventsData.value?.events) setRecentEvents(eventsData.value.events);
     } catch (err) {
       console.error("Dashboard telemetry sync error:", err);
     } finally {
@@ -197,18 +202,6 @@ export default function DashboardPage() {
     if (selectedFacility === "ALL") return all;
     return all.filter((item) => item.facilityCode === selectedFacility);
   }, [selectedFacility]);
-
-  // Loading Skeleton
-  if (loading) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
-        <RefreshCw className="w-8 h-8 text-white animate-spin" />
-        <p className="text-xs text-[#8E8E8E] font-mono tracking-tight">
-          Loading executive compliance overview...
-        </p>
-      </div>
-    );
-  }
 
   return (
     <div className="space-y-8 pb-16 animate-reveal select-none">

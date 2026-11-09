@@ -79,7 +79,7 @@ export function TopNav({
   };
 
   return (
-    <header className="sticky top-0 z-20 h-16 bg-black/35 backdrop-blur-2xl border-b border-white/10 px-4 sm:px-6 flex items-center justify-between transition-colors select-none shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
+    <header className="sticky top-0 z-20 h-16 bg-black/40 backdrop-blur-2xl border-b border-white/[0.08] px-4 sm:px-6 flex items-center justify-between transition-colors select-none shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
       {/* Left: Mobile Menu Trigger + Organization Context & Breadcrumbs */}
       <div className="flex items-center gap-3 text-xs min-w-0">
         {onToggleMobileMenu && (
@@ -193,19 +193,7 @@ export function TopNav({
           </span>
         </Link>
 
-        {/* 4. Settings Button */}
-        <Link
-          href="/settings"
-          className={`flex items-center justify-center h-9 w-9 rounded-full bg-white/[0.06] backdrop-blur-md border border-white/10 hover:border-white/25 hover:bg-white/[0.1] text-[#A1A1AA] hover:text-white transition shadow-sm shrink-0 ${
-            pathname === "/settings" ? "bg-white/[0.14] border-white/30 text-white" : ""
-          }`}
-          title="System Settings"
-          aria-label="System Settings"
-        >
-          <Settings className="w-4 h-4" />
-        </Link>
-
-        {/* 5. Account Button & Dropdown (Sarah Jenkins) */}
+        {/* 4. Account Button & Dropdown (Sarah Jenkins) */}
         <div className="relative" ref={accountDropdownRef}>
           <button
             onClick={() => {
@@ -260,19 +248,6 @@ export function TopNav({
                 >
                   <Settings className="w-3.5 h-3.5 text-[#A1A1AA]" />
                   <span>System Settings</span>
-                </Link>
-                <Link
-                  href="/notifications"
-                  onClick={() => setShowAccountDropdown(false)}
-                  className="flex items-center justify-between px-3 py-2 text-[12px] text-white/80 hover:text-white hover:bg-white/5 rounded-lg transition"
-                >
-                  <span className="flex items-center gap-2.5">
-                    <Bell className="w-3.5 h-3.5 text-[#A1A1AA]" />
-                    <span>Compliance Alerts</span>
-                  </span>
-                  <span className="px-1.5 py-0.2 rounded-full bg-[#C6B9D8] text-black font-mono font-bold text-[9.5px]">
-                    2
-                  </span>
                 </Link>
               </div>
 

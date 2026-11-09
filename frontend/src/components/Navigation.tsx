@@ -129,7 +129,7 @@ export function Navigation({
 
       {/* Primary Sidebar Rail — Glassy, Compact & Fully Responsive */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 flex flex-col bg-black/40 backdrop-blur-2xl border-r border-white/10 text-white font-sans transition-all duration-200 select-none shadow-[0_8px_32px_rgba(0,0,0,0.5)] ${
+        className={`fixed top-0 bottom-0 left-0 z-50 flex flex-col bg-black/40 backdrop-blur-2xl border-r border-white/[0.08] text-white font-sans transition-all duration-200 select-none shadow-[0_8px_32px_rgba(0,0,0,0.5)] ${
           isCollapsed ? "w-[72px]" : "w-[272px]"
         } ${
           mobileOpen
@@ -153,12 +153,12 @@ export function Navigation({
           </button>
         )}
 
-        {/* 1. BRAND HEADER — Height 64px (h-16), perfectly matches TopNav height */}
-        <div className={`h-16 ${isCollapsed ? "px-0 justify-center" : "px-4 justify-between"} border-b border-white/10 bg-white/[0.02] flex items-center shrink-0`}>
+        {/* 1. BRAND HEADER — Height 64px (h-16), perfectly matches TopNav height and tone */}
+        <div className={`h-16 ${isCollapsed ? "px-0 justify-center" : "px-4 justify-between"} border-b border-white/[0.08] flex items-center shrink-0`}>
           <Link
             href="/dashboard"
             onClick={onCloseMobile}
-            className={`flex items-center gap-2.5 group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] rounded-lg p-1 ${
+            className={`flex items-center gap-2.5 group outline-none focus:outline-none focus:ring-0 rounded-lg p-1 ${
               isCollapsed ? "justify-center" : ""
             }`}
             title="AuditMind Command Center"
@@ -190,7 +190,7 @@ export function Navigation({
             <button
               onClick={toggle}
               aria-label="Collapse sidebar rail"
-              className="hidden lg:flex items-center justify-center w-7 h-7 rounded-lg text-[#8E8E93] hover:text-white hover:bg-white/10 transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] shrink-0 ml-auto"
+              className="hidden lg:flex items-center justify-center w-6 h-6 rounded-md text-white/50 hover:text-white hover:bg-white/10 transition outline-none focus:outline-none focus:ring-0 shrink-0 mr-1 cursor-pointer"
               title="Collapse sidebar"
             >
               <ChevronLeft className="w-4 h-4" />
@@ -207,9 +207,9 @@ export function Navigation({
           </button>
         </div>
 
-        {/* 2. COMPACT NAVIGATION GROUPS CONTAINER — Zero Scroll Required */}
+        {/* 2. COMPACT NAVIGATION GROUPS CONTAINER — Smooth Architectural Flow */}
         <nav
-          className="flex-1 px-2.5 py-2.5 space-y-2 overflow-y-auto overflow-x-hidden scrollbar-none"
+          className="flex-1 px-2.5 pt-3 pb-3 space-y-2 overflow-y-auto overflow-x-hidden scrollbar-none"
           role="navigation"
           aria-label="Main Navigation"
         >
@@ -217,7 +217,7 @@ export function Navigation({
             <div key={group.group} className="space-y-0.5">
               {/* Compact Section Header */}
               {!isCollapsed && (
-                <div className="px-3 pt-2 pb-1 text-[9.5px] font-mono font-semibold uppercase tracking-[0.12em] text-white/35">
+                <div className="px-3 pt-1.5 pb-1 text-[9.5px] font-mono font-semibold uppercase tracking-[0.12em] text-white/40">
                   {group.group}
                 </div>
               )}
@@ -246,7 +246,7 @@ export function Navigation({
                         if (onCloseMobile) onCloseMobile();
                       }}
                       aria-current={isActive ? "page" : undefined}
-                      className={`flex items-center gap-2.5 min-h-[36px] py-1.5 px-3 rounded-xl transition-all duration-150 relative font-sans text-[13px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
+                      className={`flex items-center gap-2.5 min-h-[36px] py-1.5 px-3 rounded-xl transition-colors duration-150 relative font-sans text-[13px] leading-tight font-medium outline-none focus:outline-none focus:ring-0 active:outline-none select-none cursor-pointer ${
                         isActive
                           ? "bg-white/[0.12] text-white font-semibold backdrop-blur-sm shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
                           : "text-white/70 hover:text-white hover:bg-white/[0.06]"

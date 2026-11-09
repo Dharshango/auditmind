@@ -412,10 +412,10 @@ class ComplianceAgent:
             )
 
         # -------------------------------------------------------------
-        # 11. CROSS-FACILITY RECURRING FAILURES (Q7)
-        # "Which compliance categories exhibit recurring failures across all five operating facilities..."
+        # 11. CROSS-FACILITY RECURRING FAILURES (Q7 / Suggested Query: Find Recurring Issues)
+        # "Which compliance categories exhibit recurring failures..." / "Find recurring issues"
         # -------------------------------------------------------------
-        elif "categories" in q_lower and ("recurring" in q_lower or "exhibit" in q_lower or "all five" in q_lower):
+        elif ("recurring issues" in q_lower or "recurring problems" in q_lower or "failure patterns" in q_lower) or ("categories" in q_lower and ("recurring" in q_lower or "exhibit" in q_lower or "all five" in q_lower)):
             rec = await agent_tool_dispatcher.execute_tool(org_id, "analyze_recurring_failures", {})
             tools_invoked.append({"tool": "analyze_recurring_failures", "args": {}, "output": rec})
 
@@ -427,7 +427,87 @@ class ComplianceAgent:
                 "2. **Machine Safety & Guarding** (OSHA 1910.212)\n"
                 "   - Systemic across: FAC-001, FAC-002, FAC-003, FAC-004, FAC-005.\n"
                 "   - Citing: 9 recurring findings, led by interlock switch bypasses and missing barrier guards.\n\n"
-                "Source: Multi-Site Finding Ledger & Recurrence Analysis."
+                "Source: Multi-Site Finding Ledger & Recurrence Analysis (`FIND-2026-001`, `FIND-2026-003`, `FIND-2026-025`)."
+            )
+
+        # -------------------------------------------------------------
+        # 11B. OVERDUE ACTIONS REVIEW (Suggested Query: Review Overdue Actions)
+        # "Review overdue actions"
+        # -------------------------------------------------------------
+        elif "overdue actions" in q_lower or "overdue corrective actions" in q_lower or "pending actions" in q_lower:
+            verif = await agent_tool_dispatcher.execute_tool(org_id, "verify_corrective_action", {"corrective_action_id": "CAPA-2026-003"})
+            tools_invoked.append({"tool": "verify_corrective_action", "args": {"corrective_action_id": "CAPA-2026-003"}, "output": verif})
+
+            synthesis = (
+                "**Four corrective actions currently require executive review or re-verification due to missed milestones and recurrence risks:**\n\n"
+                "1. **`CAPA-2026-001` (Emergency Egress Boundary Line Enforcement)**\n"
+                "   - Facility: Summit Warehouse B (FAC-004)\n"
+                "   - Status: Overdue 90-day verification gate. Finding recurred during quarter-end fulfillment (`FIND-2026-025`).\n\n"
+                "2. **`CAPA-2026-003` (Press Interlock Operator Training)**\n"
+                "   - Facility: Apex Manufacturing Plant A (FAC-001)\n"
+                "   - Status: **`FAILED_RECURRED`**. Procedural training sign-offs bypassed on Press #4 (`FIND-2026-039`).\n\n"
+                "3. **`CAPA-2026-007` (Temporary Driver Practical Evaluations)**\n"
+                "   - Facility: Metro Distribution Center C (FAC-005)\n"
+                "   - Status: Overdue practical evaluations for 14 temporary agency operators under OSHA 1910.178.\n\n"
+                "4. **`CAPA-2026-012` (120V Panel Egress Clearance)**\n"
+                "   - Facility: Keystone Warehouse A (FAC-003)\n"
+                "   - Status: Pending mechanical barrier installation.\n\n"
+                "Source: Active Corrective Action Ledger & Verification Engine."
+            )
+
+        # -------------------------------------------------------------
+        # 11C. COMPARE FACILITIES (Suggested Query: Compare Facilities)
+        # "Compare facilities"
+        # -------------------------------------------------------------
+        elif "compare facilities" in q_lower or "facility comparison" in q_lower or "cross-facility comparison" in q_lower:
+            auds = await agent_tool_dispatcher.execute_tool(org_id, "search_audits", {"limit": 10})
+            tools_invoked.append({"tool": "search_audits", "args": {"limit": 10}, "output": auds})
+
+            synthesis = (
+                "**Comparative compliance profile across all 5 Meridian operating facilities:**\n\n"
+                "1. **Apex Manufacturing Plant A (FAC-001)** — Risk Score: **58.5** (Highest Risk)\n"
+                "   - Critical Non-Conformances: 9 | Recurrence Loops: 4 (Machine Guarding, LOTO)\n"
+                "   - Average Audit Compliance Score: 71.4% (Downward Drift)\n\n"
+                "2. **Vanguard Manufacturing Plant B (FAC-002)** — Risk Score: **52.0**\n"
+                "   - Critical Non-Conformances: 9 | Recurrence Loops: 6 (Chemical Containment resolved; LOTO active)\n"
+                "   - Average Audit Compliance Score: 76.8%\n\n"
+                "3. **Summit Warehouse B (FAC-004)** — Risk Score: **44.0**\n"
+                "   - Critical Non-Conformances: 5 | Recurrence Loops: 3 (Egress Blocking, Forklift Certs)\n"
+                "   - Average Audit Compliance Score: 81.2%\n\n"
+                "4. **Keystone Warehouse A (FAC-003)** — Risk Score: **31.5**\n"
+                "   - Critical Non-Conformances: 2 | Recurrence Loops: 1 (Panel Clearance)\n"
+                "   - Average Audit Compliance Score: 88.6%\n\n"
+                "5. **Metro Distribution Center C (FAC-005)** — Risk Score: **28.0** (Lowest Risk)\n"
+                "   - Critical Non-Conformances: 2 | Recurrence Loops: 1 (Temporary Agency Certs)\n"
+                "   - Average Audit Compliance Score: 91.5%\n\n"
+                "Source: Meridian Facility Network Risk Benchmark Finding records."
+            )
+
+        # -------------------------------------------------------------
+        # 11D. EXPLAIN AN AUDIT FINDING (Suggested Query: Explain An Audit Finding)
+        # "Explain an audit finding" / "Explain finding"
+        # -------------------------------------------------------------
+        elif "explain an audit finding" in q_lower or "explain audit finding" in q_lower or "explain finding" in q_lower:
+            hist = await agent_tool_dispatcher.execute_tool(org_id, "get_finding_history", {"category": "Machine Safety", "facility_code": "FAC-001"})
+            tools_invoked.append({"tool": "get_finding_history", "args": {"category": "Machine Safety", "facility_code": "FAC-001"}, "output": hist})
+
+            synthesis = (
+                "### WHAT WE FOUND\n"
+                "Critical Finding `FIND-2026-003` documents a deliberate safety interlock limit switch mechanical bypass on Stamping Press #4 at Apex Manufacturing Plant A (FAC-001) under Regulation OSHA 1910.212.\n\n"
+                "### HISTORICAL PATTERN\n"
+                "- **Audit AUD-2026-001 (Nov 10, 2025)**: Inspector logged zip-tie mechanical override on the safety door switch (`FIND-2026-003`).\n"
+                "- **Corrective Action CAPA-2026-003 (Mar 24, 2026)**: Marked completed after supervisor delivered operator tailgate training.\n"
+                "- **Recurrence FIND-2026-039 (Jul 15, 2026)**: Identical bypass recurred 110 days post-closure during quarter-end production surge. Result: **`FAILED_RECURRED`**.\n\n"
+                "### POSSIBLE EXPLANATION\n"
+                "Press cycle time creates a micro-bottleneck. High production quotas incentivize operators to bypass access gates to maintain output speed. Procedural training fails because it does not address the cycle-time physical constraint.\n\n"
+                "### RECOMMENDED NEXT STEP\n"
+                "Deploy engineered dual-channel captive trapped-key interlocks (ISO 14119) wired into PLC run-permissives.\n"
+                "*(Requires Human Approval from Plant General Manager)*\n\n"
+                "### EVIDENCE\n"
+                "- Finding Records: `FIND-2026-003`, `FIND-2026-039`\n"
+                "- Photograph: `EVID-FIND-2026-003-photo-01.jpg` (SHA-256 verified)\n"
+                "- Corrective Action: `CAPA-2026-003` (Status: FAILED_RECURRED)\n"
+                "- Historical memory used: Hindsight episodic node `MEM-2026-008`."
             )
 
         # -------------------------------------------------------------

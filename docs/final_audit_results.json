@@ -1,0 +1,50 @@
+{
+  "sidebar": {
+    "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif",
+    "fontSize": "14px",
+    "fontWeight": "600",
+    "letterSpacing": "normal",
+    "lineHeight": "20.3px",
+    "color": "rgb(255, 255, 255)",
+    "itemHeight": 44,
+    "flickerCount": 0
+  },
+  "dashboard": {
+    "hasOverviewHeader": true,
+    "hasOperationalStrip": true,
+    "hasMetrics": true,
+    "hasFacilityPerformance": true,
+    "hasDurabilitySummary": true
+  },
+  "agent": {
+    "welcomeScreen": {
+      "hasExactHeading": true,
+      "hasExactDescription": true,
+      "hasQuery1": true,
+      "hasQuery2": true,
+      "hasQuery3": true,
+      "hasQuery4": true
+    },
+    "query1": {
+      "hasResponse": true,
+      "hasCitations": true,
+      "hasActionToolbar": true
+    }
+  },
+  "responsive": {
+    "desktop_1920": {
+      "overflow": false
+    },
+    "laptop_1440": {
+      "overflow": false
+    },
+    "tablet_834": {
+      "overflow": false
+    },
+    "mobile_390": {
+      "overflow": false
+    }
+  },
+  "passed": true,
+  "issues": []
+}

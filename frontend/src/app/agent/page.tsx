@@ -50,6 +50,8 @@ import {
   RotateCcw,
   Calendar,
   MapPin,
+  Square,
+  Upload,
 } from "lucide-react";
 import { api } from "@/lib/api";
 import { Card } from "@/components/ui/Card";
@@ -100,65 +102,53 @@ interface Conversation {
 
 const STORAGE_KEY = "auditmind_agent_sessions_v3";
 
-const BENCHMARK_SCENARIOS = [
+const SUGGESTED_QUERIES = [
   {
-    id: "benchmark-1",
-    title: "Open Findings by Facility",
-    badge: "Factual Count",
-    facility: "Network Ledger",
-    prompt: "How many facilities currently have open findings?",
+    id: "query-recurring",
+    title: "Find recurring issues.",
+    description: "Scan multi-site audit history for repeat fire safety and machine guarding violations.",
+    badge: "Recurrence Vectors",
+    prompt: "Find recurring issues.",
     followUps: [
       "Which facilities require immediate attention?",
-      "Show all open critical findings",
-      "Which findings are currently past due date?",
+      "Show related audits for fire safety",
+      "Was the previous action effective?",
     ],
   },
   {
-    id: "benchmark-2",
-    title: "Warehouse Fire-Safety Recurrence",
-    badge: "Historical Investigation",
-    facility: "Warehouse A / B",
-    prompt: "Why is Warehouse A repeatedly experiencing fire-safety documentation problems?",
+    id: "query-overdue",
+    title: "Review overdue actions.",
+    description: "Audit pending CAPA milestones, unverified closures, and 90-day durability gates.",
+    badge: "Action Durability",
+    prompt: "Review overdue actions.",
     followUps: [
-      "Why did the earlier corrective action fail to hold?",
-      "Draft an engineered physical barrier specification",
+      "Show overdue actions for Plant A",
+      "Was the last corrective action effective?",
+      "What evidence supports your conclusion?",
+    ],
+  },
+  {
+    id: "query-compare",
+    title: "Compare facilities.",
+    description: "Benchmark weighted risk scores and compliance drift across all 5 operating facilities.",
+    badge: "Facility Matrix",
+    prompt: "Compare facilities.",
+    followUps: [
+      "Why is Plant A drifting downward?",
+      "Which facility has the lowest critical findings?",
       "Compare fire safety compliance between Plant A and Plant B",
     ],
   },
   {
-    id: "benchmark-3",
-    title: "CAPA Mitigation Durability",
-    badge: "90-Day Verification",
-    facility: "Plant A",
-    prompt: "Was the last corrective action effective?",
+    id: "query-finding",
+    title: "Explain an audit finding.",
+    description: "Inspect root causes, photographic evidence, and statutory standards for FIND-2026-003.",
+    badge: "Forensic Analysis",
+    prompt: "Explain an audit finding.",
     followUps: [
-      "What evidence supports your conclusion?",
-      "What physical engineering control is recommended for press interlocks?",
-      "Show 90-day verification records for CAPA-2026-003",
-    ],
-  },
-  {
-    id: "benchmark-4",
-    title: "Facility Attention & Drift",
-    badge: "Risk Prioritization",
-    facility: "Enterprise",
-    prompt: "Which facilities require immediate attention?",
-    followUps: [
-      "Compare Plant A and Plant B risk scores",
-      "What is causing compliance drift at Plant A?",
-      "Show the breakdown of open critical findings at Plant B",
-    ],
-  },
-  {
-    id: "benchmark-5",
-    title: "Evidentiary Grounding & Proof",
-    badge: "Evidence Audit",
-    facility: "Multi-Source",
-    prompt: "What evidence supports your conclusion?",
-    followUps: [
-      "Inspect photographic evidence for FIND-2026-003",
-      "Show the Hindsight organizational memory nodes used",
-      "Verify the cryptographic SHA-256 hashes of attached photos",
+      "Show photographic evidence for FIND-2026-003",
+      "What engineering control prevents interlock bypasses?",
+      "Was the last corrective action effective?",
     ],
   },
 ];
@@ -210,6 +200,32 @@ export default function AgentPage() {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const abortControllerRef = useRef<AbortController | null>(null);
+
+  const handleStop = () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      abortControllerRef.current = null;
+    }
+    setLoading(false);
+    setLoadingStep("Inquiry cancelled.");
+  };
+
+  const handleFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setAttachedEvidenceName(file.name);
+    }
+  };
+
+  const handleRegenerate = async () => {
+    if (loading) return;
+    const lastUserMsg = [...activeMessages].reverse().find((m) => m.role === "user");
+    if (lastUserMsg) {
+      await handleSend(lastUserMsg.content);
+    }
+  };
 
   // --- Load Live Facilities, Audits & Evidence for Context Picker ---
   useEffect(() => {
@@ -576,20 +592,25 @@ export default function AgentPage() {
 
     if (!queryOverride) setInput("");
     setLoading(true);
-    setLoadingStep("Searching audit database records...");
+    setLoadingStep("Understanding your request.");
+
+    const timer1 = setTimeout(() => {
+      setLoadingStep("Searching audit records.");
+    }, 400);
+    const timer2 = setTimeout(() => {
+      setLoadingStep("Checking historical memory.");
+    }, 800);
+    const timer3 = setTimeout(() => {
+      setLoadingStep("Reviewing corrective actions.");
+    }, 1200);
+    const timer4 = setTimeout(() => {
+      setLoadingStep("Verifying evidence.");
+    }, 1600);
+    const timer5 = setTimeout(() => {
+      setLoadingStep("Preparing response.");
+    }, 2000);
 
     try {
-      // Step feedback animation
-      const timer1 = setTimeout(() => {
-        setLoadingStep("Recalling Hindsight organizational memory...");
-      }, 700);
-      const timer2 = setTimeout(() => {
-        setLoadingStep("Verifying 90-day CAPA durability outcomes...");
-      }, 1400);
-      const timer3 = setTimeout(() => {
-        setLoadingStep("Synthesizing compliance findings with Groq LLaMA 3.3 70B...");
-      }, 2100);
-
       // Context prefix if facility, audit, or evidence attached
       let finalMessage = textToSend;
       if (facilityToUse !== "ALL") {
@@ -614,6 +635,8 @@ export default function AgentPage() {
       clearTimeout(timer1);
       clearTimeout(timer2);
       clearTimeout(timer3);
+      clearTimeout(timer4);
+      clearTimeout(timer5);
 
       const rawResponseText =
         response.response ||
@@ -673,8 +696,13 @@ export default function AgentPage() {
         )
       );
     } finally {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+      clearTimeout(timer4);
+      clearTimeout(timer5);
       setLoading(false);
-      setLoadingStep("Analyzing compliance query...");
+      setLoadingStep("Understanding your request.");
     }
   }
 
@@ -990,33 +1018,33 @@ export default function AgentPage() {
 
                 <div className="space-y-2">
                   <h3 className="text-xl sm:text-2xl font-sans font-semibold text-white tracking-[-0.03em]">
-                    What statutory deviation or compliance pattern would you like to investigate?
+                    What would you like to investigate?
                   </h3>
                   <p className="text-xs sm:text-sm text-[#A3A3A3] max-w-lg mx-auto leading-relaxed">
-                    Select a strategic compliance inquiry below, or pose an open question to traverse cross-facility audit ledgers, episodic incident history, and Hindsight institutional memory.
+                    Ask about audits, findings and recurring issues.
                   </p>
                 </div>
 
-                {/* 4 Benchmark Scenario Cards */}
+                {/* 4 Suggested Query Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 w-full text-left pt-1">
-                  {BENCHMARK_SCENARIOS.map((sc) => (
+                  {SUGGESTED_QUERIES.map((sc) => (
                     <button
                       key={sc.id}
                       onClick={() => handleSend(sc.prompt)}
                       disabled={loading}
-                      className="p-3.5 bg-[#101010]/80 hover:bg-[#101010] border border-white/10 hover:border-white/15 rounded-xl transition-all space-y-2 group shadow-subtle text-left"
+                      className="p-3.5 sm:p-4 bg-[#101010]/80 hover:bg-[#101010] border border-white/10 hover:border-white/20 rounded-xl transition-all space-y-2 group shadow-subtle text-left cursor-pointer"
                     >
                       <div className="flex items-center justify-between">
-                        <Badge variant="neutral" size="sm" className="text-[10px]">
+                        <Badge variant="neutral" size="sm" className="text-[10px] font-mono">
                           {sc.badge}
                         </Badge>
                         <ArrowUpRight className="w-3.5 h-3.5 text-[#8E8E8E] group-hover:text-white transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                       </div>
-                      <div className="text-xs font-semibold text-white group-hover:text-white transition-colors leading-snug">
+                      <div className="text-xs font-semibold text-white group-hover:text-[#C6B9D8] transition-colors leading-snug">
                         {sc.title}
                       </div>
                       <p className="text-[11px] text-[#8E8E8E] line-clamp-2 leading-relaxed">
-                        {sc.prompt}
+                        {sc.description}
                       </p>
                     </button>
                   ))}
@@ -1210,6 +1238,16 @@ export default function AgentPage() {
                             </button>
 
                             <button
+                              onClick={handleRegenerate}
+                              disabled={loading}
+                              className="p-1.5 hover:bg-[#171717] rounded-lg transition text-[#8E8E8E] hover:text-white flex items-center gap-1 text-[11px] disabled:opacity-40"
+                              title="Regenerate response"
+                            >
+                              <RotateCcw className="w-3.5 h-3.5" />
+                              <span>Regenerate</span>
+                            </button>
+
+                            <button
                               onClick={() => toggleFeedback(m.id, "up")}
                               className={`p-1.5 rounded-lg transition ${
                                 m.feedback === "up"
@@ -1234,16 +1272,28 @@ export default function AgentPage() {
                           </div>
 
                           <div className="flex items-center gap-2">
-                            <Link href="/capa">
-                              <span className="text-[11px] text-[#C6B9D8] hover:underline font-medium inline-flex items-center gap-1">
-                                Create action
+                            <button
+                              onClick={() => {
+                                setIsRightInspectorOpen(true);
+                                setInspectorTab("context");
+                              }}
+                              className="text-[11px] text-[#8E8E8E] hover:text-white hover:underline inline-flex items-center gap-1 cursor-pointer"
+                              title="Inspect evidence & source records"
+                            >
+                              <Layers className="w-3 h-3 text-[#C6B9D8]" />
+                              View evidence
+                            </button>
+                            <span className="text-zinc-700">•</span>
+                            <Link href="/audits">
+                              <span className="text-[11px] text-[#8E8E8E] hover:text-white hover:underline inline-flex items-center gap-1">
+                                Related audits
                                 <ArrowUpRight className="w-3 h-3" />
                               </span>
                             </Link>
                             <span className="text-zinc-700">•</span>
-                            <Link href="/evidence">
-                              <span className="text-[11px] text-[#8E8E8E] hover:text-white hover:underline inline-flex items-center gap-1">
-                                View evidence
+                            <Link href="/capa">
+                              <span className="text-[11px] text-[#C6B9D8] hover:underline font-medium inline-flex items-center gap-1">
+                                Create action
                                 <ArrowUpRight className="w-3 h-3" />
                               </span>
                             </Link>
@@ -1395,6 +1445,15 @@ export default function AgentPage() {
               </div>
             </div>
 
+            {/* Hidden File Input for Attachment */}
+            <input
+              type="file"
+              ref={fileInputRef}
+              className="hidden"
+              accept=".pdf,.jpg,.jpeg,.png,.csv"
+              onChange={handleFileUpload}
+            />
+
             {/* Input Form with Expanding Textarea */}
             <form
               onSubmit={(e) => {
@@ -1406,7 +1465,7 @@ export default function AgentPage() {
               <textarea
                 ref={textareaRef}
                 rows={1}
-                placeholder="Ask AUDITMIND about audits, recurring defects, or CAPA effectiveness..."
+                placeholder="Ask about audits, findings or recurring issues..."
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
@@ -1414,17 +1473,28 @@ export default function AgentPage() {
                 className="flex-1 px-4 py-2.5 text-xs sm:text-sm bg-[#101010] border border-white/10 rounded-xl text-white placeholder:text-[#71717A] focus:outline-none focus:border-zinc-600 focus:ring-1 focus:ring-white/20 disabled:opacity-50 transition resize-none leading-relaxed min-h-[44px] max-h-[180px]"
               />
 
-              <Button
-                type="submit"
-                variant="primary"
-                size="md"
-                disabled={!input.trim() || loading}
-                loading={loading}
-                icon={<Send className="w-3.5 h-3.5" />}
-                className="h-[44px] px-4 shrink-0 font-medium"
-              >
-                Inquire
-              </Button>
+              {loading ? (
+                <button
+                  type="button"
+                  onClick={handleStop}
+                  className="h-[44px] px-3.5 rounded-xl bg-red-950/40 hover:bg-red-900/50 border border-red-500/40 text-red-200 text-xs font-medium flex items-center gap-1.5 transition shrink-0 cursor-pointer"
+                  title="Stop generating response"
+                >
+                  <Square className="w-3.5 h-3.5 fill-current" />
+                  <span>Stop</span>
+                </button>
+              ) : (
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="md"
+                  disabled={!input.trim()}
+                  icon={<Send className="w-3.5 h-3.5" />}
+                  className="h-[44px] px-4 shrink-0 font-medium"
+                >
+                  Send
+                </Button>
+              )}
             </form>
           </div>
         </div>

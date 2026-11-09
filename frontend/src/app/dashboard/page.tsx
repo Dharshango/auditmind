@@ -26,35 +26,19 @@ import {
   Check,
   Zap,
   Eye,
-  Server,
   Database,
   Cpu,
-  Radio,
 } from "lucide-react";
 import { api } from "@/lib/api";
-
-interface HealthStates {
-  system: { status: string; service?: string; environment?: string } | null;
-  database: { status: string; connected: boolean; latency_ms: number; facility_count?: number; audit_count?: number; finding_count?: number } | null;
-  hindsight: { status: string; cloud_connected: boolean; fallback_store_active: boolean; retained_memories_count?: number } | null;
-  llm: { status: string; provider?: string; model?: string; configured: boolean; fallback_available: boolean; latency_ms?: number } | null;
-}
 
 export default function DashboardPage() {
   // Data states
   const [overview, setOverview] = useState<any>(null);
   const [driftMatrix, setDriftMatrix] = useState<any[]>([]);
   const [facilities, setFacilities] = useState<any[]>([]);
-  const [health, setHealth] = useState<HealthStates>({
-    system: null,
-    database: null,
-    hindsight: null,
-    llm: null,
-  });
   const [recentEvents, setRecentEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [lastSyncTime, setLastSyncTime] = useState<string>("Just now");
 
   // Filter states
   const [selectedFacility, setSelectedFacility] = useState<string>("ALL");
@@ -68,37 +52,18 @@ export default function DashboardPage() {
       if (isManualRefresh) setRefreshing(true);
       else setLoading(true);
 
-      const [ovData, driftData, facData, sysHealth, dbHealth, hsHealth, llmHealth, eventsData] =
+      const [ovData, driftData, facData, eventsData] =
         await Promise.allSettled([
           api.getDashboardOverview(),
           api.getDriftMatrix(),
           api.getFacilities(),
-          api.getHealthSystem(),
-          api.getHealthDatabase(),
-          api.getHealthHindsight(),
-          api.getHealthLLM(),
           api.getAgentEvents(10),
         ]);
 
       if (ovData.status === "fulfilled") setOverview(ovData.value);
       if (driftData.status === "fulfilled") setDriftMatrix(driftData.value?.drift_matrix || []);
       if (facData.status === "fulfilled") setFacilities(facData.value?.facilities || []);
-
-      setHealth({
-        system: sysHealth.status === "fulfilled" ? sysHealth.value : null,
-        database: dbHealth.status === "fulfilled" ? dbHealth.value : null,
-        hindsight: hsHealth.status === "fulfilled" ? hsHealth.value : null,
-        llm: llmHealth.status === "fulfilled" ? llmHealth.value : null,
-      });
-
-      if (eventsData.status === "fulfilled") {
-        setRecentEvents(eventsData.value?.events || []);
-      }
-
-      const now = new Date();
-      setLastSyncTime(
-        now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit", second: "2-digit" })
-      );
+      if (eventsData.status === "fulfilled") setRecentEvents(eventsData.value?.events || []);
     } catch (err) {
       console.error("Dashboard telemetry sync error:", err);
     } finally {
@@ -250,13 +215,6 @@ export default function DashboardPage() {
       {/* 1. EXECUTIVE HEADER — Crisp, Authoritative, Functional Controls */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-5 pb-6 border-b border-white/[0.08]">
         <div>
-          <div className="flex items-center gap-2 mb-2 flex-wrap">
-            <span className="text-[10px] font-mono uppercase tracking-[0.14em] text-[#C6B9D8] font-semibold flex items-center gap-1.5 bg-[#C6B9D8]/10 border border-[#C6B9D8]/20 px-2 py-0.5 rounded">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C6B9D8] animate-pulse" />
-              OPERATIONAL INTELLIGENCE RUNTIME
-            </span>
-          </div>
-
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-white leading-tight font-sans">
             Executive Overview
           </h1>
@@ -400,65 +358,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* 2. OPERATIONAL HEALTH STRIP — Compact Actual States */}
-      <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-2.5 shadow-sm">
-        <div className="flex items-center justify-between gap-4 flex-wrap text-xs font-mono">
-          <div className="flex items-center gap-6 flex-wrap">
-            {/* Backend API Runtime */}
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              <span className="text-[#8E8E93]">BACKEND:</span>
-              <span className="text-white font-semibold">
-                {health.system ? "OPERATIONAL (v1.0.0)" : "UNAVAILABLE"}
-              </span>
-            </div>
-
-            {/* Database */}
-            <div className="flex items-center gap-2">
-              <span
-                className={`w-1.5 h-1.5 rounded-full ${
-                  health.database?.connected ? "bg-emerald-400" : "bg-red-400"
-                }`}
-              />
-              <span className="text-[#8E8E93]">DATABASE:</span>
-              <span className="text-white font-semibold">
-                {health.database?.connected
-                  ? `CONNECTED (${health.database.latency_ms}ms)`
-                  : "UNAVAILABLE"}
-              </span>
-            </div>
-
-            {/* AI Agent Engine */}
-            <div className="flex items-center gap-2">
-              <span
-                className={`w-1.5 h-1.5 rounded-full ${
-                  health.llm?.configured
-                    ? "bg-emerald-400"
-                    : health.llm?.fallback_available
-                    ? "bg-[#D5A6B5]"
-                    : "bg-red-400"
-                }`}
-              />
-              <span className="text-[#8E8E93]">AI AGENT:</span>
-              <span className="text-white font-semibold">
-                {health.llm?.configured
-                  ? "GROQ INFERENCE ACTIVE"
-                  : health.llm?.fallback_available
-                  ? "DETERMINISTIC ENGINE"
-                  : "UNAVAILABLE"}
-              </span>
-            </div>
-          </div>
-
-          {/* Sync Timestamp */}
-          <div className="text-[11px] text-[#8E8E93] flex items-center gap-1.5 ml-auto">
-            <span>TELEMETRY SYNC:</span>
-            <span className="text-white font-semibold">{lastSyncTime}</span>
-          </div>
-        </div>
-      </div>
-
-      {/* 3. EXECUTIVE METRICS STRIP — Precision Numerals with Hairline Dividers */}
+      {/* 2. EXECUTIVE METRICS STRIP — Precision Numerals with Hairline Dividers */}
       <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-4 sm:p-5 shadow-2xl">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-y lg:divide-y-0 lg:divide-x divide-white/[0.08]">
           {/* Metric 1: Total Facilities */}
@@ -542,7 +442,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* 4. MAIN COMPOSITION: Priority Intelligence (7 cols) + CAPA Effectiveness (5 cols) */}
+      {/* 3. MAIN COMPOSITION: Priority Intelligence (7 cols) + CAPA Effectiveness (5 cols) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left: Priority Intelligence Section (7 cols) */}
         <div className="lg:col-span-7 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
@@ -733,7 +633,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* 5. FACILITY PERFORMANCE MATRIX & HISTORICAL ACTIVITY */}
+      {/* 4. FACILITY PERFORMANCE MATRIX & HISTORICAL ACTIVITY */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left: Facility Performance Comparison Section (7 cols) */}
         <div className="lg:col-span-7 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">

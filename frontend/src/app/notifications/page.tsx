@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   Bell,
@@ -10,7 +10,8 @@ import {
   ShieldAlert,
   ArrowRight,
   Filter,
-  Sparkles
+  Sparkles,
+  Check,
 } from "lucide-react";
 
 interface NotificationItem {
@@ -70,9 +71,40 @@ const INITIAL_NOTIFICATIONS: NotificationItem[] = [
 export default function NotificationsPage() {
   const [notifications, setNotifications] = useState(INITIAL_NOTIFICATIONS);
 
-  const markAllAsRead = () => {
-    setNotifications((prev) => prev.map((n) => ({ ...n, read: true })));
+  // Load read status from localStorage on mount
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("auditmind_read_notifs");
+      if (stored) {
+        const readIds = JSON.parse(stored) as string[];
+        setNotifications((prev) =>
+          prev.map((n) => (readIds.includes(n.id) ? { ...n, read: true } : n))
+        );
+      }
+    } catch (e) {
+      // ignore
+    }
+  }, []);
+
+  const persistReadState = (updated: NotificationItem[]) => {
+    const readIds = updated.filter((n) => n.read).map((n) => n.id);
+    localStorage.setItem("auditmind_read_notifs", JSON.stringify(readIds));
+    window.dispatchEvent(new Event("auditmind_notifications_updated"));
   };
+
+  const markAllAsRead = () => {
+    const updated = notifications.map((n) => ({ ...n, read: true }));
+    setNotifications(updated);
+    persistReadState(updated);
+  };
+
+  const markItemAsRead = (id: string) => {
+    const updated = notifications.map((n) => (n.id === id ? { ...n, read: true } : n));
+    setNotifications(updated);
+    persistReadState(updated);
+  };
+
+  const unreadCount = notifications.filter((n) => !n.read).length;
 
   return (
     <div className="space-y-8 pb-16 animate-reveal select-none">
@@ -89,9 +121,21 @@ export default function NotificationsPage() {
 
         <button
           onClick={markAllAsRead}
-          className="px-4 py-2 rounded-full bg-[#18181B] border border-white/15 text-xs text-[#EDEDED] hover:text-white hover:bg-white/10 transition"
+          disabled={unreadCount === 0}
+          className={`flex items-center gap-1.5 px-4 py-2 rounded-full text-xs font-medium transition cursor-pointer ${
+            unreadCount === 0
+              ? "bg-white/5 border border-white/10 text-[#8E8E93] cursor-default"
+              : "bg-white text-black font-semibold hover:bg-neutral-200 shadow-sm"
+          }`}
         >
-          Mark all as read
+          {unreadCount === 0 ? (
+            <>
+              <Check className="w-3.5 h-3.5 text-emerald-400" />
+              <span>All Marked as Read</span>
+            </>
+          ) : (
+            <span>Mark all as read</span>
+          )}
         </button>
       </div>
 
@@ -100,7 +144,7 @@ export default function NotificationsPage() {
         <div className="flex items-center justify-between border-b border-white/10 pb-4">
           <div className="text-sm font-semibold text-white font-sans flex items-center gap-2">
             <Bell className="w-4 h-4 text-[#C6B9D8]" />
-            <span>Active Compliance Alerts ({notifications.filter(n => !n.read).length} unread)</span>
+            <span>Active Compliance Alerts ({unreadCount} unread)</span>
           </div>
         </div>
 
@@ -128,6 +172,9 @@ export default function NotificationsPage() {
                     <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-white/5 border border-white/10 text-[#8E8E93]">
                       {item.facility}
                     </span>
+                    {!item.read && (
+                      <span className="w-2 h-2 rounded-full bg-[#C6B9D8] inline-block shrink-0" />
+                    )}
                   </div>
                   <p className="text-xs text-[#A1A1AA] leading-relaxed max-w-3xl">
                     {item.description}
@@ -138,15 +185,26 @@ export default function NotificationsPage() {
                 </div>
               </div>
 
-              {item.actionHref && (
-                <Link
-                  href={item.actionHref}
-                  className="shrink-0 flex items-center gap-1 text-xs text-white hover:text-[#C6B9D8] font-medium transition"
-                >
-                  <span>Inspect</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
-                </Link>
-              )}
+              <div className="flex items-center gap-3 shrink-0">
+                {!item.read && (
+                  <button
+                    onClick={() => markItemAsRead(item.id)}
+                    className="text-[11px] text-[#A1A1AA] hover:text-white transition px-2.5 py-1 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 cursor-pointer"
+                    title="Mark this alert as read"
+                  >
+                    Mark as read
+                  </button>
+                )}
+                {item.actionHref && (
+                  <Link
+                    href={item.actionHref}
+                    className="flex items-center gap-1 text-xs text-white hover:text-[#C6B9D8] font-medium transition"
+                  >
+                    <span>Inspect</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                )}
+              </div>
             </div>
           ))}
         </div>

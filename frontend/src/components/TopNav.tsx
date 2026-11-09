@@ -43,9 +43,36 @@ export function TopNav({
   const router = useRouter();
   const [showOrgDropdown, setShowOrgDropdown] = useState(false);
   const [showAccountDropdown, setShowAccountDropdown] = useState(false);
+  const [unreadCount, setUnreadCount] = useState<number>(2);
 
   const orgDropdownRef = useRef<HTMLDivElement>(null);
   const accountDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Sync unread notification count across the application
+  useEffect(() => {
+    const syncUnread = () => {
+      try {
+        const stored = localStorage.getItem("auditmind_read_notifs");
+        if (stored) {
+          const readIds = JSON.parse(stored) as string[];
+          const unread = ["notif-01", "notif-02"].filter((id) => !readIds.includes(id)).length;
+          setUnreadCount(unread);
+        } else {
+          setUnreadCount(2);
+        }
+      } catch (e) {
+        setUnreadCount(0);
+      }
+    };
+
+    syncUnread();
+    window.addEventListener("auditmind_notifications_updated", syncUnread);
+    window.addEventListener("storage", syncUnread);
+    return () => {
+      window.removeEventListener("auditmind_notifications_updated", syncUnread);
+      window.removeEventListener("storage", syncUnread);
+    };
+  }, [pathname]);
 
   // Close dropdowns on route changes
   useEffect(() => {
@@ -184,13 +211,15 @@ export function TopNav({
           className={`relative flex items-center justify-center h-9 w-9 rounded-full bg-white/[0.06] backdrop-blur-md border border-white/10 hover:border-white/25 hover:bg-white/[0.1] text-[#A1A1AA] hover:text-white transition shadow-sm shrink-0 ${
             pathname === "/notifications" ? "bg-white/[0.14] border-white/30 text-white" : ""
           }`}
-          title="Compliance Alerts (2 unread)"
+          title={unreadCount > 0 ? `Compliance Alerts (${unreadCount} unread)` : "Compliance Alerts (All caught up)"}
           aria-label="Compliance Alerts"
         >
           <Bell className="w-4 h-4" />
-          <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#C6B9D8] text-[9.5px] font-mono font-bold text-black ring-2 ring-black">
-            2
-          </span>
+          {unreadCount > 0 && (
+            <span className="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center rounded-full bg-[#C6B9D8] text-[9.5px] font-mono font-bold text-black ring-2 ring-black">
+              {unreadCount}
+            </span>
+          )}
         </Link>
 
         {/* 4. Account Button & Dropdown (Sarah Jenkins) */}

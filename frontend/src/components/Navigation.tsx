@@ -88,7 +88,6 @@ export function Navigation({
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(collapsed || false);
   const [hoveredItem, setHoveredItem] = useState<{ name: string; y: number } | null>(null);
-  const [optimisticPath, setOptimisticPath] = useState<string | null>(null);
 
   // Sync internal collapsed state with parent prop if provided
   useEffect(() => {
@@ -102,13 +101,6 @@ export function Navigation({
       ? pathname.slice(0, -1)
       : pathname
     : "";
-
-  // Reset optimistic path whenever pathname actually changes
-  useEffect(() => {
-    setOptimisticPath(null);
-  }, [pathname]);
-
-  const currentPath = optimisticPath || normalizedPathname;
 
   const toggle = () => {
     const next = !isCollapsed;
@@ -224,7 +216,9 @@ export function Navigation({
 
               {/* Group Nav Items — Premium Obsidian Aesthetic */}
               {group.items.map((item) => {
-                const isActive = currentPath === item.href;
+                const isActive =
+                  normalizedPathname === item.href ||
+                  (item.href === "/dashboard" && (normalizedPathname === "/" || normalizedPathname === ""));
                 const Icon = item.icon;
 
                 return (
@@ -242,20 +236,21 @@ export function Navigation({
                     <Link
                       href={item.href}
                       onClick={() => {
-                        setOptimisticPath(item.href);
                         if (onCloseMobile) onCloseMobile();
                       }}
                       aria-current={isActive ? "page" : undefined}
-                      className={`flex items-center gap-2.5 min-h-[36px] py-1.5 px-3 rounded-xl transition-colors duration-150 relative font-sans text-[13px] leading-tight font-medium outline-none focus:outline-none focus:ring-0 active:outline-none select-none cursor-pointer ${
+                      className={`flex items-center gap-2.5 min-h-[36px] py-1.5 px-3 rounded-xl transition-all duration-200 ease-out relative font-sans text-[13px] leading-tight font-medium outline-none focus:outline-none focus:ring-0 active:outline-none focus-visible:outline-none select-none cursor-pointer ${
                         isActive
-                          ? "bg-white/[0.12] text-white font-semibold backdrop-blur-sm shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
-                          : "text-white/70 hover:text-white hover:bg-white/[0.06]"
+                          ? "bg-white/[0.12] text-white shadow-sm"
+                          : "text-white/60 hover:text-white hover:bg-white/[0.04]"
                       }`}
                     >
-                      {/* Active indicator bar */}
-                      {isActive && (
-                        <span className="absolute left-1.5 top-1/2 -translate-y-1/2 w-1 h-3.5 rounded-full bg-[#C6B9D8] transition-all" />
-                      )}
+                      {/* Active indicator bar with smooth height/opacity transition */}
+                      <span
+                        className={`absolute left-1.5 top-1/2 -translate-y-1/2 w-1 rounded-full bg-[#C6B9D8] transition-all duration-200 ease-out ${
+                          isActive ? "h-3.5 opacity-100" : "h-0 opacity-0 pointer-events-none"
+                        }`}
+                      />
 
                       {/* Icon */}
                       <Icon

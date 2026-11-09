@@ -92,7 +92,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           onToggleMobileMenu={() => setMobileMenuOpen((prev) => !prev)}
         />
 
-        <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto outline-none" tabIndex={-1}>
           <div key={pathname} className="max-w-7xl mx-auto animate-page-enter">{children}</div>
         </main>
       </div>

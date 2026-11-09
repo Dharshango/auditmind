@@ -158,26 +158,33 @@
 @keyframes reveal {
   0% {
     opacity: 0;
-    transform: translateY(22px) scale(0.98);
-    filter: blur(6px);
+    transform: translateY(8px);
   }
   100% {
     opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
+    transform: translateY(0);
   }
 }
 
 @keyframes revealPulse {
   0% {
     opacity: 0;
-    transform: translateY(22px) scale(0.96);
-    filter: blur(6px);
+    transform: translateY(10px) scale(0.98);
   }
   100% {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0);
+  }
+}
+
+@keyframes pageFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
@@ -203,23 +210,27 @@
 
 /* Utility Animation Classes */
 .animate-slide-down {
-  animation: slideDown 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: slideDown 0.4s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .animate-headline-1 {
-  animation: headlineFade 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+  animation: headlineFade 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
 }
 
 .animate-headline-2 {
-  animation: headlineFade 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.30s both;
+  animation: headlineFade 0.5s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
 }
 
 .animate-reveal {
-  animation: reveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation: reveal 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-reveal-pulse {
-  animation: revealPulse 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.40s forwards;
+  animation: revealPulse 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+}
+
+.animate-page-enter {
+  animation: pageFadeIn 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 .animate-overlay-in {

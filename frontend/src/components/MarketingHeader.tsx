@@ -36,7 +36,7 @@ export function MarketingHeader({ activePage }: MarketingHeaderProps) {
 
   return (
     <>
-      <header className="w-full max-w-[820px] px-4 pt-6 z-30 flex items-center justify-between md:justify-center gap-[clamp(14px,2.2vw,24px)] animate-slide-down">
+      <header className="w-full max-w-[820px] px-4 pt-6 z-30 flex items-center justify-between md:justify-center gap-[clamp(14px,2.2vw,24px)]">
         {/* 1. Circular White Logo Button + AuditMind Brand Typography */}
         <Link
           href="/"

@@ -99,6 +99,7 @@ export function Navigation({
   const router = useRouter();
   const [isCollapsed, setIsCollapsed] = useState(collapsed || false);
   const [hoveredItem, setHoveredItem] = useState<{ name: string; y: number } | null>(null);
+  const [optimisticPath, setOptimisticPath] = useState<string | null>(null);
 
   // Sync internal collapsed state with parent prop if provided
   useEffect(() => {
@@ -112,6 +113,13 @@ export function Navigation({
       ? pathname.slice(0, -1)
       : pathname
     : "";
+
+  // Reset optimistic path whenever pathname actually changes
+  useEffect(() => {
+    setOptimisticPath(null);
+  }, [pathname]);
+
+  const currentPath = optimisticPath || normalizedPathname;
 
   const toggle = () => {
     const next = !isCollapsed;
@@ -232,7 +240,7 @@ export function Navigation({
 
               {/* Group Nav Items — Premium Obsidian Aesthetic */}
               {group.items.map((item) => {
-                const isActive = normalizedPathname === item.href;
+                const isActive = currentPath === item.href;
                 const Icon = item.icon;
 
                 return (
@@ -249,17 +257,20 @@ export function Navigation({
                   >
                     <Link
                       href={item.href}
-                      onClick={onCloseMobile}
+                      onClick={() => {
+                        setOptimisticPath(item.href);
+                        if (onCloseMobile) onCloseMobile();
+                      }}
                       aria-current={isActive ? "page" : undefined}
                       className={`flex items-center gap-2.5 min-h-[36px] py-1.5 px-3 rounded-xl transition-all duration-150 relative font-sans text-[13px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
                         isActive
-                          ? "bg-white/[0.12] text-white font-semibold border border-white/15 shadow-[inset_0_1px_0_rgba(255,255,255,0.12),0_2px_8px_rgba(0,0,0,0.3)]"
+                          ? "bg-white/[0.12] text-white font-semibold backdrop-blur-sm shadow-[0_2px_12px_rgba(0,0,0,0.25)]"
                           : "text-white/70 hover:text-white hover:bg-white/[0.06]"
                       }`}
                     >
                       {/* Active indicator bar */}
                       {isActive && (
-                        <span className="absolute left-1 top-1/2 -translate-y-1/2 w-1 h-3.5 rounded-full bg-[#C6B9D8]" />
+                        <span className="absolute left-1.5 top-1/2 -translate-y-1/2 w-1 h-3.5 rounded-full bg-[#C6B9D8] transition-all" />
                       )}
 
                       {/* Icon */}
@@ -300,7 +311,7 @@ export function Navigation({
           {/* Notifications & Settings Links */}
           <div className="space-y-0.5">
             {BOTTOM_ITEMS.map((item) => {
-              const isActive = normalizedPathname === item.href;
+              const isActive = currentPath === item.href;
               const Icon = item.icon;
 
               return (
@@ -317,11 +328,14 @@ export function Navigation({
                 >
                   <Link
                     href={item.href}
-                    onClick={onCloseMobile}
+                    onClick={() => {
+                      setOptimisticPath(item.href);
+                      if (onCloseMobile) onCloseMobile();
+                    }}
                     aria-current={isActive ? "page" : undefined}
                     className={`flex items-center gap-2.5 min-h-[34px] py-1 px-3 rounded-xl transition-all duration-150 relative font-sans text-[12.5px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
                       isActive
-                        ? "bg-white/[0.12] text-white font-semibold border border-white/15 shadow-sm"
+                        ? "bg-white/[0.12] text-white font-semibold shadow-sm"
                         : "text-[#A1A1AA] hover:text-white hover:bg-white/[0.06]"
                     }`}
                   >

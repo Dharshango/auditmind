@@ -49,7 +49,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           position="fixed"
           scrimClassName="bg-gradient-to-b from-black/40 via-transparent to-black/60"
         />
-        <main className="relative z-10 min-h-screen">{children}</main>
+        <main key={pathname} className="relative z-10 min-h-screen animate-page-enter">{children}</main>
       </div>
     );
   }
@@ -93,7 +93,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         />
 
         <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto">
-          <div className="max-w-7xl mx-auto">{children}</div>
+          <div key={pathname} className="max-w-7xl mx-auto animate-page-enter">{children}</div>
         </main>
       </div>
 

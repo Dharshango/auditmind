@@ -83,7 +83,7 @@ export default function LoginPage() {
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-[#18181B] border border-white/10 text-white mb-3 shadow-inner">
               <ShieldCheck className="w-6 h-6 text-white" />
             </div>
-            <h1 className="font-display text-2xl text-white tracking-tight">
+            <h1 className="font-display text-[28px] sm:text-[32px] text-white tracking-tight leading-tight">
               Welcome back
             </h1>
             <p className="text-xs text-[#8E8E8E] mt-1">
@@ -185,10 +185,10 @@ export default function LoginPage() {
 
           {/* Quick Fill Demo Credentials */}
           <div className="mt-6 pt-5 border-t border-white/10">
-            <div className="text-[10px] font-mono uppercase text-[#8E8E8E] text-center mb-2.5 tracking-wider">
+            <div className="text-[12px] font-mono uppercase text-[#A1A1AA] text-center mb-3 tracking-wider font-medium">
               One-Click Demo Credentials
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-2 gap-2.5">
               <button
                 type="button"
                 onClick={() =>
@@ -197,13 +197,13 @@ export default function LoginPage() {
                     "compliance123"
                   )
                 }
-                className="p-2 rounded-xl bg-[#18181B] hover:bg-[#202024] border border-white/10 hover:border-white/25 text-left transition group"
+                className="p-2.5 rounded-xl bg-[#18181B] hover:bg-[#202024] border border-white/10 hover:border-white/25 text-left transition group"
               >
-                <div className="text-[11px] font-medium text-white group-hover:text-neutral-100 flex items-center justify-between">
+                <div className="text-[13px] font-medium text-white group-hover:text-neutral-100 flex items-center justify-between">
                   <span>Sarah Jenkins</span>
-                  <Check className="w-3 h-3 text-[#8E8E8E] opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Check className="w-3.5 h-3.5 text-[#8E8E8E] opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-                <div className="text-[10px] text-[#8E8E8E]">VP Compliance</div>
+                <div className="text-[11.5px] text-[#A1A1AA] mt-0.5">VP Compliance</div>
               </button>
 
               <button
@@ -214,13 +214,13 @@ export default function LoginPage() {
                     "auditor123"
                   )
                 }
-                className="p-2 rounded-xl bg-[#18181B] hover:bg-[#202024] border border-white/10 hover:border-white/25 text-left transition group"
+                className="p-2.5 rounded-xl bg-[#18181B] hover:bg-[#202024] border border-white/10 hover:border-white/25 text-left transition group"
               >
-                <div className="text-[11px] font-medium text-white group-hover:text-neutral-100 flex items-center justify-between">
+                <div className="text-[13px] font-medium text-white group-hover:text-neutral-100 flex items-center justify-between">
                   <span>Marcus Vance</span>
-                  <Check className="w-3 h-3 text-[#8E8E8E] opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <Check className="w-3.5 h-3.5 text-[#8E8E8E] opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-                <div className="text-[10px] text-[#8E8E8E]">Lead Auditor</div>
+                <div className="text-[11.5px] text-[#A1A1AA] mt-0.5">Lead Auditor</div>
               </button>
             </div>
           </div>

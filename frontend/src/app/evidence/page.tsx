@@ -208,7 +208,7 @@ export default function EvidenceExplorerPage() {
       {/* 1. TOP HERO AREA — Sleek Executive Typography */}
       <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-white/10">
         <div>
-          <h1 className="text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-white leading-tight font-sans">
+          <h1 className="font-display text-3xl sm:text-4xl md:text-[42px] text-white tracking-tight leading-tight font-normal">
             Evidence Explorer
           </h1>
           <p className="text-sm text-[#C8C8C8] mt-1.5 max-w-2xl leading-relaxed">

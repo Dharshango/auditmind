@@ -809,9 +809,9 @@ export default function AgentPage() {
           ========================================================================= */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-white/10 pb-4">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-sans font-semibold text-white tracking-[-0.03em] flex items-center gap-2.5">
-            <Bot className="w-7 h-7 text-white" />
-            AI Compliance Agent
+          <h1 className="font-display text-2xl sm:text-3xl md:text-[38px] text-white tracking-tight leading-tight font-normal flex items-center gap-2.5">
+            <Bot className="w-7 h-7 text-white shrink-0" />
+            <span>AI Compliance Agent</span>
           </h1>
           <p className="text-sm text-[#A3A3A3] mt-1 leading-relaxed max-w-3xl">
             Autonomous compliance analysis, audit cross-referencing, and recurrence diagnosis.

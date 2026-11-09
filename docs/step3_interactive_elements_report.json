@@ -1,0 +1,31 @@
+[
+  {
+    "component": "Dashboard Chart & Badges",
+    "count": 23
+  },
+  {
+    "component": "Upload Audit Modal",
+    "elements": 6
+  },
+  {
+    "component": "Command Palette",
+    "status": "Verified"
+  },
+  {
+    "component": "Findings Ledger & Inputs",
+    "inputsCount": 4,
+    "badgesCount": 0,
+    "rowsCount": 0
+  },
+  {
+    "component": "Evidence SHA-256 Checksum",
+    "hashFound": true
+  },
+  {
+    "component": "AI Compliance Agent Composer",
+    "hasTextarea": true,
+    "textareaColor": "rgb(255, 255, 255)",
+    "selectCount": 3,
+    "buttonCount": 28
+  }
+]

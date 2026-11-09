@@ -1,0 +1,1273 @@
+<USER_REQUEST>
+# AUDITMIND — COMPLETE DASHBOARD REDESIGN
+## CINEMATIC INTELLIGENCE COMMAND CENTER
+### VISUAL DIRECTION: EXACT CONTINUATION OF THE MOTION SITES LANDING PAGE
+
+==================================================
+0. YOUR ROLE
+==================================================
+
+Act as a world-class enterprise product designer, creative director, principal UI/UX architect and senior frontend engineer.
+
+Your assignment is to completely redesign the existing AUDITMIND authenticated dashboard.
+
+The current dashboard does not match the visual quality, atmosphere or design language of the landing page.
+
+The landing page is already established and looks premium.
+
+The dashboard needs to feel like the natural continuation of that exact product.
+
+I do not want a conventional SaaS dashboard.
+
+I do not want a generic AI-generated admin interface.
+
+I do not want a dashboard made from dozens of repetitive rectangular cards.
+
+I want an extraordinary enterprise AI intelligence workspace with cinematic visual quality, beautiful data presentation, precise typography, sophisticated navigation and carefully designed interactions.
+
+Your responsibility is to rethink the dashboard's complete visual experience.
+
+This is a major dashboard redesign, not a minor styling change.
+
+==================================================
+1. THE LANDING PAGE IS THE DESIGN SOURCE OF TRUTH
+==================================================
+
+Inspect the existing AUDITMIND landing page in the browser.
+
+Inspect its actual:
+- Background video.
+- Colour combinations.
+- Typography.
+- Font sizes.
+- Navigation.
+- Logo.
+- Button shapes.
+- Shadows.
+- Background atmosphere.
+- Animations.
+- Spacing.
+- Visual composition.
+
+The landing page must remain unchanged.
+
+It is the authoritative reference for this redesign.
+
+The supplied visual reference uses:
+
+BACKGROUND VIDEO:
+
+https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4
+
+MAIN COLOURS:
+
+Black:
+#000000
+
+White:
+#FFFFFF
+
+Muted grey:
+#8E8E8E
+
+Navigation text:
+#2E2E2E
+
+Dark pill:
+#28282A
+
+Secondary text:
+#C8C8C8
+
+Trust text:
+#C4C2C3
+
+Trust border:
+rgba(255,255,255,0.4)
+
+TYPOGRAPHY:
+
+UI:
+Inter
+
+Display:
+BubbledotICG-FinePos
+
+Fallback:
+Geist Pixel Circle
+
+Display font stack:
+
+"BubbledotICG-FinePos",
+"Geist Pixel Circle",
+monospace
+
+The landing page has a distinctive combination of:
+
+- Cinematic black background.
+- Lavender, dusty pink and peach video imagery.
+- Flowing abstract visual forms.
+- White typography.
+- Retro dot-matrix headlines.
+- Floating white navigation.
+- Rounded pill-shaped controls.
+- Minimal descriptions.
+- Soft white glow.
+- Elegant entrance animations.
+- Restrained interface content.
+
+These characteristics must define the new dashboard identity.
+
+DO NOT reuse the previous Verdant Atelier design.
+
+DO NOT introduce:
+- Green colour systems.
+- Gold accents.
+- Electric citron.
+- Unrelated blue themes.
+- Generic purple AI gradients.
+- Random bright colours.
+
+The new dashboard should be unmistakably connected to the existing landing page.
+
+==================================================
+2. NEW DASHBOARD DESIGN PHILOSOPHY
+==================================================
+
+Create a visual identity called:
+
+CINEMATIC INTELLIGENCE COMMAND CENTER
+
+Tagline:
+
+"Clarity across every facility. Intelligence across every decision."
+
+The dashboard should communicate:
+
+- Intelligence.
+- Precision.
+- Trust.
+- Sophistication.
+- Operational control.
+- Enterprise credibility.
+- Technological advancement.
+
+The user should feel that they have entered a sophisticated professional intelligence platform.
+
+The design should feel art-directed by an experienced product design team.
+
+Avoid the appearance of an automatically generated SaaS template.
+
+The interface should rely on:
+
+1. Strong visual hierarchy.
+2. Elegant typography.
+3. Beautiful negative space.
+4. Layered monochromatic surfaces.
+5. Sophisticated data visualization.
+6. Atmospheric visual depth.
+7. Carefully controlled colour.
+8. Functional minimalism.
+9. Beautiful transitions.
+10. Purposeful information presentation.
+
+Every element must have a reason to exist.
+
+==================================================
+3. ABSOLUTE PRESERVATION RULES
+==================================================
+
+This is a dashboard redesign, not a full application rebuild.
+
+DO NOT MODIFY THE LANDING PAGE.
+
+Do not alter:
+- Public homepage.
+- Homepage video.
+- Homepage fonts.
+- Homepage navigation.
+- Homepage headline.
+- Homepage CTA.
+- Homepage layout.
+- Homepage animations.
+
+Do not modify:
+- Backend logic.
+- PostgreSQL schema.
+- Hindsight configuration.
+- Retain operations.
+- Recall operations.
+- Reflect operations.
+- Groq integration.
+- LLM tools.
+- Authentication logic.
+- Existing API contracts.
+- Audit ingestion.
+- OCR processing.
+- Evidence extraction.
+- Recurring failure algorithms.
+- Corrective-action workflows.
+- Historical business records.
+
+Preserve all existing dashboard features.
+
+You may modify the frontend components, dashboard layouts, CSS and visual presentation.
+
+Preserve all props, component contracts, state, event handlers and data flows.
+
+Never replace actual data with mock data.
+
+Never make a functional button decorative.
+
+Never delete an existing dashboard route.
+
+If existing functionality has to be refactored for a visual improvement, inspect its dependencies first and preserve its behavior.
+
+==================================================
+4. BACKGROUND SYSTEM
+==================================================
+
+The dashboard must visually connect with the landing page's exact video.
+
+Do not place an uncontrolled full-brightness video behind every table and document.
+
+Implement a refined cinematic background system.
+
+Use the exact homepage video as the shared ambient visual source.
+
+Preferred composition:
+
+- Deep black canvas.
+- Same animated abstract video.
+- Dark cinematic overlay.
+- Subtle visibility of lavender, dusty pink and peach tones.
+- Dark translucent surfaces for analytical content.
+
+The video should create an atmospheric identity rather than compete with the dashboard content.
+
+Suggested treatment:
+
+Use the exact video inside a shared background component.
+
+Apply an appropriately tuned dark overlay.
+
+Allow some of the original video colours to remain visible in areas with sufficient negative space.
+
+For dense tables, document viewers and analytical content, use controlled opaque dark surfaces.
+
+Do not make the text depend on the brightness of the moving video.
+
+Use a static fallback from the same video for reduced-motion or failed video loading.
+
+Do not create multiple unnecessary video instances if a shared layout can reuse one background.
+
+The dashboard background must feel related to the landing page, but the actual dashboard content must remain highly readable.
+
+==================================================
+5. COLOUR SYSTEM
+==================================================
+
+Create a centralized dashboard colour system.
+
+CORE:
+
+--dashboard-bg: #000000;
+--dashboard-surface: #101010;
+--dashboard-surface-secondary: #171717;
+--dashboard-surface-elevated: #202020;
+
+--dashboard-text: #FFFFFF;
+--dashboard-text-secondary: #C8C8C8;
+--dashboard-muted: #8E8E8E;
+
+--dashboard-border:
+rgba(255,255,255,0.12);
+
+--dashboard-border-subtle:
+rgba(255,255,255,0.07);
+
+--dashboard-accent: #FFFFFF;
+--dashboard-accent-muted: #D0D0D0;
+
+SUGGESTED VIDEO-DERIVED ACCENTS:
+
+- Muted lavender.
+- Dusty pink.
+- Soft peach.
+- Desaturated purple.
+
+IMPORTANT:
+
+Sample these supporting accents from actual frames of the supplied homepage video wherever possible.
+
+Record the derived values in:
+
+docs/DASHBOARD_DESIGN_SYSTEM.md
+
+Do not invent bright accent colours unrelated to the reference.
+
+Use the video-derived tones selectively for:
+- Chart series.
+- Data visualization.
+- Selected intelligence highlights.
+- Graph relationships.
+- Decorative dividers.
+- Visual emphasis.
+
+Maintain the monochromatic black-and-white foundation.
+
+SEMANTIC COLOURS:
+
+Keep appropriate readable status colours for:
+- Success.
+- Warning.
+- Critical.
+- Information.
+
+Never sacrifice accessibility to match the screenshot.
+
+Ensure all foreground text has sufficient contrast against its actual background.
+
+==================================================
+6. TYPOGRAPHY SYSTEM
+==================================================
+
+Use the exact landing-page typography.
+
+UI FONT:
+
+Inter.
+
+DISPLAY FONT:
+
+BubbledotICG-FinePos.
+
+DISPLAY FALLBACK:
+
+Geist Pixel Circle.
+
+Do not use the pixel font everywhere.
+
+It is a display identity, not a body font.
+
+Use it for:
+- Selected large dashboard titles.
+- Important numerical displays.
+- Short section identities.
+- Special intelligence indicators.
+- Carefully chosen visual accents.
+
+Use Inter for:
+- Body text.
+- Tables.
+- Sidebar labels.
+- Buttons.
+- Form fields.
+- Charts.
+- AI responses.
+- Supporting text.
+- Data values where readability is essential.
+
+Typography should have a deliberate hierarchy.
+
+Avoid unnecessary uppercase headings.
+
+Avoid excessively tiny labels.
+
+Avoid excessively large headings inside dense operational pages.
+
+Keep the typography connected to the landing page while adapting it to an information-rich dashboard.
+
+==================================================
+7. COMPLETELY REDEFINE THE DASHBOARD SHELL
+==================================================
+
+Redesign the existing dashboard shell.
+
+Do not simply apply dark backgrounds to the current layout.
+
+Rethink the composition.
+
+The application should have:
+
+A. Refined navigation.
+
+B. Compact top command bar.
+
+C. Large but controlled content workspace.
+
+D. Sophisticated analytical sections.
+
+E. Contextual AI intelligence.
+
+## SIDEBAR DESIGN
+
+Create a slim, premium, well-structured sidebar.
+
+Use deep black or near-black surfaces.
+
+Reuse the exact AUDITMIND logo.
+
+The logo should match the landing-page brand identity.
+
+Use elegant spacing and restrained icons.
+
+Suggested grouping:
+
+OVERVIEW
+- Executive Overview
+- Facility Network
+
+AUDITS
+- Audit Management
+- Findings
+
+INTELLIGENCE
+- Organizational Memory
+- Recurring Failures
+- Compliance Intelligence
+
+OPERATIONS
+- Corrective Actions
+- Evidence Explorer
+
+AI
+- AI Compliance Agent
+
+BOTTOM
+- Notifications.
+- Settings.
+- User profile.
+
+Preserve the existing destinations and any additional existing dashboard modules.
+
+Do not delete navigation items just because they are not in this suggested grouping.
+
+The sidebar should:
+- Support expansion and collapse.
+- Have a beautiful active-state indicator.
+- Support hover states.
+- Use smooth transitions.
+- Show tooltips when collapsed.
+- Work on smaller screens.
+- Avoid unnecessary visual clutter.
+
+The active item should use a restrained white-on-dark or white-pill treatment consistent with the landing-page navigation.
+
+Ensure only one navigation item is active at a time.
+
+Use the actual router pathname as the source of truth.
+
+Fix any existing active-navigation flickering.
+
+## TOP COMMAND BAR
+
+Create an elegant top bar.
+
+Include:
+- Current organization.
+- Breadcrumb.
+- Search.
+- Notifications.
+- Contextual date range where relevant.
+- User profile.
+- Theme or appearance controls if already supported.
+
+Keep its height controlled.
+
+Avoid unnecessary buttons and labels.
+
+The top bar must not compete with the main content.
+
+==================================================
+8. EXECUTIVE OVERVIEW — COMPLETE RECONSTRUCTION
+==================================================
+
+This is the most important dashboard page.
+
+Do not create another ordinary dashboard.
+
+I want a distinctive executive intelligence overview.
+
+The page should have an editorial composition.
+
+## TOP HERO AREA
+
+Use a refined heading such as:
+
+"Your organization, in focus."
+
+A short subtitle:
+
+"Compliance intelligence across every facility."
+
+Use:
+- Selected pixel typography for the main display heading.
+- Inter for supporting text.
+- Large clean whitespace.
+- A subtle atmospheric video-derived background treatment.
+- One primary action.
+- Compact contextual filters.
+
+Avoid a large collection of floating cards.
+
+## KPI PRESENTATION
+
+Do not display every metric inside identical rounded cards.
+
+Create an elegant analytical metrics strip.
+
+Required metrics:
+
+- Total Facilities.
+- Total Audits.
+- Open Findings.
+- Critical Findings.
+- Overdue Corrective Actions.
+- Recurring Failures.
+
+Use actual backend data.
+
+Design the numbers prominently.
+
+Use thin separators between metrics.
+
+Display:
+- Main value.
+- Short label.
+- Supporting trend only when actual historical comparisons exist.
+
+Use tabular numerals.
+
+Use restrained animations.
+
+Avoid excessive colour.
+
+On narrow displays, reorganize metrics into responsive groups.
+
+## MAIN ANALYTICS COMPOSITION
+
+Use an intentional asymmetric layout.
+
+Possible structure:
+
+LEFT:
+Compliance trend over time.
+
+RIGHT:
+Priority intelligence and critical findings.
+
+SECOND ROW:
+
+Facility performance comparison.
+
+Recurring issue analysis.
+
+Corrective-action effectiveness.
+
+Use editorial spacing instead of making every component a separate identical card.
+
+## ORGANIZATIONAL INTELLIGENCE
+
+Create a visually important section:
+
+"Intelligence detected"
+
+Display the most relevant real insights:
+
+- Newly recurring issues.
+- Repeated facility failures.
+- Failed corrective actions.
+- Unresolved critical findings.
+- Significant historical changes.
+
+Each insight must link to its actual supporting records.
+
+Use restrained visual emphasis.
+
+Avoid decorative AI-generated claims.
+
+## RECENT ACTIVITY
+
+Display:
+- Audit submitted.
+- Finding created.
+- Corrective action assigned.
+- Action verified.
+- Recurrence detected.
+- Historical memory retained.
+
+Create an elegant timeline.
+
+Keep descriptions short.
+
+==================================================
+9. FACILITY NETWORK — COMPLETE RECONSTRUCTION
+==================================================
+
+This page must feel like an interactive intelligence map rather than an ordinary listing page.
+
+Create a sophisticated facility overview.
+
+Display:
+- Total facilities.
+- Facility status.
+- Audit history.
+- Findings.
+- Recurring issues.
+- Corrective actions.
+- Historical risk indicators.
+
+Where reliable facility locations are available, use a geographical map.
+
+Where geographical data is unavailable, create an abstract relationship network that shows facility connections based on actual shared findings or operational relationships.
+
+Do not invent geographical locations.
+
+## VISUALIZATION
+
+Create an elegant interactive network visualization.
+
+Each facility is represented by an identifiable node.
+
+Connected relationships must represent actual data.
+
+Possible relationships:
+- Shared recurring finding.
+- Similar inspection history.
+- Common operational process.
+- Related corrective action.
+
+Provide a searchable facility list as an accessible alternative to the network.
+
+Clicking a facility should open its detail workspace.
+
+Use subtle video-derived colours for selected nodes and connections.
+
+Do not use bright arbitrary colours.
+
+## FACILITY DETAIL
+
+Display:
+- Facility identity.
+- Audit history.
+- Current findings.
+- Recurring issues.
+- Corrective actions.
+- Verification history.
+- Relevant memory.
+
+==================================================
+10. AUDIT MANAGEMENT — COMPLETE RECONSTRUCTION
+==================================================
+
+Create a refined enterprise audit workspace.
+
+Avoid generic crowded data tables.
+
+Use strong typography and clear information hierarchy.
+
+Include:
+- Search.
+- Filters.
+- Date range.
+- Facility selection.
+- Audit type.
+- Status.
+- Upload action.
+
+Display audits with concise information:
+
+- Audit ID.
+- Facility.
+- Audit type.
+- Date.
+- Findings.
+- Severity.
+- Status.
+
+Make the primary upload action visually prominent.
+
+Preserve the existing PDF ingestion system.
+
+## AUDIT DETAIL
+
+Create an organized inspection workspace with:
+
+- Audit summary.
+- Original document.
+- Extracted findings.
+- Supporting evidence.
+- Source page references.
+- Corrective actions.
+- Historical context.
+
+Use a professional document investigation layout.
+
+==================================================
+11. FINDINGS MANAGEMENT
+==================================================
+
+Redesign the complete findings experience.
+
+Present:
+- Finding description.
+- Severity.
+- Facility.
+- Audit.
+- Date.
+- Status.
+- Corrective action.
+- Evidence.
+
+Create a visually organized list and detailed investigation view.
+
+Use severity colours only for actual severity meaning.
+
+Do not fill the entire page with bright warning colours.
+
+Keep advanced details expandable.
+
+==================================================
+12. ORGANIZATIONAL MEMORY — SIGNATURE EXPERIENCE
+==================================================
+
+This is one of AUDITMIND's most important differentiators.
+
+Create a distinctive dark intelligence workspace.
+
+It should feel like inspecting an evolving organizational knowledge system.
+
+Display:
+
+- Current memory bank.
+- Recent memory events.
+- Historical audit memories.
+- Related facilities.
+- Retained corrective actions.
+- Recall activity.
+- Reflection results.
+- Memory ingestion status.
+- Mental models when actually available.
+
+Use:
+- Elegant timelines.
+- Connected visualizations.
+- Refined information panels.
+- Expandable historical details.
+- Traceable source references.
+
+The memory visualization must use actual structured relationships and Hindsight responses.
+
+Do not create decorative fake AI knowledge graphs.
+
+==================================================
+13. RECURRING FAILURE INTELLIGENCE
+==================================================
+
+Redesign this as a premium investigation interface.
+
+The central question:
+
+"Which problems keep returning, and why?"
+
+Display:
+
+- Recurrence count.
+- Affected facilities.
+- Historical events.
+- First occurrence.
+- Latest occurrence.
+- Related corrective actions.
+- Verification history.
+- Supporting evidence.
+- Possible common causes.
+
+Create:
+- Elegant time-series charts.
+- Facility comparisons.
+- Finding relationship visualization.
+- Evidence inspection panels.
+
+Show uncertainty clearly.
+
+==================================================
+14. CORRECTIVE ACTION CENTER
+==================================================
+
+Create a sophisticated operational workspace.
+
+Do not use a generic task application template.
+
+Use:
+- Refined tables.
+- Elegant progress indicators.
+- Clear ownership.
+- Due dates.
+- Status indicators.
+- Verification results.
+- Historical recurrence.
+
+Preserve all existing statuses:
+
+OPEN
+ASSIGNED
+IN_PROGRESS
+COMPLETED
+AWAITING_VERIFICATION
+VERIFIED_EFFECTIVE
+FAILED_VERIFICATION
+RECURRENCE_DETECTED
+
+Make the difference between completed and verified effective obvious.
+
+Preserve all existing task workflows.
+
+==================================================
+15. EVIDENCE EXPLORER
+==================================================
+
+Create a premium document investigation experience.
+
+Use a deliberate split layout:
+
+LEFT:
+Document navigation and list.
+
+CENTER:
+Document viewer.
+
+RIGHT:
+Extracted evidence and finding relationships.
+
+Features:
+- Original report.
+- Source pages.
+- Extracted text.
+- Related findings.
+- Audit references.
+- Evidence metadata.
+
+Make citations easy to navigate.
+
+Preserve the actual document-processing system.
+
+==================================================
+16. AI COMPLIANCE AGENT — INTEGRATED COMMAND WORKSPACE
+==================================================
+
+Redesign the AI compliance agent as a natural part of the dashboard.
+
+It must not feel like an unrelated generic chatbot.
+
+Use a premium dark conversational interface.
+
+Create:
+
+LEFT:
+Conversation history.
+
+CENTER:
+Main AI conversation.
+
+RIGHT:
+Optional collapsible evidence/context panel.
+
+Include:
+- New conversation.
+- Search conversations.
+- Suggested investigations.
+- Message composer.
+- Attachment control where supported.
+- Send action.
+- Stop generation where supported.
+- Copy response.
+- Regenerate response.
+- Follow-up suggestions.
+- Historical memory indicator.
+- Evidence citations.
+- Expandable tool activity.
+
+The welcome message should be concise:
+
+"What would you like to investigate?"
+
+Suggested queries:
+
+- Find recurring issues.
+- Review overdue actions.
+- Compare facilities.
+- Explain an audit finding.
+
+Only offer capabilities supported by actual backend tools.
+
+Show actual Hindsight usage.
+
+Do not fabricate tool executions.
+
+Make the message composer visually exceptional.
+
+Use the landing-page pill language where appropriate.
+
+Keep the interface simple.
+
+==================================================
+17. DATA VISUALIZATION
+==================================================
+
+All charts must use actual backend data.
+
+Use a sophisticated colour palette derived from the background video.
+
+Prefer:
+- White.
+- Muted grey.
+- Lavender.
+- Dusty pink.
+- Soft peach.
+
+Use restrained semantic status colours.
+
+Design:
+- Trend lines.
+- Area charts.
+- Bar charts.
+- Facility comparisons.
+- Severity distributions.
+- Corrective-action effectiveness.
+- Recurrence timelines.
+
+Improve:
+- Axis labels.
+- Legends.
+- Tooltips.
+- Grid lines.
+- Data labels.
+- Chart spacing.
+- Hover interactions.
+
+Avoid rainbow charts.
+
+Avoid unnecessary chart decorations.
+
+Do not invent trend percentages.
+
+==================================================
+18. ANIMATIONS AND INTERACTIONS
+==================================================
+
+The dashboard should feel polished and alive.
+
+Use the animation framework already installed.
+
+Implement:
+- Smooth page transitions.
+- Sidebar transitions.
+- Active navigation indicator.
+- Controlled content reveals.
+- Subtle chart transitions.
+- Button feedback.
+- Dialog entrances.
+- Dropdown transitions.
+- Timeline reveal.
+- Number count-up.
+- Elegant loading states.
+- AI thinking indicators.
+- Expandable evidence panels.
+
+Keep animations intentional.
+
+Use approximately:
+150–250ms for ordinary UI interactions.
+
+300–500ms for larger transitions where suitable.
+
+Do not animate everything.
+
+No excessive bouncing.
+
+No distracting continuous motion.
+
+No unnecessary 3D effects.
+
+Respect prefers-reduced-motion.
+
+==================================================
+19. RESPONSIVE DESIGN
+==================================================
+
+Support:
+
+- Large desktop.
+- Standard desktop.
+- Laptop.
+- Tablet.
+- Mobile.
+
+Desktop:
+Premium full navigation and complete analytical layout.
+
+Tablet:
+Collapsible navigation and responsive analytics.
+
+Mobile:
+Compact navigation drawer, stacked analytics, readable tables and usable AI chat.
+
+Do not simply shrink the desktop layout.
+
+Avoid horizontal overflow.
+
+Maintain comfortable touch targets.
+
+==================================================
+20. HUMAN-DESIGNED EXPERIENCE
+==================================================
+
+The result must not look AI-generated.
+
+Avoid:
+- Repetitive identical cards.
+- Excessively rounded containers everywhere.
+- Generic gradients.
+- Unnecessary icons.
+- Random metric cards.
+- Repeated explanatory paragraphs.
+- Decorative placeholders.
+- Artificial data.
+- Excessive uppercase labels.
+
+Use a consistent but varied layout.
+
+Give important information visual importance.
+
+Use negative space intentionally.
+
+Make the interface feel calm, confident and sophisticated.
+
+==================================================
+21. IMPLEMENTATION PROCEDURE
+==================================================
+
+Do not begin blindly replacing components.
+
+Follow these stages.
+
+STAGE 1 — DASHBOARD AUDIT
+
+Inspect every existing dashboard route.
+
+Run the current application.
+
+Capture screenshots.
+
+Document:
+- Existing layouts.
+- Existing components.
+- Existing APIs.
+- Existing navigation.
+- Existing functionality.
+- Visual weaknesses.
+- Broken interactions.
+
+Create:
+
+docs/DASHBOARD_UI_AUDIT.md
+
+STAGE 2 — DESIGN SYSTEM
+
+Create:
+
+docs/DASHBOARD_DESIGN_SYSTEM.md
+
+Document:
+- Colours.
+- Typography.
+- Surfaces.
+- Spacing.
+- Navigation.
+- Charts.
+- Tables.
+- Animation.
+- Layout system.
+
+STAGE 3 — DASHBOARD SHELL
+
+Redesign:
+- Sidebar.
+- Header.
+- Main content container.
+- Navigation states.
+- Background.
+- Responsive structure.
+
+Verify routing before proceeding.
+
+STAGE 4 — EXECUTIVE OVERVIEW
+
+Completely rebuild its visual layout.
+
+Keep the same underlying data and functionality.
+
+STAGE 5 — ALL DASHBOARD MODULES
+
+Redesign every existing dashboard page.
+
+Do not stop after the Executive Overview.
+
+STAGE 6 — AI AGENT
+
+Integrate the redesigned AI experience into the dashboard design system.
+
+STAGE 7 — INTERACTION AND ANIMATION
+
+Implement and verify all relevant interactions.
+
+STAGE 8 — VISUAL QA
+
+Use actual browser rendering.
+
+Capture screenshots at different viewport sizes.
+
+Compare the landing page and dashboard side by side.
+
+Ensure they clearly belong to the same product.
+
+STAGE 9 — FUNCTIONAL REGRESSION
+
+Verify:
+- Navigation.
+- API calls.
+- Authentication.
+- Data loading.
+- Hindsight.
+- AI tools.
+- Audit upload.
+- Evidence.
+- Corrective actions.
+- All existing user interactions.
+
+STAGE 10 — RELEASE REPORT
+
+Create:
+
+docs/DASHBOARD_REDESIGN_REPORT.md
+
+Include:
+- Design changes.
+- Routes redesigned.
+- Screenshots.
+- Colour tokens.
+- Typography.
+- Chart improvements.
+- Responsive changes.
+- Functional tests.
+- Remaining issues.
+
+==================================================
+22. NON-NEGOTIABLE RESTRICTIONS
+==================================================
+
+1. Do not modify the landing page.
+2. Do not use a different brand identity.
+3. Do not reintroduce the green-and-gold theme.
+4. Do not create a generic SaaS dashboard.
+5. Do not make every element a card.
+6. Do not overload the dashboard with text.
+7. Do not remove existing dashboard modules.
+8. Do not remove working features.
+9. Do not replace actual backend data with mock data.
+10. Do not modify Hindsight logic.
+11. Do not modify database schemas unnecessarily.
+12. Do not alter authentication.
+13. Do not create fake memory visualizations.
+14. Do not invent business metrics.
+15. Do not create decorative nonfunctional buttons.
+16. Do not create unreadable charts.
+17. Do not compromise responsiveness.
+18. Do not stop after redesigning one page.
+
+==================================================
+23. FINAL ACCEPTANCE CRITERIA
+==================================================
+
+[ ] Dashboard visually matches the landing-page identity.
+
+[ ] Homepage remains unchanged.
+
+[ ] Background video identity is consistent.
+
+[ ] Black and white foundation is consistent.
+
+[ ] Typography is consistent.
+
+[ ] Pixel display font is used selectively.
+
+[ ] Dashboard navigation is redesigned.
+
+[ ] Executive Overview is redesigned.
+
+[ ] Facility Network is redesigned.
+
+[ ] Audit Management is redesigned.
+
+[ ] Findings is redesigned.
+
+[ ] Organizational Memory is redesigned.
+
+[ ] Recurring Failure Intelligence is redesigned.
+
+[ ] Corrective Action Center is redesigned.
+
+[ ] Evidence Explorer is redesigned.
+
+[ ] AI Compliance Agent is redesigned.
+
+[ ] All existing data remains intact.
+
+[ ] All backend integrations continue working.
+
+[ ] Hindsight continues working.
+
+[ ] All dashboard interactions work.
+
+[ ] Charts use real data.
+
+[ ] Responsive layouts work.
+
+[ ] No major console errors.
+
+[ ] Production build succeeds.
+
+[ ] Before-and-after screenshots are saved.
+
+==================================================
+FINAL INSTRUCTION
+==================================================
+
+I want the existing landing page and dashboard to feel like two parts of the same premium AI product.
+
+The landing page is the cinematic introduction.
+
+The dashboard is the actual intelligence environment behind it.
+
+Do not reproduce the landing-page hero inside the dashboard.
+
+Instead, translate its visual identity into a functional enterprise command center.
+
+Create something sophisticated, minimal, cinematic, distinctive and genuinely beautiful.
+
+Completely rethink the dashboard's composition.
+
+Preserve its actual capabilities.
+
+Inspect, design, implement, test and visually refine every existing dashboard route.
+
+Do not stop at a design proposal.
+
+BEGIN WITH A COMPLETE DASHBOARD AUDIT.
+
+THEN IMPLEMENT THE REDESIGN.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-08T20:38:55+05:30.
+</ADDITIONAL_METADATA>

@@ -1,0 +1,119 @@
+[
+  {
+    "route": "/dashboard",
+    "name": "dashboard",
+    "screenshot": "C:\\Users\\dhars\\OneDrive\\Desktop\\Projects\\AUDITMIND\\docs\\screenshots\\dashboard_audit\\dashboard_current.png",
+    "metrics": {
+      "title": "AUDITMIND — Operational Compliance Intelligence",
+      "heading": "Executive Compliance Ledger",
+      "textCount": 127,
+      "cardCount": 38,
+      "bodyBg": "rgb(0, 0, 0)"
+    },
+    "status": "OK"
+  },
+  {
+    "route": "/facilities",
+    "name": "facilities",
+    "screenshot": "C:\\Users\\dhars\\OneDrive\\Desktop\\Projects\\AUDITMIND\\docs\\screenshots\\dashboard_audit\\facilities_current.png",
+    "metrics": {
+      "title": "AUDITMIND — Operational Compliance Intelligence",
+      "heading": "Facilities",
+      "textCount": 133,
+      "cardCount": 44,
+      "bodyBg": "rgb(0, 0, 0)"
+    },
+    "status": "OK"
+  },
+  {
+    "route": "/audits",
+    "name": "audits",
+    "screenshot": "C:\\Users\\dhars\\OneDrive\\Desktop\\Projects\\AUDITMIND\\docs\\screenshots\\dashboard_audit\\audits_current.png",
+    "metrics": {
+      "title": "AUDITMIND — Operational Compliance Intelligence",
+      "heading": "Audits",
+      "textCount": 699,
+      "cardCount": 148,
+      "bodyBg": "rgb(0, 0, 0)"
+    },
+    "status": "OK"
+  },
+  {
+    "route": "/findings",
+    "name": "findings",
+    "screenshot": "C:\\Users\\dhars\\OneDrive\\Desktop\\Projects\\AUDITMIND\\docs\\screenshots\\dashboard_audit\\findings_current.png",
+    "metrics": {
+      "title": "AUDITMIND — Operational Compliance Intelligence",
+      "heading": "Findings",
+      "textCount": 671,
+      "cardCount": 203,
+      "bodyBg": "rgb(0, 0, 0)"
+    },
+    "status": "OK"
+  },
+  {
+    "route": "/memory",
+    "name": "memory",
+    "screenshot": "C:\\Users\\dhars\\OneDrive\\Desktop\\Projects\\AUDITMIND\\docs\\screenshots\\dashboard_audit\\memory_current.png",
+    "metrics": {
+      "title": "AUDITMIND — Operational Compliance Intelligence",
+      "heading": "Organizational memory",
+      "textCount": 133,
+      "cardCount": 40,
+      "bodyBg": "rgb(0, 0, 0)"
+    },
+    "status": "OK"
+  },
+  {
+    "route": "/recurring",
+    "name": "recurring",
+    "screenshot": "C:\\Users\\dhars\\OneDrive\\Desktop\\Projects\\AUDITMIND\\docs\\screenshots\\dashboard_audit\\recurring_current.png",
+    "metrics": {
+      "title": "AUDITMIND — Operational Compliance Intelligence",
+      "heading": "Recurring issues",
+      "textCount": 343,
+      "cardCount": 98,
+      "bodyBg": "rgb(0, 0, 0)"
+    },
+    "status": "OK"
+  },
+  {
+    "route": "/capa",
+    "name": "capa",
+    "screenshot": "C:\\Users\\dhars\\OneDrive\\Desktop\\Projects\\AUDITMIND\\docs\\screenshots\\dashboard_audit\\capa_current.png",
+    "metrics": {
+      "title": "AUDITMIND — Operational Compliance Intelligence",
+      "heading": "Corrective actions",
+      "textCount": 598,
+      "cardCount": 81,
+      "bodyBg": "rgb(0, 0, 0)"
+    },
+    "status": "OK"
+  },
+  {
+    "route": "/evidence",
+    "name": "evidence",
+    "screenshot": "C:\\Users\\dhars\\OneDrive\\Desktop\\Projects\\AUDITMIND\\docs\\screenshots\\dashboard_audit\\evidence_current.png",
+    "metrics": {
+      "title": "AUDITMIND — Operational Compliance Intelligence",
+      "heading": "Evidence vault",
+      "textCount": 90,
+      "cardCount": 29,
+      "bodyBg": "rgb(0, 0, 0)"
+    },
+    "status": "OK"
+  },
+  {
+    "route": "/agent",
+    "name": "agent",
+    "screenshot": "C:\\Users\\dhars\\OneDrive\\Desktop\\Projects\\AUDITMIND\\docs\\screenshots\\dashboard_audit\\agent_current.png",
+    "metrics": {
+      "title": "AUDITMIND — Operational Compliance Intelligence",
+      "heading": "AUDITMIND Compliance Agent",
+      "textCount": 94,
+      "cardCount": 30,
+      "bodyBg": "rgb(0, 0, 0)"
+    },
+    "status": "OK"
+  }
+]

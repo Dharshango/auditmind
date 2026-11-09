@@ -1,0 +1,9 @@
+{
+  "health": true,
+  "browserLogin": true,
+  "auditsApi": true,
+  "findingsApi": true,
+  "evidenceFunctionality": true,
+  "hindsightStatus": true,
+  "agentChat": true
+}

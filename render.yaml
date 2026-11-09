@@ -1,0 +1,58 @@
+services:
+  # AUDITMIND FastAPI Backend Service
+  - type: web
+    name: auditmind-backend
+    runtime: python
+    region: oregon
+    plan: standard
+    branch: main
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: DEBUG
+        value: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: auditmind-postgres
+          property: connectionString
+      - key: HINDSIGHT_API_KEY
+        sync: false
+      - key: HINDSIGHT_BASE_URL
+        value: https://api.hindsight.vectorize.io
+      - key: GROQ_API_KEY
+        sync: false
+      - key: LLM_MODEL
+        value: llama-3.3-70b-versatile
+      - key: CORS_ORIGINS
+        value: https://auditmind.vercel.app,http://localhost:3000
+
+  # AUDITMIND Next.js Frontend Service
+  - type: web
+    name: auditmind-frontend
+    runtime: node
+    region: oregon
+    plan: standard
+    branch: main
+    rootDir: frontend
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: auditmind-backend
+          property: host
+
+databases:
+  # Managed PostgreSQL Database
+  - name: auditmind-postgres
+    region: oregon
+    plan: standard
+    databaseName: auditmind_db
+    user: auditmind_admin

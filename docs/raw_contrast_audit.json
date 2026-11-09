@@ -1,0 +1,100 @@
+[
+  {
+    "route": "Landing Page",
+    "path": "/",
+    "totalChecked": 19,
+    "issueCount": 0,
+    "issues": []
+  },
+  {
+    "route": "Product Page",
+    "path": "/product",
+    "totalChecked": 26,
+    "issueCount": 0,
+    "issues": []
+  },
+  {
+    "route": "Case Studies",
+    "path": "/case-studies",
+    "totalChecked": 32,
+    "issueCount": 0,
+    "issues": []
+  },
+  {
+    "route": "Contact Page",
+    "path": "/contact",
+    "totalChecked": 25,
+    "issueCount": 0,
+    "issues": []
+  },
+  {
+    "route": "Login Page",
+    "path": "/login",
+    "totalChecked": 22,
+    "issueCount": 0,
+    "issues": []
+  },
+  {
+    "route": "Executive Overview",
+    "path": "/dashboard",
+    "totalChecked": 113,
+    "issueCount": 0,
+    "issues": []
+  },
+  {
+    "route": "Facility Network",
+    "path": "/facilities",
+    "totalChecked": 113,
+    "issueCount": 0,
+    "issues": []
+  },
+  {
+    "route": "Audit Management",
+    "path": "/audits",
+    "totalChecked": 643,
+    "issueCount": 0,
+    "issues": []
+  },
+  {
+    "route": "Findings Ledger",
+    "path": "/findings",
+    "totalChecked": 575,
+    "issueCount": 0,
+    "issues": []
+  },
+  {
+    "route": "Memory Explorer",
+    "path": "/memory",
+    "totalChecked": 107,
+    "issueCount": 0,
+    "issues": []
+  },
+  {
+    "route": "Recurring Failures",
+    "path": "/recurring",
+    "totalChecked": 240,
+    "issueCount": 0,
+    "issues": []
+  },
+  {
+    "route": "CAPA Center",
+    "path": "/capa",
+    "totalChecked": 430,
+    "issueCount": 0,
+    "issues": []
+  },
+  {
+    "route": "Evidence Vault",
+    "path": "/evidence",
+    "totalChecked": 77,
+    "issueCount": 0,
+    "issues": []
+  },
+  {
+    "route": "AI Compliance Agent",
+    "path": "/agent",
+    "totalChecked": 70,
+    "issueCount": 0,
+    "issues": []
+  }
+]

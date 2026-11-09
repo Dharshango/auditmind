@@ -1,0 +1,110 @@
+[
+  {
+    "viewport": "Desktop (1920x1080)",
+    "route": "Landing",
+    "path": "/",
+    "hasHorizontalOverflow": false,
+    "scrollWidth": 1920,
+    "windowWidth": 1920,
+    "screenshot": "landing_desktop.png"
+  },
+  {
+    "viewport": "Desktop (1920x1080)",
+    "route": "Dashboard",
+    "path": "/dashboard",
+    "hasHorizontalOverflow": false,
+    "scrollWidth": 1920,
+    "windowWidth": 1920,
+    "screenshot": "dashboard_desktop.png"
+  },
+  {
+    "viewport": "Desktop (1920x1080)",
+    "route": "Audits",
+    "path": "/audits",
+    "hasHorizontalOverflow": false,
+    "scrollWidth": 1920,
+    "windowWidth": 1920,
+    "screenshot": "audits_desktop.png"
+  },
+  {
+    "viewport": "Desktop (1920x1080)",
+    "route": "Agent",
+    "path": "/agent",
+    "hasHorizontalOverflow": false,
+    "scrollWidth": 1920,
+    "windowWidth": 1920,
+    "screenshot": "agent_desktop.png"
+  },
+  {
+    "viewport": "Laptop (1366x768)",
+    "route": "Landing",
+    "path": "/",
+    "hasHorizontalOverflow": false,
+    "scrollWidth": 1366,
+    "windowWidth": 1366,
+    "screenshot": "landing_laptop_1366.png"
+  },
+  {
+    "viewport": "Laptop (1366x768)",
+    "route": "Dashboard",
+    "path": "/dashboard",
+    "hasHorizontalOverflow": false,
+    "scrollWidth": 1366,
+    "windowWidth": 1366,
+    "screenshot": "dashboard_laptop_1366.png"
+  },
+  {
+    "viewport": "Laptop (1366x768)",
+    "route": "Audits",
+    "path": "/audits",
+    "hasHorizontalOverflow": false,
+    "scrollWidth": 1366,
+    "windowWidth": 1366,
+    "screenshot": "audits_laptop_1366.png"
+  },
+  {
+    "viewport": "Laptop (1366x768)",
+    "route": "Agent",
+    "path": "/agent",
+    "hasHorizontalOverflow": false,
+    "scrollWidth": 1366,
+    "windowWidth": 1366,
+    "screenshot": "agent_laptop_1366.png"
+  },
+  {
+    "viewport": "Mobile (390x844)",
+    "route": "Landing",
+    "path": "/",
+    "hasHorizontalOverflow": false,
+    "scrollWidth": 390,
+    "windowWidth": 390,
+    "screenshot": "landing_mobile.png"
+  },
+  {
+    "viewport": "Mobile (390x844)",
+    "route": "Dashboard",
+    "path": "/dashboard",
+    "hasHorizontalOverflow": false,
+    "scrollWidth": 630,
+    "windowWidth": 630,
+    "screenshot": "dashboard_mobile.png"
+  },
+  {
+    "viewport": "Mobile (390x844)",
+    "route": "Audits",
+    "path": "/audits",
+    "hasHorizontalOverflow": false,
+    "scrollWidth": 1155,
+    "windowWidth": 1155,
+    "screenshot": "audits_mobile.png"
+  },
+  {
+    "viewport": "Mobile (390x844)",
+    "route": "Agent",
+    "path": "/agent",
+    "hasHorizontalOverflow": false,
+    "scrollWidth": 557,
+    "windowWidth": 557,
+    "screenshot": "agent_mobile.png"
+  }
+]

@@ -1,0 +1,1667 @@
+<USER_REQUEST>
+# AUDITMIND — EXACT CINEMATIC LANDING PAGE INTEGRATION AND COMPLETE SITE DESIGN SYSTEM
+
+## PROJECT OBJECTIVE
+
+Integrate the supplied AI Runtime landing-page reference into the existing AUDITMIND website.
+
+Recreate the reference as closely as possible, including its:
+
+- Full-screen video background.
+- Black cinematic background.
+- Lavender, pink, peach and dark flowing visual composition.
+- Floating white navigation pill.
+- Circular white logo button.
+- Dark Sign In pill.
+- Retro pixel/dot-matrix typography.
+- Overlapping enterprise logo circles.
+- Dark trust badge.
+- Centered headline.
+- Minimal description.
+- White glowing Get Started button.
+- Four-column statistics footer.
+- Precise spacing.
+- Font sizes.
+- Animations.
+- Mobile navigation behavior.
+
+Also implement or integrate:
+
+1. Public landing page.
+2. Sign-in page.
+3. Authenticated dashboard page.
+
+The complete AUDITMIND application must use the same visual identity, typography, colours and stylistic language.
+
+**The uploaded screenshot and the exact specification supplied by the user are the authoritative visual references.**
+
+Do not invent a different design direction.
+
+Do not use the previously implemented Verdant Atelier green, ivory, gold or other unrelated colour system.
+
+The new reference design completely supersedes those previous colour choices.
+
+==================================================
+PART 1 — IMPORTANT EXISTING PROJECT PRESERVATION
+==================================================
+
+Before making changes, inspect the current repository.
+
+This is an existing application.
+
+Preserve its existing:
+- Backend.
+- Database.
+- Hindsight integration.
+- Retain/recall/reflect functionality.
+- Groq integration.
+- AI agent logic.
+- Audit ingestion.
+- OCR.
+- Evidence management.
+- Recurring failure intelligence.
+- Corrective action workflows.
+- API integrations.
+- Authentication where present.
+- Business logic.
+
+Do not rebuild the application from scratch.
+
+Do not convert an existing Next.js/React application into a separate static HTML application.
+
+The supplied HTML/CSS/JavaScript specification is the exact visual implementation reference.
+
+Translate it faithfully into the existing application framework.
+
+If the existing application uses Next.js:
+- Use existing App Router or Pages Router.
+- Use appropriate React components.
+- Use TypeScript if already configured.
+- Use scoped CSS or existing styling conventions.
+- Preserve routing and client-side behavior.
+
+If the application is already plain HTML/CSS/JavaScript, use the supplied file structure directly.
+
+Do not introduce a framework migration.
+
+Do not delete existing application features.
+
+==================================================
+PART 2 — REFERENCE IMAGE ANALYSIS
+==================================================
+
+Inspect the uploaded reference image.
+
+IMPORTANT:
+
+Only reproduce the actual website shown in the large left-hand preview area.
+
+The black panel on the far right containing:
+- AI Runtime.
+- Likes.
+- Copy prompt.
+- Sponsored links.
+- Designer credit.
+
+belongs to the screenshot-sharing interface.
+
+It is NOT part of the website.
+
+Do not reproduce it.
+
+The back arrow in the top-left corner also belongs to the screenshot viewer. Do not reproduce it.
+
+The actual website composition consists of:
+
+1. Full-screen video background.
+2. Floating top navigation.
+3. Logo.
+4. Hero trust row.
+5. Large dot-matrix headline.
+6. Two-line description.
+7. White CTA button.
+8. Four-statistics footer.
+
+Recreate these elements in their proper relative positions.
+
+Do not add cards or conventional dashboard elements to the landing-page hero.
+
+==================================================
+PART 3 — EXACT WEBSITE BACKGROUND VIDEO
+==================================================
+
+This video URL is mandatory.
+
+Use the exact URL:
+
+https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4
+
+Implement:
+
+<video class="bg-video" autoplay muted loop playsinline>
+  <source
+    src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_012548_ef22562c-c0ae-4816-ad9d-f8922af4e6a7.mp4"
+    type="video/mp4"
+  />
+</video>
+
+CSS requirements:
+
+.bg {
+    position: absolute;
+    inset: 0;
+    background: #000000;
+    overflow: hidden;
+}
+
+.bg-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    pointer-events: none;
+    z-index: 0;
+}
+
+The video must cover the entire landing viewport.
+
+It must appear behind all content.
+
+Do not use an unrelated stock background.
+
+Do not replace it with an ordinary gradient.
+
+Use this exact video.
+
+Create a graceful black fallback when the video fails to load.
+
+If a video poster frame is necessary, use a frame derived from the supplied video where technically possible.
+
+Avoid heavy additional overlays that hide the video's visual texture.
+
+Preserve the lavender, dusty pink, peach, white-character patterns and black flowing areas.
+
+Respect reduced-motion accessibility settings.
+
+When reduced motion is enabled, pause the background video and provide the poster or a carefully derived static fallback.
+
+Do not allow the background video to interfere with the performance of the application.
+
+==================================================
+PART 4 — EXACT FONTS
+==================================================
+
+Use the exact typography system provided.
+
+## FONT 1: INTER
+
+Load:
+
+https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap
+
+CSS:
+
+--font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+
+Use Inter for:
+- Navigation.
+- Description.
+- Buttons.
+- Statistics values.
+- Dashboard text.
+- Forms.
+- Tables.
+- AI conversation.
+- UI labels.
+
+## FONT 2: BUBBLEDOTICG-FINEPOS
+
+Load the exact stylesheet:
+
+<link
+  href="https://db.onlinewebfonts.com/c/8cb707a9b8a73f8a7403336b861c3074?family=BubbledotICG-FinePos"
+  rel="stylesheet"
+/>
+
+Font family:
+
+"BubbledotICG-FinePos"
+
+This is the primary retro dot-matrix display font.
+
+Use it for:
+- Main landing headline.
+- Selected large display headings.
+- Small statistics symbols.
+- Carefully chosen decorative numerical elements.
+
+Do not use this font for normal paragraphs or dense dashboard text.
+
+## FONT 3: GEIST PIXEL CIRCLE
+
+Load local file if available:
+
+fonts/GeistPixel-Circle.woff2
+
+Use:
+
+@font-face {
+    font-family: "Geist Pixel Circle";
+    src: url("/fonts/GeistPixel-Circle.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+}
+
+Display stack:
+
+--font-display:
+"BubbledotICG-FinePos",
+"Geist Pixel Circle",
+monospace;
+
+Do not invent a local font file if it does not exist.
+
+Inspect the existing repository.
+
+If the local file is missing, inform the user that it needs to be supplied or use the explicitly defined fallback.
+
+## FONT 4: FONT AWESOME 6.5.2
+
+Load:
+
+https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css
+
+Integrity:
+
+sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==
+
+Use crossorigin="anonymous".
+
+Use suitable brand icons for Microsoft, Amazon and Google where appropriate.
+
+Do not mix unrelated icon families.
+
+==================================================
+PART 5 — EXACT COLOUR SYSTEM
+==================================================
+
+Replace the previous Verdant Atelier design tokens with this reference palette.
+
+Use the following exact variables:
+
+:root {
+    --bg: #000000;
+    --text: #ffffff;
+    --muted: #8e8e8e;
+    --nav-text: #2e2e2e;
+    --pill-dark: #28282a;
+    --sign-in-text: #c8c8c8;
+    --nav-shadow:
+      0 4px 14px rgba(0, 0, 0, 0.16);
+    --trust-bg: #28282a;
+    --trust-border:
+      rgba(255, 255, 255, 0.4);
+    --trust-text: #c4c2c3;
+
+    --font-sans:
+      "Inter", "Segoe UI", system-ui, sans-serif;
+
+    --font-display:
+      "BubbledotICG-FinePos",
+      "Geist Pixel Circle",
+      monospace;
+}
+
+Additional exact visual values:
+
+Navigation:
+#FFFFFF
+
+Navigation text:
+#2E2E2E
+
+Navigation default opacity:
+0.5
+
+Navigation hover opacity:
+0.75
+
+Navigation active opacity:
+1
+
+Sign-in background:
+#28282A
+
+Sign-in text:
+#C8C8C8
+
+Hero text:
+#FFFFFF
+
+Subheading:
+#D0D0D0
+
+Subheading opacity:
+0.8
+
+Statistics muted label:
+#8E8E8E
+
+White trust inner circles:
+#FFFFFF
+
+Trust icon:
+#111111
+
+Do not introduce:
+- Green colour systems.
+- Gold accents.
+- Yellow-green accents.
+- Blue navigation.
+- Purple UI cards.
+- Random gradients.
+- Unrelated colour palettes.
+
+The pink, lavender and peach visible in the background must come from the supplied video.
+
+Use these tones naturally through the video itself.
+
+The dashboard and sign-in pages must inherit the same monochrome palette and atmospheric video colours.
+
+Do not reintroduce the previous colour system.
+
+==================================================
+PART 6 — PUBLIC LANDING PAGE ROUTE
+==================================================
+
+Implement the main landing page at:
+
+/
+
+The page must be a single-viewport, full-bleed hero experience.
+
+Desktop:
+
+height: 100vh;
+height: 100dvh;
+overflow: hidden;
+
+Use a landing-route-specific layout.
+
+Do not apply overflow:hidden globally to dashboard or other pages.
+
+Overall structure:
+
+PAGE
+    BACKGROUND VIDEO
+    HEADER
+    HERO
+    STATISTICS FOOTER
+
+Use semantic HTML.
+
+Use accessible labels.
+
+Maintain the existing routing system.
+
+==================================================
+PART 7 — EXACT HEADER COMPOSITION
+==================================================
+
+Create a centered header.
+
+Desktop header:
+
+- Centered row.
+- Maximum width: 720px.
+- Gap: clamp(18px, 2.8vw, 28px).
+- Correct vertical alignment.
+
+## 7.1 Logo
+
+Circular button:
+
+width:
+clamp(40px, 4.4vw, 46px)
+
+height:
+clamp(40px, 4.4vw, 46px)
+
+background:
+#FFFFFF
+
+border-radius:
+50%
+
+box-shadow:
+var(--nav-shadow)
+
+Inside:
+
+Use the existing AUDITMIND logo asset if it is available.
+
+Preferred asset path:
+
+assets/logo.webp
+
+If the supplied AUDITMIND logo already exists elsewhere, reuse the correct asset.
+
+Do not invent an unrelated corporate logo.
+
+Logo image:
+- Width and height attributes: 52.
+- Object-fit: contain.
+- Actual visible mark scaled to 72%.
+- Center using CSS grid.
+- Circular white container.
+
+Hover:
+
+transform: scale(1.04);
+
+## 7.2 Navigation pill
+
+White pill:
+
+background:
+#FFFFFF
+
+height:
+clamp(44px, 5.2vw, 48px)
+
+max-width:
+430px
+
+flex:
+1
+
+padding:
+4px 8px
+
+border-radius:
+999px
+
+box-shadow:
+var(--nav-shadow)
+
+Navigation links:
+
+Home
+Product
+Case Studies
+Contact
+
+Typography:
+
+Inter 500.
+
+Font size:
+
+clamp(13px, 1.4vw, 15px)
+
+Letter spacing:
+
+-0.01em
+
+Colours and opacity:
+- Default: #2E2E2E at 0.5 opacity.
+- Hover: 0.75 opacity.
+- Active: 1 opacity.
+
+ACTIVE INDICATOR:
+
+Create three small black dots below the active navigation label.
+
+Each dot:
+3px × 3px.
+
+Use pseudo-elements or equivalent CSS.
+
+Dots must be positioned at the bottom 5px of the active navigation area.
+
+Use three circles with spacing of approximately 5px.
+
+## 7.3 Sign In button
+
+Background:
+#28282A
+
+Text:
+#C8C8C8
+
+Same height as the navigation pill.
+
+Pill radius:
+999px.
+
+Soft shadow.
+
+Hover:
+- Background #323234.
+- Text #FFFFFF.
+- translateY(-1px).
+
+Link to actual sign-in route.
+
+Do not make it decorative.
+
+## 7.4 Authentication-aware navigation
+
+Unauthenticated users:
+
+Show:
+Sign In
+
+Authenticated users:
+
+Show:
+Dashboard
+
+Dashboard button must link to the authenticated application dashboard.
+
+Preserve the original button shape and visual style.
+
+==================================================
+PART 8 — LANDING PAGE HERO
+==================================================
+
+Main hero:
+
+- Centered vertically.
+- Flex column.
+- Text aligned center.
+- Maximum width 900px.
+- Above background video.
+- Proper responsive dimensions.
+
+The hero composition must be visually very close to the supplied screenshot.
+
+## 8.1 Trust row
+
+Create a horizontal row consisting of:
+
+Three overlapping enterprise logo circles and one trust pill.
+
+Trust size:
+
+--trust-size: clamp(36px, 4.5vw, 42px);
+
+At widths 420px or less:
+34px.
+
+Margin below:
+clamp(16px, 2.5vh, 26px)
+
+### Three avatar circles
+
+Each outer circle:
+
+- Dark background #28282A.
+- White translucent border.
+- Border thickness 1px.
+- Padding 5px.
+- Circular shape.
+
+Inner circle:
+- White background.
+- Border-radius 50%.
+- Filled within outer padding.
+
+Icons:
+
+1. Microsoft brand.
+2. Amazon brand.
+3. Google brand.
+
+Font Awesome brands.
+
+Icon colour:
+#111111.
+
+Icon size:
+calc(var(--trust-size) * 0.34).
+
+Overlap later circles:
+
+margin-left:
+calc(var(--trust-size) * -0.42).
+
+Z-index:
+1, 2, 4.
+
+Hover lift:
+- First: -2px.
+- Second: -4px.
+- Third: -2px.
+
+Use 0.35s transition.
+
+Do not make the outer circles completely white.
+
+They must retain their dark outer ring and small white inner circle.
+
+### Trust pill
+
+Background:
+#28282A.
+
+Border:
+1px solid rgba(255,255,255,0.4).
+
+Border-radius:
+999px.
+
+Height:
+same as avatar circles.
+
+Left margin:
+-0.42 times trust size.
+
+Left padding:
+0.58 times trust size.
+
+Text:
+
+"Trusted by 2000+ Enterprises"
+
+Font:
+Inter 500.
+
+Colour:
+#C4C2C3.
+
+Size:
+clamp(12px, 1.4vw, 13.5px).
+
+Mobile:
+12px.
+
+IMPORTANT FACTUALITY REQUIREMENT:
+
+Treat "Trusted by 2000+ Enterprises" as a configurable marketing claim.
+
+Only publish this exact claim if the company/user verifies it.
+
+If it cannot be verified, preserve the exact visual design but use a truthful alternative such as:
+
+"Built for Enterprise Workflows"
+
+Do not falsely imply that Microsoft, Amazon or Google are AUDITMIND customers or endorsers. Use those brand logos only if their display is authorized and contextually accurate. Otherwise use three abstract monochrome logo marks while preserving the exact avatar composition.
+
+## 8.2 HERO HEADLINE
+
+Exact headline:
+
+Intelligence
+Designed To Evolve
+
+Two separate block-level spans.
+
+Font:
+BubbledotICG-FinePos.
+
+Fallback:
+Geist Pixel Circle.
+
+Colour:
+Solid #FFFFFF.
+
+Do not add:
+- Gradient text.
+- Shimmer.
+- LED scanning.
+- Text glow.
+- Colour-changing text.
+- Decorative animation inside individual letters.
+
+Font size:
+
+Desktop:
+clamp(28px, 6.2vw, 80px)
+
+Letter spacing:
+-0.04em.
+
+At widths <=720px:
+-0.08em.
+
+At widths <=420px:
+-0.09em.
+
+Line height:
+1.12 desktop.
+
+1.05 at smaller breakpoints.
+
+1.04 at very small widths.
+
+white-space:
+nowrap.
+
+Keep the text centered.
+
+Do not allow the second line to clip.
+
+Scale typography carefully for mobile devices.
+
+### Headline entrance animation
+
+Each line:
+
+Initial:
+opacity 0;
+translateY(14px).
+
+Animate:
+headlineFade.
+
+Duration:
+0.85s.
+
+Timing:
+cubic-bezier(0.22, 1, 0.36, 1).
+
+First-line delay:
+0.12s.
+
+Second-line delay:
+0.30s.
+
+Do not animate the headline parent as a whole.
+
+## 8.3 SUBHEADING
+
+Use the exact copy:
+
+"Build applications that reason, adapt and collaborate using a modular AI platform designed for production."
+
+Preserve the sentence and two-line presentation.
+
+Maximum width:
+
+min(500px, 92%).
+
+Font family:
+Inter.
+
+Font size:
+
+clamp(
+  calc(13.5px + 2pt),
+  calc(1.55vw + 2pt),
+  calc(16.5px + 2pt)
+)
+
+Colour:
+#D0D0D0.
+
+Opacity:
+0.8.
+
+Line height:
+1.55.
+
+Font weight:
+400.
+
+Center align.
+
+Stagger delay:
+0.28s.
+
+Do not add another paragraph or oversized descriptive content.
+
+## 8.4 CTA BUTTON
+
+Text:
+
+Get Started
+
+Style:
+
+- White background.
+- Black text.
+- Inter 600.
+- Font size clamp(13.5px, 1.5vw, 14.5px).
+- Fully rounded pill.
+
+Padding:
+
+clamp(11px, 1.6vh, 13px)
+clamp(22px, 3vw, 28px)
+
+Border radius:
+999px.
+
+Shadow:
+
+0 0 0 1px rgba(255,255,255,0.15),
+0 0 22px rgba(255,255,255,0.32),
+0 0 44px rgba(255,255,255,0.12).
+
+Hover:
+- translateY(-2px).
+- scale(1.02).
+- Slightly stronger glow.
+
+Entrance:
+
+Use revealPulse.
+
+Delay:
+0.4s.
+
+AUTHENTICATION BEHAVIOUR:
+
+Unauthenticated:
+Get Started → /login.
+
+Authenticated:
+Open Dashboard → /dashboard or the existing authenticated dashboard route.
+
+Do not create a fake login interaction.
+
+==================================================
+PART 9 — STATISTICS FOOTER
+==================================================
+
+Create four statistics arranged horizontally.
+
+Maximum width:
+920px.
+
+Use:
+grid-template-columns: repeat(4, 1fr).
+
+On widths <=720px:
+2 columns × 2 rows.
+
+Each statistic contains:
+
+1. Pixel-style symbol.
+2. Large numerical value.
+3. Muted label.
+
+Exact visual statistics specification:
+
+METRIC 1:
+
+Glyph:
+<
+
+Value:
+120
+
+Suffix:
+ms
+
+Decimals:
+0
+
+Label:
+Inference Time
+
+METRIC 2:
+
+Glyph:
+%
+
+Value:
+99.99
+
+Suffix:
+%
+
+Decimals:
+2
+
+Label:
+Platform Uptime
+
+METRIC 3:
+
+Glyph:
+*
+
+Value:
+24
+
+Suffix:
+/7
+
+Decimals:
+0
+
+Label:
+Autonomous Runtime
+
+METRIC 4:
+
+Glyph:
+#
+
+Value:
+2.4
+
+Suffix:
+M
+
+Decimals:
+1
+
+Label:
+Context Windows
+
+Typography:
+
+Glyph:
+BubbledotICG-FinePos.
+
+Size:
+clamp(22px, 3vw, 33px).
+
+Colour:
+#FFFFFF.
+
+Value:
+Inter.
+
+Size:
+clamp(18px, 2.2vw, 26px).
+
+Letter spacing:
+-0.025em.
+
+Use tabular numerals.
+
+Label:
+#8E8E8E.
+
+Size:
+clamp(11px, 1.2vw, 12.5px).
+
+Stagger delays:
+0.50s
+0.58s
+0.66s
+0.74s
+
+Implement count-up animation using IntersectionObserver.
+
+Threshold:
+0.25.
+
+Duration:
+1500ms + i * 80ms.
+
+Start offset:
+480ms + i * 90ms.
+
+Use easeOutCubic.
+
+Run once.
+
+IMPORTANT:
+
+The supplied numerical performance figures and uptime values are not automatically verified product performance.
+
+Keep the exact visual presentation and metric structure.
+
+Before publishing these values as factual marketing claims, validate them against actual measurements.
+
+If unverified:
+- Use actual measured values where available.
+- Otherwise use neutral, factual product capabilities or mark them as demonstration metrics.
+- Never invent uptime, inference latency or infrastructure capacity.
+
+Keep these values configurable rather than hardcoded throughout the application.
+
+==================================================
+PART 10 — SHARED ANIMATIONS
+==================================================
+
+Implement the reference entrance animations.
+
+Shared reveal:
+
+Initial:
+
+opacity: 0;
+transform: translateY(22px) scale(0.98);
+filter: blur(6px);
+
+Final:
+
+opacity: 1;
+transform: translateY(0) scale(1);
+filter: blur(0);
+
+Animation:
+
+reveal 0.85s cubic-bezier(0.22, 1, 0.36, 1) forwards.
+
+Use inline --d for individual delay values.
+
+Header:
+slideDown 0.7s cubic-bezier(0.22, 1, 0.36, 1) both.
+
+Initial:
+opacity: 0;
+translateY(-18px).
+
+Headline uses its separate line animation.
+
+CTA uses revealPulse.
+
+Trust content uses the stagger system.
+
+Do not animate every component indiscriminately.
+
+Use reduced-motion support.
+
+When prefers-reduced-motion is reduce:
+- Disable entrance animations.
+- Show all elements in their final state.
+- Stop optional background motion.
+- Preserve the solid white headline.
+
+==================================================
+PART 11 — MOBILE HEADER AND MENU
+==================================================
+
+Breakpoint:
+
+720px.
+
+At widths <=720px:
+
+Hide desktop navigation.
+
+Hide desktop Sign In button.
+
+Header:
+
+display flex;
+justify-content: space-between.
+
+Logo:
+48 × 48px.
+
+Show circular hamburger button:
+48 × 48px.
+
+Hamburger background:
+#28282A.
+
+Three white bars:
+18px × 1.5px.
+
+When open:
+
+- Background becomes white.
+- Bars become black.
+- Bars transform into an X.
+- Top and bottom bars translateY ±6.5px.
+- Rotate ±45 degrees.
+
+Overlay:
+
+position fixed;
+inset 0;
+background rgba(0,0,0,0.62);
+backdrop-filter blur(6px).
+
+Animation:
+overlayIn 0.28s.
+
+Menu sheet:
+
+- White background.
+- Centered below the header.
+- Radius 28px.
+- Padding: 22px 18px 20px.
+- Shadow: 0 20px 60px rgba(0,0,0,0.45).
+
+Links:
+- Home.
+- Product.
+- Case Studies.
+- Contact.
+- Sign In.
+
+Full-width Sign In button.
+
+Use staggered linkIn animations.
+
+Active navigation indicator:
+Three dots positioned approximately 8px below the label.
+
+JavaScript behaviour:
+
+- Toggle aria-expanded.
+- Manage hidden state.
+- Manage body.menu-open.
+- Close on overlay click.
+- Close on Escape.
+- Close after navigation.
+- Close when resized above 720px.
+
+At widths <=420px:
+- Adjust headline spacing.
+- Adjust trust-size.
+- Adjust line-height.
+- Prevent clipping.
+
+At viewport heights <=700px:
+- Tighten hero vertical spacing.
+- Preserve all essential elements.
+- Prevent stats from covering the CTA.
+
+On unusually short displays, allow controlled vertical scrolling instead of clipping essential content.
+
+==================================================
+PART 12 — PUBLIC WEBSITE ROUTING
+==================================================
+
+Implement or integrate these routes.
+
+PUBLIC LANDING PAGE:
+/
+
+SIGN-IN:
+ /login
+
+DASHBOARD:
+ /dashboard
+
+Existing application dashboard routes must be reused rather than duplicated.
+
+If the current dashboard exists at another URL, preserve its business logic and create an appropriate redirect or route integration.
+
+The landing page should retain the exact header labels:
+
+Home
+Product
+Case Studies
+Contact
+Sign In
+
+Ensure each navigation link works.
+
+Use existing pages or valid routes when available.
+
+If a Product, Case Studies or Contact route does not exist, create a genuinely useful corresponding page or section using the same typography, palette and layout language.
+
+Do not leave dead links.
+
+The landing page must remain visually faithful to the reference first viewport.
+
+==================================================
+PART 13 — SIGN-IN PAGE
+==================================================
+
+Create a proper AUDITMIND sign-in page.
+
+Use the same:
+- Exact video background.
+- Black base.
+- White typography.
+- Inter font.
+- Pixel display font for a small selected heading.
+- Muted grey.
+- Dark pills.
+- White CTA.
+
+Design direction:
+
+Minimal.
+Cinematic.
+Professional.
+Uncluttered.
+
+Avoid a generic authentication template.
+
+Main content:
+
+AUDITMIND logo.
+
+Small heading:
+
+"Welcome back"
+
+Description:
+
+"Sign in to continue."
+
+Form:
+
+- Email address.
+- Password.
+- Password visibility control.
+- Remember me where supported.
+- Forgot password.
+- Sign In button.
+
+Optional social sign-in buttons only when supported by the actual authentication provider.
+
+Include:
+- Loading state.
+- Invalid credentials message.
+- Validation message.
+- Authentication failure state.
+- Password reset flow if supported.
+- Back to home link.
+
+Use a carefully designed dark or translucent form surface that preserves the reference aesthetic.
+
+Do not use the previous green or gold styling.
+
+Preserve or integrate the actual authentication backend.
+
+If authentication is not currently implemented:
+- Inspect existing backend and infrastructure.
+- Propose the smallest secure compatible implementation.
+- Do not create hardcoded credentials or pretend that a visual login is secure authentication.
+- Identify any required provider configuration or manual credentials.
+
+Successful authentication must navigate to the existing dashboard.
+
+Unauthenticated users must not access protected dashboard data.
+
+==================================================
+PART 14 — DASHBOARD PAGE
+==================================================
+
+Integrate the existing AUDITMIND dashboard into the new visual design.
+
+Do not delete or simplify away existing capabilities.
+
+The dashboard must inherit:
+
+Background:
+#000000.
+
+Primary text:
+#FFFFFF.
+
+Muted text:
+#8E8E8E.
+
+Navigation elements:
+#28282A and white.
+
+Typography:
+Inter for the application interface.
+
+Bubbledot display font for selected page titles and appropriate statistics.
+
+Use the same exact font loading and brand identity as the landing page.
+
+Create a premium dark dashboard.
+
+Do not put the full-bleed moving video directly behind dense tables and document text.
+
+Use the video only as:
+- A subtle ambient header background.
+- A low-opacity decorative background in selected areas.
+- A visual element where it does not impair readability.
+
+The main dashboard content should use dark, layered neutral surfaces.
+
+Keep:
+- Existing overview statistics.
+- Facilities.
+- Audits.
+- Findings.
+- Organizational memory.
+- Recurring failures.
+- Corrective actions.
+- Evidence.
+- AI Agent.
+
+Use concise page labels.
+
+Display actual backend data.
+
+Do not create fake statistics.
+
+Use restrained borders and soft surfaces.
+
+Avoid generic bright colourful cards.
+
+Keep charts readable and consistent with the reference palette.
+
+Use muted colours for secondary data and white for important values.
+
+Preserve all existing dashboard workflows.
+
+==================================================
+PART 15 — AUTHENTICATION-AWARE LANDING PAGE BUTTONS
+==================================================
+
+Implement the following state-based behaviour.
+
+When signed out:
+
+Header:
+- Sign In.
+
+Hero:
+- Get Started.
+
+When signed in:
+
+Header:
+- Dashboard.
+
+Hero:
+- Open Dashboard.
+
+Both buttons must navigate to the correct existing route.
+
+Do not redirect authenticated users unnecessarily.
+
+Preserve the existing logout functionality on the dashboard.
+
+==================================================
+PART 16 — RESPONSIVE AND ACCESSIBILITY REQUIREMENTS
+==================================================
+
+Test:
+
+- Large desktop.
+- Standard desktop.
+- Laptop.
+- Tablet.
+- Mobile.
+- Short viewport heights.
+
+The landing page must preserve its visual composition at every size.
+
+No horizontal overflow.
+
+No clipped headline.
+
+No overlapping CTA and footer.
+
+No inaccessible navigation.
+
+Ensure:
+- Keyboard accessibility.
+- Visible focus states.
+- ARIA labels.
+- Correct button semantics.
+- Reduced-motion support.
+- Readable contrast.
+- Accessible forms.
+
+The sign-in page and dashboard must be responsive.
+
+==================================================
+PART 17 — IMPLEMENTATION PROCEDURE
+==================================================
+
+Do not modify the entire application blindly.
+
+Perform the following stages.
+
+STAGE 1 — EXISTING APPLICATION AUDIT
+
+Inspect the repository.
+
+Identify:
+- Existing framework.
+- Routes.
+- Landing page.
+- Authentication system.
+- Dashboard.
+- Logo assets.
+- Local font assets.
+- Background media assets.
+- Existing UI components.
+- Backend dependencies.
+- API integration points.
+
+Create:
+
+docs/REFERENCE_DESIGN_ANALYSIS.md
+
+Document:
+- Screenshot layout.
+- Colours.
+- Typography.
+- Element sizes.
+- Spacing.
+- Animations.
+- Video.
+- Responsive behavior.
+- Application integration strategy.
+
+STAGE 2 — ASSET VERIFICATION
+
+Verify:
+- Supplied CloudFront video.
+- Font Awesome CDN.
+- Inter stylesheet.
+- Bubbledot stylesheet.
+- Local Geist Pixel Circle file.
+- AUDITMIND logo asset.
+
+Do not silently substitute unavailable assets.
+
+Implement fallbacks and report missing assets.
+
+STAGE 3 — DESIGN TOKENS
+
+Create the exact CSS variables.
+
+Remove the previous Verdant Atelier colour system from the new active design.
+
+Do not delete old assets unnecessarily.
+
+Implement a consistent dark reference theme.
+
+STAGE 4 — LANDING PAGE
+
+Recreate the supplied screenshot.
+
+Match:
+- Full-screen background.
+- Video position.
+- Logo.
+- Navigation.
+- Trust row.
+- Headline.
+- Subheading.
+- CTA.
+- Statistics footer.
+- Animations.
+- Mobile menu.
+
+STAGE 5 — SIGN-IN PAGE
+
+Build the real sign-in experience.
+
+Connect actual authentication.
+
+STAGE 6 — DASHBOARD INTEGRATION
+
+Apply the exact new design language to the existing dashboard.
+
+Preserve all business features and data.
+
+STAGE 7 — ROUTING
+
+Integrate authentication-aware navigation and button behavior.
+
+STAGE 8 — VISUAL QA
+
+Run the application.
+
+Capture screenshots.
+
+Compare the landing page against the supplied reference.
+
+Test responsive layouts.
+
+Fix visual differences.
+
+STAGE 9 — FUNCTIONAL REGRESSION
+
+Verify:
+
+- Sign-in.
+- Sign-out.
+- Dashboard access.
+- Navigation.
+- Audit management.
+- Document upload.
+- Hindsight.
+- Agent chat.
+- Corrective actions.
+- Evidence.
+- Existing API operations.
+
+STAGE 10 — REPORT
+
+Create:
+
+docs/REFERENCE_DESIGN_REPORT.md
+
+Include:
+- Changes made.
+- Routes created or reused.
+- Assets used.
+- Fonts loaded.
+- Background-video verification.
+- Colour system.
+- Sign-in status.
+- Dashboard status.
+- Functional regression results.
+- Remaining blockers.
+
+==================================================
+PART 18 — NON-NEGOTIABLE RESTRICTIONS
+==================================================
+
+1. Do not reproduce the screenshot-sharing platform's right sidebar.
+2. Do not reproduce its back arrow.
+3. Do not use an unrelated video.
+4. Do not substitute another visual theme.
+5. Do not use Verdant Atelier colours.
+6. Do not use gold or green accents.
+7. Do not change the supplied headline copy without authorization.
+8. Do not change the supplied font specifications.
+9. Do not remove existing AUDITMIND functionality.
+10. Do not replace real backend integrations with mocks.
+11. Do not fabricate marketing or infrastructure metrics.
+12. Do not invent enterprise customers or endorsements.
+13. Do not use a fake authentication mechanism.
+14. Do not break existing database operations.
+15. Do not break Hindsight.
+16. Do not make buttons decorative.
+17. Do not create dead navigation links.
+18. Do not make dense dashboard information unreadable.
+19. Do not force single-viewport overflow rules onto dashboard pages.
+20. Do not stop after designing the landing page.
+
+==================================================
+PART 19 — FINAL ACCEPTANCE CRITERIA
+==================================================
+
+LANDING PAGE:
+
+[ ] Exact supplied video URL.
+[ ] Full-bleed background video.
+[ ] Black background fallback.
+[ ] Inter loaded.
+[ ] Bubbledot loaded.
+[ ] Geist Pixel fallback configured.
+[ ] Font Awesome loaded.
+[ ] Circular logo button.
+[ ] White navigation pill.
+[ ] Exact four navigation labels.
+[ ] Dark Sign In pill.
+[ ] Overlapping trust circles.
+[ ] Trust pill.
+[ ] Two-line pixel headline.
+[ ] Exact two-line subheading.
+[ ] White glowing CTA.
+[ ] Four-statistics footer.
+[ ] Number count-up.
+[ ] Header animation.
+[ ] Headline animation.
+[ ] Mobile menu.
+[ ] Responsive layout.
+[ ] Reduced-motion support.
+
+AUTHENTICATION:
+
+[ ] Sign-in route works.
+[ ] Form validation works.
+[ ] Password visibility works.
+[ ] Loading state works.
+[ ] Errors are handled.
+[ ] Real authentication is connected.
+[ ] Successful sign-in opens dashboard.
+[ ] Protected dashboard access works.
+[ ] Logout works.
+
+DASHBOARD:
+
+[ ] Same visual identity.
+[ ] Same typography system.
+[ ] Same monochrome palette.
+[ ] Correct navigation.
+[ ] Existing statistics preserved.
+[ ] Actual database data displayed.
+[ ] Existing functionality preserved.
+[ ] Charts remain readable.
+[ ] Memory explorer works.
+[ ] AI agent works.
+[ ] Evidence works.
+[ ] Responsive behavior works.
+
+FINAL VERIFICATION:
+
+Run production build.
+
+Run TypeScript checks.
+
+Run existing tests.
+
+Inspect all routes in browser.
+
+Capture before-and-after screenshots.
+
+Fix critical regressions.
+
+Do not mark any acceptance criterion complete unless it has been verified.
+
+==================================================
+FINAL INSTRUCTION
+==================================================
+
+The target is a faithful visual integration of the supplied cinematic landing page into AUDITMIND.
+
+The landing page must closely match the reference screenshot in composition, colours, background, fonts, typography, navigation, spacing, animation and statistics.
+
+The sign-in page and dashboard must feel like natural parts of the same product.
+
+The new visual identity must consistently replace the previous green-and-gold design system.
+
+Do not introduce unrelated redesign ideas.
+
+Do not rebuild working functionality.
+
+Inspect, implement, integrate, test and refine.
+
+BEGIN WITH THE EXISTING REPOSITORY AUDIT AND REFERENCE DESIGN ANALYSIS.
+
+THEN BUILD THE LANDING PAGE, SIGN-IN PAGE AND DASHBOARD INTEGRATION.
+</USER_REQUEST>
+<ADDITIONAL_METADATA>
+The current local time is: 2026-11-08T18:47:34+05:30.
+</ADDITIONAL_METADATA>

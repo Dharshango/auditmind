@@ -49,7 +49,7 @@ export function TopNav({
   };
 
   return (
-    <header className="sticky top-0 z-20 h-16 bg-black/75 backdrop-blur-md border-b border-white/[0.08] px-4 sm:px-6 flex items-center justify-between transition-colors select-none">
+    <header className="sticky top-0 z-20 h-16 bg-black/35 backdrop-blur-2xl border-b border-white/10 px-4 sm:px-6 flex items-center justify-between transition-colors select-none shadow-[0_4px_24px_rgba(0,0,0,0.3)]">
       {/* Left: Mobile Menu Trigger + Organization context & Breadcrumbs */}
       <div className="flex items-center gap-3 text-xs min-w-0">
         {onToggleMobileMenu && (
@@ -77,17 +77,17 @@ export function TopNav({
       <div className="hidden md:flex items-center">
         <button
           onClick={onOpenCommand}
-          className="flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-[#101012] border border-white/10 hover:border-white/25 text-[#A1A1AA] text-xs transition shadow-sm group"
+          className="flex items-center gap-3 px-3.5 py-1.5 rounded-full bg-white/[0.06] backdrop-blur-md border border-white/10 hover:border-white/25 text-[#A1A1AA] text-xs transition shadow-sm group hover:bg-white/[0.1]"
         >
           <Search className="w-3.5 h-3.5 text-[#8E8E93] group-hover:text-white transition-colors" />
           <span className="text-[#8E8E93] text-[11px] font-sans">Quick search findings, audits, memory...</span>
-          <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono rounded bg-black border border-white/10 text-[#8E8E93]">
+          <kbd className="hidden sm:inline-flex items-center px-1.5 py-0.5 text-[10px] font-mono rounded bg-white/10 border border-white/10 text-white/80">
             ⌘K
           </kbd>
         </button>
       </div>
 
-      {/* Right: Actions, Hindsight Status, Tenant Pill */}
+      {/* Right: Actions & Tenant Selector */}
       <div className="flex items-center gap-2.5 sm:gap-3 shrink-0">
         {/* Quick Upload Action */}
         <button
@@ -98,25 +98,11 @@ export function TopNav({
           <span>Upload Audit</span>
         </button>
 
-        {/* Hindsight Status Pill */}
-        <div className="hidden lg:flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#101012] text-white border border-white/10 text-[11px] font-medium font-mono">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#C6B9D8] animate-pulse" />
-          <span className="text-[10px] tracking-wider font-semibold text-[#C8C8C8]">
-            HINDSIGHT: ACTIVE
-          </span>
-        </div>
-
-        {/* Date context indicator */}
-        <div className="hidden xl:flex items-center gap-1.5 text-[10px] font-mono text-[#8E8E93] px-2.5 py-1 rounded-full bg-[#101012] border border-white/5">
-          <Calendar className="w-3 h-3 text-[#8E8E93]" />
-          <span>Q4 2026</span>
-        </div>
-
         {/* Tenant Organization Switcher */}
         <div className="relative">
           <button
             onClick={() => setShowOrgDropdown(!showOrgDropdown)}
-            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#101012] border border-white/10 hover:border-white/25 text-xs font-medium text-white transition shadow-sm font-sans"
+            className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.06] backdrop-blur-md border border-white/10 hover:border-white/25 text-xs font-medium text-white transition shadow-sm font-sans hover:bg-white/[0.1]"
           >
             <div className="w-5 h-5 rounded-full bg-white text-black flex items-center justify-center text-[10px] font-bold shrink-0">
               M

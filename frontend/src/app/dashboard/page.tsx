@@ -222,7 +222,7 @@ export default function DashboardPage() {
         facilityCode: "FAC-001",
         priority: "HIGH ATTRITION",
         priorityType: "critical",
-        date: "Q4 2026 Telemetry",
+        date: "Active Telemetry",
         standard: "Multi-Standard",
         linkText: "Review facility network",
         href: "/facilities",
@@ -255,14 +255,6 @@ export default function DashboardPage() {
               <span className="w-1.5 h-1.5 rounded-full bg-[#C6B9D8] animate-pulse" />
               OPERATIONAL INTELLIGENCE RUNTIME
             </span>
-            <span className="text-white/20">•</span>
-            <span className="text-[11px] font-mono text-[#8E8E93]">
-              TENANT: MERIDIAN INDUSTRIAL GROUP
-            </span>
-            <span className="text-white/20">•</span>
-            <span className="text-[11px] font-mono text-[#8E8E93]">
-              Q4 2026 SURVEILLANCE
-            </span>
           </div>
 
           <h1 className="text-3xl sm:text-4xl font-semibold tracking-[-0.03em] text-white leading-tight font-sans">
@@ -282,7 +274,7 @@ export default function DashboardPage() {
                 setShowFacilityDropdown(!showFacilityDropdown);
                 setShowDateDropdown(false);
               }}
-              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#101012] border border-white/10 hover:border-white/25 text-xs text-[#EDEDED] font-medium transition shadow-sm"
+              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.06] backdrop-blur-xl border border-white/15 hover:bg-white/[0.12] hover:border-white/25 text-xs text-[#EDEDED] font-medium transition shadow-sm"
             >
               <Building2 className="w-3.5 h-3.5 text-[#8E8E93]" />
               <span className="font-sans">
@@ -302,7 +294,7 @@ export default function DashboardPage() {
             </button>
 
             {showFacilityDropdown && (
-              <div className="absolute right-0 mt-2 w-64 rounded-xl bg-[#14151C] border border-white/15 p-1.5 shadow-2xl z-50 text-xs text-[#EDEDED] animate-reveal">
+              <div className="absolute right-0 mt-2 w-64 rounded-xl bg-black/80 backdrop-blur-2xl border border-white/15 p-1.5 shadow-2xl z-50 text-xs text-[#EDEDED] animate-reveal">
                 <div className="px-2.5 py-1.5 text-[10px] font-mono text-[#8E8E93] uppercase tracking-wider border-b border-white/10">
                   Select Operating Node
                 </div>
@@ -322,7 +314,7 @@ export default function DashboardPage() {
                     }}
                     className={`w-full text-left px-2.5 py-2 rounded-lg flex items-center justify-between text-xs transition ${
                       selectedFacility === item.code
-                        ? "bg-white/10 text-white font-semibold"
+                        ? "bg-white/15 text-white font-semibold"
                         : "text-[#A1A1AA] hover:text-white hover:bg-white/5"
                     }`}
                   >
@@ -341,31 +333,31 @@ export default function DashboardPage() {
                 setShowDateDropdown(!showDateDropdown);
                 setShowFacilityDropdown(false);
               }}
-              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-[#101012] border border-white/10 hover:border-white/25 text-xs text-[#EDEDED] font-medium transition shadow-sm"
+              className="flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/[0.06] backdrop-blur-xl border border-white/15 hover:bg-white/[0.12] hover:border-white/25 text-xs text-[#EDEDED] font-medium transition shadow-sm"
             >
               <Calendar className="w-3.5 h-3.5 text-[#8E8E93]" />
               <span className="font-sans">
                 {selectedDateRange === "90D"
                   ? "Last 90 Days"
                   : selectedDateRange === "Q4"
-                  ? "Q4 2026 (Surveillance)"
+                  ? "Active Quarter"
                   : selectedDateRange === "T12M"
                   ? "Trailing 12 Months"
-                  : "Year-to-Date (2026)"}
+                  : "Year-to-Date"}
               </span>
               <ChevronDown className="w-3 h-3 text-[#8E8E93]" />
             </button>
 
             {showDateDropdown && (
-              <div className="absolute right-0 mt-2 w-52 rounded-xl bg-[#14151C] border border-white/15 p-1.5 shadow-2xl z-50 text-xs text-[#EDEDED] animate-reveal">
+              <div className="absolute right-0 mt-2 w-52 rounded-xl bg-black/80 backdrop-blur-2xl border border-white/15 p-1.5 shadow-2xl z-50 text-xs text-[#EDEDED] animate-reveal">
                 <div className="px-2.5 py-1.5 text-[10px] font-mono text-[#8E8E93] uppercase tracking-wider border-b border-white/10">
                   Observation Window
                 </div>
                 {[
                   { id: "90D", label: "Last 90 Days (Statutory Gate)" },
-                  { id: "Q4", label: "Q4 2026 (Active Surveillance)" },
+                  { id: "Q4", label: "Active Quarter (Surveillance)" },
                   { id: "T12M", label: "Trailing 12 Months" },
-                  { id: "YTD", label: "Year-to-Date (2026)" },
+                  { id: "YTD", label: "Year-to-Date" },
                 ].map((item) => (
                   <button
                     key={item.id}
@@ -375,7 +367,7 @@ export default function DashboardPage() {
                     }}
                     className={`w-full text-left px-2.5 py-2 rounded-lg flex items-center justify-between text-xs transition ${
                       selectedDateRange === item.id
-                        ? "bg-white/10 text-white font-semibold"
+                        ? "bg-white/15 text-white font-semibold"
                         : "text-[#A1A1AA] hover:text-white hover:bg-white/5"
                     }`}
                   >
@@ -391,7 +383,7 @@ export default function DashboardPage() {
           <button
             onClick={() => loadData(true)}
             disabled={refreshing}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#101012] border border-white/10 hover:border-white/25 text-xs text-[#A1A1AA] hover:text-white transition shadow-sm"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/[0.06] backdrop-blur-xl border border-white/15 hover:bg-white/[0.12] hover:border-white/25 text-xs text-[#A1A1AA] hover:text-white transition shadow-sm"
             title="Refresh Telemetry Stream"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? "animate-spin text-[#C6B9D8]" : ""}`} />
@@ -400,7 +392,7 @@ export default function DashboardPage() {
 
           {/* Primary Action Button */}
           <Link href="/agent">
-            <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-white text-black font-semibold text-xs hover:bg-neutral-200 transition shadow-sm group">
+            <button className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 hover:bg-white text-black font-semibold text-xs transition shadow-[0_0_20px_rgba(255,255,255,0.15)] backdrop-blur-sm group">
               <Sparkles className="w-3.5 h-3.5 text-black group-hover:rotate-12 transition-transform" />
               <span>Launch AI Investigation</span>
             </button>
@@ -409,7 +401,7 @@ export default function DashboardPage() {
       </div>
 
       {/* 2. OPERATIONAL HEALTH STRIP — Compact Actual States */}
-      <div className="bg-[#09090B] border border-white/[0.08] rounded-xl px-4 py-2.5 shadow-sm">
+      <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-2.5 shadow-sm">
         <div className="flex items-center justify-between gap-4 flex-wrap text-xs font-mono">
           <div className="flex items-center gap-6 flex-wrap">
             {/* Backend API Runtime */}
@@ -433,27 +425,6 @@ export default function DashboardPage() {
                 {health.database?.connected
                   ? `CONNECTED (${health.database.latency_ms}ms)`
                   : "UNAVAILABLE"}
-              </span>
-            </div>
-
-            {/* Hindsight Memory */}
-            <div className="flex items-center gap-2">
-              <span
-                className={`w-1.5 h-1.5 rounded-full ${
-                  health.hindsight?.cloud_connected
-                    ? "bg-emerald-400"
-                    : health.hindsight?.fallback_store_active
-                    ? "bg-[#C6B9D8]"
-                    : "bg-amber-400"
-                }`}
-              />
-              <span className="text-[#8E8E93]">HINDSIGHT:</span>
-              <span className="text-white font-semibold">
-                {health.hindsight?.cloud_connected
-                  ? "CLOUD MEMORY ENGINE"
-                  : health.hindsight?.fallback_store_active
-                  ? "LOCAL MEMORY BANK ACTIVE"
-                  : "DEGRADED"}
               </span>
             </div>
 
@@ -488,7 +459,7 @@ export default function DashboardPage() {
       </div>
 
       {/* 3. EXECUTIVE METRICS STRIP — Precision Numerals with Hairline Dividers */}
-      <div className="bg-[#101012] border border-white/10 rounded-2xl p-4 sm:p-5 shadow-2xl">
+      <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-4 sm:p-5 shadow-2xl">
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 divide-y lg:divide-y-0 lg:divide-x divide-white/[0.08]">
           {/* Metric 1: Total Facilities */}
           <div className="p-3 sm:p-4 space-y-1">
@@ -574,7 +545,7 @@ export default function DashboardPage() {
       {/* 4. MAIN COMPOSITION: Priority Intelligence (7 cols) + CAPA Effectiveness (5 cols) */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left: Priority Intelligence Section (7 cols) */}
-        <div className="lg:col-span-7 bg-[#101012] border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
+        <div className="lg:col-span-7 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <div>
               <div className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#C6B9D8] font-semibold">
@@ -593,7 +564,7 @@ export default function DashboardPage() {
             {priorityItems.map((item) => (
               <div
                 key={item.id}
-                className="p-4 rounded-xl bg-[#141416] border border-white/10 hover:border-white/20 transition-colors space-y-2 group"
+                className="p-4 rounded-xl bg-white/[0.04] backdrop-blur-md border border-white/10 hover:border-white/20 transition-colors space-y-2 group"
               >
                 <div className="flex items-center justify-between gap-2 flex-wrap">
                   <div className="flex items-center gap-2">
@@ -640,7 +611,7 @@ export default function DashboardPage() {
 
         {/* Right: Corrective Action Effectiveness Analytical Summary (5 cols) */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="bg-[#101012] border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
+          <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-white/10 pb-4">
               <div>
                 <div className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#8E8E93]">
@@ -661,7 +632,7 @@ export default function DashboardPage() {
 
             {/* Breakdown Cards: Completed vs Verified */}
             <div className="grid grid-cols-2 gap-3 pt-1">
-              <div className="p-3.5 rounded-xl bg-[#141416] border border-white/10 space-y-1">
+              <div className="p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-md border border-white/10 space-y-1">
                 <div className="text-[10px] font-mono text-[#8E8E93] uppercase tracking-wider">
                   Completed Tasks
                 </div>
@@ -673,7 +644,7 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#141416] border border-amber-500/20 space-y-1">
+              <div className="p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-md border border-amber-500/20 space-y-1">
                 <div className="text-[10px] font-mono text-amber-400 uppercase tracking-wider">
                   Pending Gate
                 </div>
@@ -683,7 +654,7 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#141416] border border-emerald-500/20 space-y-1">
+              <div className="p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-md border border-emerald-500/20 space-y-1">
                 <div className="text-[10px] font-mono text-emerald-400 uppercase tracking-wider">
                   Verified Durable
                 </div>
@@ -695,7 +666,7 @@ export default function DashboardPage() {
                 </div>
               </div>
 
-              <div className="p-3.5 rounded-xl bg-[#141416] border border-red-500/20 space-y-1">
+              <div className="p-3.5 rounded-xl bg-white/[0.04] backdrop-blur-md border border-red-500/20 space-y-1">
                 <div className="text-[10px] font-mono text-red-400 uppercase tracking-wider">
                   Failed Verification
                 </div>
@@ -709,7 +680,7 @@ export default function DashboardPage() {
             </div>
 
             {/* True Empirical Durability Gauge */}
-            <div className="p-4 rounded-xl bg-[#141416] border border-white/10 space-y-2.5">
+            <div className="p-4 rounded-xl bg-white/[0.04] backdrop-blur-md border border-white/10 space-y-2.5">
               <div className="flex items-center justify-between text-xs">
                 <span className="text-[#C8C8C8] font-medium font-sans">
                   True Empirical Durability Rate
@@ -731,12 +702,12 @@ export default function DashboardPage() {
           </div>
 
           {/* Organizational Intelligence Insights (Hindsight) */}
-          <div className="bg-[#101012] border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-3.5">
+          <div className="bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-3.5">
             <div className="flex items-center justify-between border-b border-white/10 pb-3">
               <div className="flex items-center gap-2">
                 <BrainCircuit className="w-4 h-4 text-[#C6B9D8]" />
                 <h3 className="text-sm font-semibold text-white font-sans">
-                  Hindsight Episodic Insights
+                  Episodic Precedent Insights
                 </h3>
               </div>
               <Link href="/memory" className="text-xs text-[#C6B9D8] hover:underline font-mono">
@@ -745,13 +716,13 @@ export default function DashboardPage() {
             </div>
 
             <div className="space-y-2.5 text-xs text-[#A1A1AA] font-sans">
-              <div className="p-3 rounded-xl bg-[#141416] border border-white/5 space-y-1">
+              <div className="p-3 rounded-xl bg-white/[0.04] backdrop-blur-md border border-white/5 space-y-1">
                 <div className="font-semibold text-white">Machine Guarding Ergonomics Rule</div>
                 <p className="text-[11px] text-[#8E8E93] leading-relaxed">
                   Interlock bypasses correlate directly with rapid line changeovers. Procedural sign-offs degrade after 42 operating days.
                 </p>
               </div>
-              <div className="p-3 rounded-xl bg-[#141416] border border-white/5 space-y-1">
+              <div className="p-3 rounded-xl bg-white/[0.04] backdrop-blur-md border border-white/5 space-y-1">
                 <div className="font-semibold text-white">Seasonal Logistics Surge Trap</div>
                 <p className="text-[11px] text-[#8E8E93] leading-relaxed">
                   Emergency egress blockages spike by 40% in late-quarter fulfillment periods across Reno and Charlotte distribution nodes.
@@ -765,7 +736,7 @@ export default function DashboardPage() {
       {/* 5. FACILITY PERFORMANCE MATRIX & HISTORICAL ACTIVITY */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* Left: Facility Performance Comparison Section (7 cols) */}
-        <div className="lg:col-span-7 bg-[#101012] border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
+        <div className="lg:col-span-7 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <div>
               <div className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#8E8E93]">
@@ -793,7 +764,7 @@ export default function DashboardPage() {
                 <div
                   key={fac.facility_code}
                   className={`py-3.5 px-3 rounded-xl transition-colors flex items-center justify-between gap-4 ${
-                    isSelected ? "bg-white/[0.06] border border-white/15" : "hover:bg-white/[0.03]"
+                    isSelected ? "bg-white/[0.1] backdrop-blur-md border border-white/20" : "hover:bg-white/[0.04]"
                   }`}
                 >
                   <div className="flex items-center gap-3.5 min-w-0">
@@ -839,7 +810,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Right: Historical Activity Timeline (5 cols) */}
-        <div className="lg:col-span-5 bg-[#101012] border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
+        <div className="lg:col-span-5 bg-black/40 backdrop-blur-xl border border-white/10 rounded-2xl p-5 sm:p-6 shadow-2xl space-y-4">
           <div className="flex items-center justify-between border-b border-white/10 pb-4">
             <div>
               <div className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#8E8E93]">
@@ -892,8 +863,8 @@ export default function DashboardPage() {
               {
                 id: "act-05",
                 badge: "MEMORY RETAINED",
-                title: "Hindsight Episodic Precedent Formed",
-                desc: "Trapped-key captive interlock pattern retained across Meridian memory banks.",
+                title: "Episodic Precedent Formed",
+                desc: "Trapped-key captive interlock pattern retained across facility memory banks.",
                 time: "1 week ago",
                 color: "text-[#C6B9D8]",
               },

@@ -152,10 +152,10 @@ export function Navigation({
         />
       )}
 
-      {/* Primary Sidebar Rail */}
+      {/* Primary Sidebar Rail — Glassy, Compact & Fully Responsive */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 flex flex-col bg-[#09090B] border-r border-white/[0.08] text-white font-sans transition-all duration-200 select-none shadow-2xl ${
-          isCollapsed ? "w-[72px]" : "w-[272px]"
+        className={`fixed top-0 bottom-0 left-0 z-50 flex flex-col bg-black/40 backdrop-blur-2xl border-r border-white/10 text-white font-sans transition-all duration-200 select-none shadow-[0_8px_32px_rgba(0,0,0,0.5)] ${
+          isCollapsed ? "w-[72px]" : "w-[260px]"
         } ${
           mobileOpen
             ? "translate-x-0"
@@ -167,33 +167,33 @@ export function Navigation({
         }}
       >
         {/* 1. BRAND HEADER */}
-        <div className="h-16 px-4 border-b border-white/[0.08] flex items-center justify-between shrink-0">
+        <div className="h-14 px-3.5 border-b border-white/10 bg-white/[0.02] flex items-center justify-between shrink-0">
           <Link
             href="/dashboard"
             onClick={() => handleItemClick("/dashboard")}
-            className="flex items-center gap-3 overflow-hidden group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] rounded-lg p-1"
+            className="flex items-center gap-2.5 overflow-hidden group focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] rounded-lg p-1"
           >
             {/* White Circular Monogram Icon */}
-            <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center text-black shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-105">
-              <div className="w-5 h-5 relative flex items-center justify-center">
+            <div className="w-7 h-7 rounded-full bg-white flex items-center justify-center text-black shrink-0 shadow-sm transition-transform duration-200 group-hover:scale-105">
+              <div className="w-4 h-4 relative flex items-center justify-center">
                 <Image
                   src="/assets/logo.svg"
                   alt="AUDITMIND Logo"
-                  width={18}
-                  height={18}
+                  width={16}
+                  height={16}
                   className="object-contain"
                   priority
                 />
               </div>
             </div>
 
-            {/* Typography: Healthy Positive Spacing, Never Squashed */}
+            {/* Typography */}
             {!isCollapsed && (
               <div className="flex items-baseline gap-2 overflow-hidden min-w-0">
-                <span className="font-bold text-[15px] tracking-[0.06em] text-white leading-none font-sans">
+                <span className="font-bold text-[14px] tracking-[0.04em] text-white leading-none font-sans">
                   AUDITMIND
                 </span>
-                <span className="text-[9px] font-mono px-1.5 py-0.5 bg-[#18181B] text-[#C6B9D8] rounded border border-white/10 font-semibold tracking-wider">
+                <span className="text-[8.5px] font-mono px-1.5 py-0.5 bg-white/10 text-[#C6B9D8] rounded border border-white/10 font-semibold tracking-wider">
                   ENTERPRISE
                 </span>
               </div>
@@ -206,60 +206,42 @@ export function Navigation({
             <button
               onClick={onCloseMobile}
               aria-label="Close mobile navigation"
-              className="p-1.5 rounded-lg text-[#8E8E93] hover:text-white hover:bg-white/10 transition lg:hidden"
+              className="p-1 rounded-lg text-[#8E8E93] hover:text-white hover:bg-white/10 transition lg:hidden"
             >
-              <X className="w-5 h-5" />
+              <X className="w-4 h-4" />
             </button>
 
             {/* Desktop collapse toggle */}
             <button
               onClick={toggle}
               aria-label={isCollapsed ? "Expand sidebar rail" : "Collapse sidebar rail"}
-              className="hidden lg:flex p-1.5 rounded-lg text-[#8E8E93] hover:text-white hover:bg-white/10 transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8]"
+              className="hidden lg:flex p-1 rounded-lg text-[#8E8E93] hover:text-white hover:bg-white/10 transition focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8]"
             >
               {isCollapsed ? (
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="w-3.5 h-3.5" />
               ) : (
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="w-3.5 h-3.5" />
               )}
             </button>
           </div>
         </div>
 
-        {/* 2. TENANT IDENTITY PILL (Expanded view only) */}
-        {!isCollapsed && (
-          <div className="px-4 py-3 bg-[#111114]/80 border-b border-white/[0.06] flex items-center justify-between shrink-0">
-            <div className="min-w-0 overflow-hidden">
-              <div className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#8E8E93] font-semibold">
-                SURVEILLANCE NODE
-              </div>
-              <div className="text-[12.5px] font-medium text-white truncate font-sans mt-0.5">
-                Meridian Industrial Group
-              </div>
-            </div>
-            <span
-              className="w-2 h-2 rounded-full bg-[#C6B9D8] animate-pulse shrink-0 ml-2"
-              title="Hindsight Experiential Memory Active"
-            />
-          </div>
-        )}
-
-        {/* 3. NAVIGATION GROUPS CONTAINER */}
+        {/* 2. COMPACT NAVIGATION GROUPS CONTAINER — Zero Scroll Required */}
         <nav
-          className="flex-1 px-3 py-4 space-y-5 overflow-y-auto overflow-x-hidden scrollbar-none"
+          className="flex-1 px-2.5 py-2.5 space-y-2 overflow-y-auto overflow-x-hidden scrollbar-none"
           role="navigation"
           aria-label="Main Navigation"
         >
           {NAV_GROUPS.map((group) => (
-            <div key={group.group} className="space-y-1">
-              {/* Section Header: Compliant 11px Sans-Serif with Muted Tone */}
+            <div key={group.group} className="space-y-0.5">
+              {/* Compact Section Header */}
               {!isCollapsed && (
-                <div className="px-3.5 pb-1.5 text-[11px] font-sans font-semibold uppercase tracking-[0.08em] text-[#8E8E93]">
+                <div className="px-3 pb-0.5 text-[9.5px] font-mono font-semibold uppercase tracking-[0.1em] text-white/40">
                   {group.group}
                 </div>
               )}
 
-              {/* Group Nav Items */}
+              {/* Group Nav Items — Glassy Aesthetic */}
               {group.items.map((item) => {
                 const isActive = effectivePath === item.href;
                 const Icon = item.icon;
@@ -280,18 +262,15 @@ export function Navigation({
                       href={item.href}
                       onClick={() => handleItemClick(item.href)}
                       aria-current={isActive ? "page" : undefined}
-                      className={`flex items-center gap-3 min-h-[44px] px-3.5 rounded-xl transition-all duration-150 relative font-sans text-[14px] leading-[1.45] font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
+                      className={`flex items-center gap-2.5 min-h-[35px] py-1.5 px-3 rounded-lg transition-all duration-150 relative font-sans text-[13px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
                         isActive
-                          ? "bg-white/[0.08] text-white font-semibold border-l-[3px] border-[#C6B9D8] shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]"
-                          : "text-[#D4D4D8] hover:text-white hover:bg-white/[0.04] border-l-[3px] border-transparent"
+                          ? "bg-white/[0.14] backdrop-blur-md text-white font-semibold border-l-[3px] border-[#C6B9D8] border-r border-t border-b border-white/20 shadow-[0_2px_10px_rgba(255,255,255,0.06)]"
+                          : "text-white/70 hover:text-white bg-white/[0.03] hover:bg-white/[0.08] hover:backdrop-blur-md border border-white/[0.04] hover:border-white/15"
                       }`}
-                      style={{
-                        letterSpacing: "0em",
-                      }}
                     >
                       {/* Icon */}
                       <Icon
-                        className={`w-[18px] h-[18px] shrink-0 transition-colors duration-150 ${
+                        className={`w-4 h-4 shrink-0 transition-colors duration-150 ${
                           isActive
                             ? "text-white"
                             : item.highlight
@@ -300,7 +279,7 @@ export function Navigation({
                         }`}
                       />
 
-                      {/* Item Label (Hidden on collapsed) */}
+                      {/* Item Label */}
                       {!isCollapsed && (
                         <span className="truncate flex-1 tracking-normal font-sans">
                           {item.name}
@@ -309,7 +288,7 @@ export function Navigation({
 
                       {/* AI Feature Highlight Badge */}
                       {!isCollapsed && item.highlight && (
-                        <span className="flex items-center gap-1 text-[10px] font-mono px-2 py-0.5 rounded-md bg-white/10 text-white border border-white/15 font-semibold shrink-0">
+                        <span className="flex items-center gap-1 text-[9px] font-mono px-1.5 py-0.5 rounded-md bg-white/10 text-white border border-white/15 font-semibold shrink-0">
                           <Sparkles className="w-2.5 h-2.5 text-[#C6B9D8]" />
                           AI
                         </span>
@@ -322,9 +301,9 @@ export function Navigation({
           ))}
         </nav>
 
-        {/* 4. BOTTOM SECTION: Notifications, Settings, Profile & Sign Out */}
-        <div className="p-3 border-t border-white/[0.08] bg-[#111114]/90 space-y-1.5 shrink-0">
-          {/* Notifications & Settings Links */}
+        {/* 3. BOTTOM SECTION: Notifications, Settings, Profile */}
+        <div className="p-2.5 border-t border-white/10 bg-black/20 backdrop-blur-md space-y-1 shrink-0">
+          {/* Notifications & Settings Links — Glassy */}
           <div className="space-y-0.5">
             {BOTTOM_ITEMS.map((item) => {
               const isActive = effectivePath === item.href;
@@ -346,20 +325,20 @@ export function Navigation({
                     href={item.href}
                     onClick={() => handleItemClick(item.href)}
                     aria-current={isActive ? "page" : undefined}
-                    className={`flex items-center gap-3 min-h-[40px] px-3.5 rounded-xl transition-all duration-150 relative font-sans text-[13.5px] leading-[1.45] font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
+                    className={`flex items-center gap-2.5 min-h-[33px] py-1 px-3 rounded-lg transition-all duration-150 relative font-sans text-[12.5px] leading-tight font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8] ${
                       isActive
-                        ? "bg-white/[0.08] text-white font-semibold border-l-[3px] border-[#C6B9D8]"
-                        : "text-[#A1A1AA] hover:text-white hover:bg-white/[0.04] border-l-[3px] border-transparent"
+                        ? "bg-white/[0.14] text-white font-semibold border-l-[3px] border-[#C6B9D8] border-r border-t border-b border-white/20"
+                        : "text-[#A1A1AA] hover:text-white bg-white/[0.02] hover:bg-white/[0.08] border border-white/[0.04] hover:border-white/15"
                     }`}
                   >
-                    <Icon className={`w-[18px] h-[18px] shrink-0 ${isActive ? "text-white" : "text-[#A1A1AA]"}`} />
+                    <Icon className={`w-3.5 h-3.5 shrink-0 ${isActive ? "text-white" : "text-[#A1A1AA]"}`} />
                     {!isCollapsed && (
                       <span className="truncate flex-1 tracking-normal font-sans">
                         {item.name}
                       </span>
                     )}
                     {!isCollapsed && item.badge && (
-                      <span className="text-[10px] font-mono px-1.5 py-0.2 rounded-full bg-white/10 text-[#EDEDED] font-semibold">
+                      <span className="text-[9px] font-mono px-1.5 py-0.2 rounded-full bg-white/10 text-[#EDEDED] font-semibold">
                         {item.badge}
                       </span>
                     )}
@@ -373,45 +352,42 @@ export function Navigation({
           {onOpenCommand && !isCollapsed && (
             <button
               onClick={onOpenCommand}
-              className="w-full flex items-center justify-between px-3.5 py-2 rounded-xl bg-white/[0.04] border border-white/10 text-xs text-[#A1A1AA] hover:text-white hover:border-white/20 hover:bg-white/[0.08] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8]"
+              className="w-full flex items-center justify-between px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/10 text-xs text-[#A1A1AA] hover:text-white hover:border-white/20 hover:bg-white/[0.08] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8]"
             >
               <span className="flex items-center gap-2">
-                <Command className="w-3.5 h-3.5 text-white" />
-                <span className="font-sans text-[12px] font-medium">Command Palette</span>
+                <Command className="w-3 h-3 text-white" />
+                <span className="font-sans text-[11.5px] font-medium">Command Palette</span>
               </span>
-              <kbd className="px-1.5 py-0.5 font-mono text-[9px] bg-black text-white rounded border border-white/20">
+              <kbd className="px-1.5 py-0.2 font-mono text-[9px] bg-white/10 text-white rounded border border-white/20">
                 ⌘K
               </kbd>
             </button>
           )}
 
           {/* User Profile & Sign Out Bar */}
-          <div className="pt-1.5 border-t border-white/[0.06]">
+          <div className="pt-1 border-t border-white/[0.06]">
             <button
               onClick={handleLogout}
               className={`w-full flex items-center ${
                 isCollapsed ? "justify-center" : "justify-between"
-              } px-3 py-2 rounded-xl text-xs text-[#A1A1AA] hover:text-white hover:bg-white/[0.06] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8]`}
+              } px-2.5 py-1.5 rounded-lg text-xs text-[#A1A1AA] hover:text-white hover:bg-white/[0.06] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#C6B9D8]`}
               title="Sign out of active auditor session"
             >
-              <div className="flex items-center gap-2.5 min-w-0">
-                <div className="w-6 h-6 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-[10px] font-semibold text-white shrink-0">
+              <div className="flex items-center gap-2 min-w-0">
+                <div className="w-5 h-5 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-[9px] font-semibold text-white shrink-0">
                   SJ
                 </div>
                 {!isCollapsed && (
                   <div className="text-left min-w-0">
-                    <div className="text-[12px] font-medium text-white truncate font-sans">
+                    <div className="text-[11.5px] font-medium text-white truncate font-sans">
                       Sarah Jenkins
-                    </div>
-                    <div className="text-[10px] font-mono text-[#8E8E93] truncate">
-                      Lead Auditor
                     </div>
                   </div>
                 )}
               </div>
 
               {!isCollapsed && (
-                <LogOut className="w-4 h-4 text-[#8E8E93] hover:text-white shrink-0 ml-2" />
+                <LogOut className="w-3.5 h-3.5 text-[#8E8E93] hover:text-white shrink-0 ml-2" />
               )}
             </button>
           </div>

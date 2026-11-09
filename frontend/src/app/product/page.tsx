@@ -3,15 +3,11 @@
 import React from "react";
 import Link from "next/link";
 import { MarketingHeader } from "@/components/MarketingHeader";
-import { CinematicBackground } from "@/components/CinematicBackground";
 import { BrainCircuit, ShieldAlert, CheckCircle2, FileSearch, ArrowRight, Activity, Cpu } from "lucide-react";
 
 export default function ProductPage() {
   return (
-    <div className="relative min-h-screen bg-black text-white flex flex-col justify-between items-center select-none overflow-x-hidden">
-      {/* Unified Cinematic Background matching Homepage */}
-      <CinematicBackground position="fixed" />
-
+    <div className="relative min-h-screen text-white flex flex-col justify-between items-center select-none overflow-x-hidden">
       {/* Floating Header */}
       <MarketingHeader activePage="product" />
 

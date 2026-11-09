@@ -41,16 +41,24 @@ export function AppShell({ children }: { children: React.ReactNode }) {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  // For public landing and marketing pages, render clean full-bleed layout without dashboard sidebar
+  // For public landing and marketing pages, render clean full-bleed layout with persistent cinematic video
   if (isPublicPage) {
-    return <main className="min-h-screen bg-black text-white">{children}</main>;
+    return (
+      <div className="min-h-screen bg-black text-white relative selection:bg-white selection:text-black">
+        <CinematicBackground
+          position="fixed"
+          scrimClassName="bg-gradient-to-b from-black/40 via-transparent to-black/60"
+        />
+        <main className="relative z-10 min-h-screen">{children}</main>
+      </div>
+    );
   }
 
   // Authenticated Command Center Dashboard Layout
   return (
     <div className="min-h-screen bg-black text-white flex antialiased relative selection:bg-white selection:text-black">
-      {/* Ambient Cinematic Video with Calibrated Command Center Scrim */}
-      <CinematicBackground scrimClassName="bg-black/85 backdrop-blur-[1px]" />
+      {/* Ambient Cinematic Video with Calibrated Glassy Command Center Scrim */}
+      <CinematicBackground position="fixed" scrimClassName="bg-black/60 backdrop-blur-[2px]" />
 
       {/* Subtle Architectural Drafting Grid */}
       <div

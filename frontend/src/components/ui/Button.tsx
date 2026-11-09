@@ -32,21 +32,21 @@ export function Button({
 }: ButtonProps) {
   const variantStyles: Record<ButtonVariant, string> = {
     primary:
-      "bg-white hover:bg-zinc-200 text-black font-medium border border-white/20 shadow-sm",
+      "bg-white/90 hover:bg-white text-black font-semibold border border-white/30 backdrop-blur-md shadow-[0_2px_12px_rgba(255,255,255,0.12)]",
     forest:
-      "bg-white hover:bg-zinc-200 text-black font-medium border border-white/20 shadow-sm",
+      "bg-white/90 hover:bg-white text-black font-semibold border border-white/30 backdrop-blur-md shadow-[0_2px_12px_rgba(255,255,255,0.12)]",
     secondary:
-      "bg-zinc-900 hover:bg-zinc-800 text-white border border-zinc-700/80 shadow-subtle",
+      "bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/15 hover:border-white/25 backdrop-blur-xl shadow-sm",
     citron:
-      "bg-white hover:bg-zinc-200 text-black font-medium border border-white/20 shadow-sm",
+      "bg-white/90 hover:bg-white text-black font-semibold border border-white/30 backdrop-blur-md shadow-sm",
     gold:
-      "bg-white hover:bg-zinc-200 text-black font-medium border border-white/20 shadow-sm",
+      "bg-white/90 hover:bg-white text-black font-semibold border border-white/30 backdrop-blur-md shadow-sm",
     teal:
-      "bg-zinc-900 hover:bg-zinc-800 text-white border border-zinc-700/80 shadow-subtle",
+      "bg-white/[0.06] hover:bg-white/[0.12] text-white border border-white/15 hover:border-white/25 backdrop-blur-xl shadow-sm",
     ghost:
-      "bg-transparent text-zinc-300 hover:text-white hover:bg-white/10 border border-transparent",
+      "bg-transparent text-zinc-300 hover:text-white hover:bg-white/10 border border-transparent backdrop-blur-sm",
     danger:
-      "bg-rose-600 hover:bg-rose-500 text-white font-medium border border-transparent shadow-subtle",
+      "bg-rose-500/20 hover:bg-rose-500/30 text-rose-300 hover:text-white font-medium border border-rose-500/30 backdrop-blur-xl shadow-sm",
   };
 
   const sizeStyles: Record<ButtonSize, string> = {

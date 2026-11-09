@@ -36,23 +36,28 @@ export function MarketingHeader({ activePage }: MarketingHeaderProps) {
 
   return (
     <>
-      <header className="w-full max-w-[720px] px-4 pt-6 z-30 flex items-center justify-between md:justify-center gap-[clamp(18px,2.8vw,28px)] animate-slide-down">
-        {/* 1. Circular White Logo Button */}
+      <header className="w-full max-w-[820px] px-4 pt-6 z-30 flex items-center justify-between md:justify-center gap-[clamp(14px,2.2vw,24px)] animate-slide-down">
+        {/* 1. Circular White Logo Button + AuditMind Brand Typography */}
         <Link
           href="/"
-          className="w-[clamp(40px,4.4vw,46px)] h-[clamp(40px,4.4vw,46px)] rounded-full bg-white flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.16)] hover:scale-[1.04] transition-transform shrink-0"
-          title="AUDITMIND Home"
+          className="flex items-center gap-2.5 group focus-visible:outline-none shrink-0"
+          title="AuditMind Home"
         >
-          <div className="w-[72%] h-[72%] relative flex items-center justify-center">
-            <Image
-              src="/assets/logo.svg"
-              alt="AUDITMIND Logo"
-              width={32}
-              height={32}
-              priority
-              className="object-contain"
-            />
+          <div className="w-[clamp(40px,4.4vw,46px)] h-[clamp(40px,4.4vw,46px)] rounded-full bg-white flex items-center justify-center shadow-[0_4px_14px_rgba(0,0,0,0.16)] group-hover:scale-[1.04] transition-transform shrink-0">
+            <div className="w-[72%] h-[72%] relative flex items-center justify-center">
+              <Image
+                src="/assets/logo.svg"
+                alt="AuditMind Logo"
+                width={32}
+                height={32}
+                priority
+                className="object-contain"
+              />
+            </div>
           </div>
+          <span className="font-semibold text-white tracking-[-0.02em] text-[17px] font-sans">
+            AuditMind
+          </span>
         </Link>
 
         {/* 2. Floating White Nav Pill */}

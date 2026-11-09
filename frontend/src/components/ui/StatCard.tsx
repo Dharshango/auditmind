@@ -50,7 +50,7 @@ export function StatCard({
   return (
     <div
       onClick={onClick}
-      className={`bg-surface rounded-xl border p-5 shadow-subtle transition-all duration-200 ${
+      className={`bg-black/40 backdrop-blur-xl rounded-xl border p-5 shadow-subtle transition-all duration-200 ${
         borderAccents[variant]
       } ${onClick ? "cursor-pointer active:scale-[0.99]" : ""} ${className}`}
     >

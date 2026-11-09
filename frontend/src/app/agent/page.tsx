@@ -812,7 +812,7 @@ export default function AgentPage() {
           <div className="flex items-center gap-2 mb-1.5">
             <span className="text-[11px] font-mono font-semibold text-white uppercase tracking-[0.12em] flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-              COGNITIVE REASONING ENGINE • HINDSIGHT v1.2 ACTIVE
+              COGNITIVE REASONING ENGINE • RUNTIME OPERATIONAL
             </span>
             <span className="text-white/20">•</span>
             <span className="text-[11px] text-[#A3A3A3] font-mono">

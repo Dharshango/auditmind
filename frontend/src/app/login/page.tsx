@@ -5,7 +5,6 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { api } from "@/lib/api";
-import { CinematicBackground } from "@/components/CinematicBackground";
 import { Eye, EyeOff, Lock, Mail, ArrowRight, ShieldCheck, Check } from "lucide-react";
 
 export default function LoginPage() {
@@ -43,10 +42,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-black text-white flex flex-col justify-between items-center p-6 select-none overflow-x-hidden">
-      {/* Unified Cinematic Background matching Homepage */}
-      <CinematicBackground position="absolute" />
-
+    <div className="relative min-h-screen text-white flex flex-col justify-between items-center p-6 select-none overflow-x-hidden">
       {/* Top Header */}
       <header className="w-full max-w-5xl flex items-center justify-between z-20 pt-2">
         <Link

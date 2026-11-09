@@ -16,7 +16,7 @@ export function Card({
   return (
     <div
       onClick={onClick}
-      className={`bg-surface rounded-xl border border-border-subtle shadow-subtle p-5 sm:p-6 transition-all duration-200 ${
+      className={`bg-black/40 backdrop-blur-xl rounded-xl border border-white/10 shadow-subtle p-5 sm:p-6 transition-all duration-200 ${
         hoverable
           ? "hover:border-white/20 hover:shadow-elevated cursor-pointer"
           : ""

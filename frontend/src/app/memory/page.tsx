@@ -338,7 +338,7 @@ export default function MemoryPage() {
               >
                 <div className="flex items-center justify-between text-[10px] font-mono">
                   <span className="text-[#C6B9D8] font-semibold">{mem.category || "MEMORY_FRAGMENT"}</span>
-                  <span className="text-[#8E8E8E]">{mem.timestamp || "Retained Q4 2026"}</span>
+                  <span className="text-[#8E8E8E]">{mem.timestamp || "Recently Retained"}</span>
                 </div>
                 <p className="text-xs text-white leading-relaxed">{mem.content || mem.text}</p>
               </div>

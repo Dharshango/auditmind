@@ -24,6 +24,12 @@ class AgentChatResponse(BaseModel):
     response: str
     tools_used: List[Dict[str, Any]] = []
     mode: Optional[str] = None
+    memory_used: Optional[bool] = False
+    summary: Optional[str] = None
+    key_findings: Optional[List[str]] = None
+    evidence: Optional[List[Dict[str, Any]]] = None
+    recommended_actions: Optional[List[str]] = None
+    limitations: Optional[List[str]] = None
 
 
 class AgentRecallRequest(BaseModel):

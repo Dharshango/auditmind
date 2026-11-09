@@ -55,6 +55,7 @@ import { api } from "@/lib/api";
 import { Card } from "@/components/ui/Card";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { StructuredAgentResponse } from "@/components/agent/StructuredAgentResponse";
 
 interface ToolExecution {
   tool?: string;
@@ -101,51 +102,63 @@ const STORAGE_KEY = "auditmind_agent_sessions_v3";
 
 const BENCHMARK_SCENARIOS = [
   {
-    id: "scenario-a",
-    title: "Systemic Recurrence Vectors",
-    badge: "Failure Recurrence",
-    facility: "All facilities",
-    prompt: "Identify systemic egress and fire safety recurrence vectors across manufacturing and warehouse facilities.",
+    id: "benchmark-1",
+    title: "Open Findings by Facility",
+    badge: "Factual Count",
+    facility: "Network Ledger",
+    prompt: "How many facilities currently have open findings?",
     followUps: [
-      "What was the root cause of the egress blockages?",
+      "Which facilities require immediate attention?",
+      "Show all open critical findings",
+      "Which findings are currently past due date?",
+    ],
+  },
+  {
+    id: "benchmark-2",
+    title: "Warehouse Fire-Safety Recurrence",
+    badge: "Historical Investigation",
+    facility: "Warehouse A / B",
+    prompt: "Why is Warehouse A repeatedly experiencing fire-safety documentation problems?",
+    followUps: [
       "Why did the earlier corrective action fail to hold?",
+      "Draft an engineered physical barrier specification",
       "Compare fire safety compliance between Plant A and Plant B",
     ],
   },
   {
-    id: "scenario-b",
+    id: "benchmark-3",
     title: "CAPA Mitigation Durability",
     badge: "90-Day Verification",
-    facility: "All facilities",
-    prompt: "Evaluate CAPA durability: Why did stamping press interlock mitigations fail in subsequent audits?",
-    followUps: [
-      "Show 90-day verification outcomes for press interlocks",
-      "What physical engineering control is recommended?",
-      "How many total machine guarding findings recurred?",
-    ],
-  },
-  {
-    id: "scenario-c",
-    title: "Cross-Facility Risk Topology",
-    badge: "Regulatory Vulnerability",
-    facility: "5 Sites",
-    prompt: "Synthesize cross-facility risk exposure and regulatory vulnerability rankings between Plant A and Warehouse B.",
-    followUps: [
-      "Which facility has the highest critical finding count?",
-      "Compare Plant A and Plant B recurring rates",
-      "Show historical audit scores for Warehouse A",
-    ],
-  },
-  {
-    id: "scenario-d",
-    title: "Forensic Non-Conformance Analysis",
-    badge: "Statutory Citation",
     facility: "Plant A",
-    prompt: "Analyze root-cause failure and statutory liability behind critical non-conformance FIND-2026-001.",
+    prompt: "Was the last corrective action effective?",
     followUps: [
-      "Inspect photographic evidence for FIND-2026-001",
-      "What NFPA standard was cited?",
-      "Show previous corrective actions for this finding",
+      "What evidence supports your conclusion?",
+      "What physical engineering control is recommended for press interlocks?",
+      "Show 90-day verification records for CAPA-2026-003",
+    ],
+  },
+  {
+    id: "benchmark-4",
+    title: "Facility Attention & Drift",
+    badge: "Risk Prioritization",
+    facility: "Enterprise",
+    prompt: "Which facilities require immediate attention?",
+    followUps: [
+      "Compare Plant A and Plant B risk scores",
+      "What is causing compliance drift at Plant A?",
+      "Show the breakdown of open critical findings at Plant B",
+    ],
+  },
+  {
+    id: "benchmark-5",
+    title: "Evidentiary Grounding & Proof",
+    badge: "Evidence Audit",
+    facility: "Multi-Source",
+    prompt: "What evidence supports your conclusion?",
+    followUps: [
+      "Inspect photographic evidence for FIND-2026-003",
+      "Show the Hindsight organizational memory nodes used",
+      "Verify the cryptographic SHA-256 hashes of attached photos",
     ],
   },
 ];
@@ -1120,9 +1133,11 @@ export default function AgentPage() {
                       )}
 
                       {/* Main Message Content */}
-                      <div className="whitespace-pre-wrap leading-relaxed font-sans text-xs sm:text-sm text-white">
-                        {m.content}
-                      </div>
+                      <StructuredAgentResponse
+                        content={m.content}
+                        isUser={isUser}
+                        onOpenCitation={handleOpenCitation}
+                      />
 
                       {/* Citations & Evidence Pills (Clickable) */}
                       {!isUser && m.citations && m.citations.length > 0 && (

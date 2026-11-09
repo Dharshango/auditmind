@@ -53,11 +53,11 @@ import {
   Square,
   Upload,
 } from "lucide-react";
-import { api } from "@/lib/api";
-import { Card } from "@/components/ui/Card";
-import { Badge } from "@/components/ui/Badge";
-import { Button } from "@/components/ui/Button";
-import { StructuredAgentResponse } from "@/components/agent/StructuredAgentResponse";
+import { api } from "../../lib/api";
+import { Card } from "../../components/ui/Card";
+import { Badge } from "../../components/ui/Badge";
+import { Button } from "../../components/ui/Button";
+import { StructuredAgentResponse } from "../../components/agent/StructuredAgentResponse";
 
 interface ToolExecution {
   tool?: string;

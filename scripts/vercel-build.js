@@ -8,17 +8,7 @@ const rootDir = path.resolve(__dirname, '..');
 const frontendDir = path.join(rootDir, 'frontend');
 
 try {
-  // 1. Install frontend dependencies if needed
-  if (!fs.existsSync(path.join(frontendDir, 'node_modules'))) {
-    console.log('[AUDITMIND] Installing frontend dependencies...');
-    execSync('npm install --prefer-offline --no-audit', {
-      cwd: frontendDir,
-      stdio: 'inherit',
-      env: process.env,
-    });
-  }
-
-  // 2. Build the Next.js production bundle
+  // 1. Compile the Next.js production bundle inside frontend
   console.log('[AUDITMIND] Compiling Next.js application in frontend/...');
   execSync('npm run build', {
     cwd: frontendDir,
@@ -26,7 +16,7 @@ try {
     env: process.env,
   });
 
-  // 3. Mirror .next build output to repository root for Vercel framework runtime
+  // 2. Mirror .next build output to repository root for Vercel framework runtime
   const srcNext = path.join(frontendDir, '.next');
   const destNext = path.join(rootDir, '.next');
 
@@ -38,7 +28,7 @@ try {
     fs.cpSync(srcNext, destNext, { recursive: true });
   }
 
-  // 4. Mirror public directory to project root for static asset resolution
+  // 3. Mirror public directory to project root for static asset resolution
   const srcPublic = path.join(frontendDir, 'public');
   const destPublic = path.join(rootDir, 'public');
 

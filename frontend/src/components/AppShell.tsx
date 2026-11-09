@@ -13,11 +13,17 @@ const PUBLIC_ROUTES = ["/", "/login", "/product", "/case-studies", "/contact"];
 export function AppShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isCommandOpen, setIsCommandOpen] = useState(false);
   const [isUploadOpen, setIsUploadOpen] = useState(false);
 
   // Check if current page is public landing, sign-in, or marketing page
   const isPublicPage = PUBLIC_ROUTES.includes(pathname);
+
+  // Close mobile drawer on route change
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [pathname]);
 
   // Global keyboard shortcuts: ⌘K for command palette, ⌘U for upload
   useEffect(() => {
@@ -62,20 +68,23 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         collapsed={collapsed}
         onToggleCollapse={() => setCollapsed(!collapsed)}
         onOpenCommand={() => setIsCommandOpen(true)}
+        mobileOpen={mobileMenuOpen}
+        onCloseMobile={() => setMobileMenuOpen(false)}
       />
 
       {/* Main Content Workspace with Top Command Bar */}
       <div
-        className={`flex-1 flex flex-col min-h-screen transition-all duration-200 relative z-10 ${
-          collapsed ? "ml-20" : "ml-64"
+        className={`flex-1 flex flex-col min-h-screen transition-all duration-200 relative z-10 ml-0 ${
+          collapsed ? "lg:ml-[72px]" : "lg:ml-[272px]"
         }`}
       >
         <TopNav
           onOpenCommand={() => setIsCommandOpen(true)}
           onOpenUpload={() => setIsUploadOpen(true)}
+          onToggleMobileMenu={() => setMobileMenuOpen((prev) => !prev)}
         />
 
-        <main className="flex-1 p-6 md:p-8 overflow-y-auto">
+        <main className="flex-1 p-4 sm:p-6 md:p-8 overflow-y-auto">
           <div className="max-w-7xl mx-auto">{children}</div>
         </main>
       </div>

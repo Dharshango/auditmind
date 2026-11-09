@@ -1,0 +1,158 @@
+{
+  "sidebar": {
+    "width": 272,
+    "height": 1080,
+    "backgroundColor": "rgb(9, 9, 11)",
+    "borderRight": "1px solid rgba(255, 255, 255, 0.08)"
+  },
+  "brand": {
+    "text": "AUDITMIND",
+    "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif",
+    "fontSize": "15px",
+    "fontWeight": "700",
+    "letterSpacing": "0.9px",
+    "lineHeight": "15px"
+  },
+  "sectionHeader": {
+    "text": "OVERVIEW",
+    "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif",
+    "fontSize": "11px",
+    "fontWeight": "600",
+    "letterSpacing": "0.88px",
+    "color": "rgb(142, 142, 147)"
+  },
+  "navItemBox": {
+    "height": 44,
+    "padding": "0px 14px",
+    "gap": "12px"
+  },
+  "navIcon": {
+    "width": 18,
+    "height": 18
+  },
+  "navLabel": {
+    "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif",
+    "fontSize": "14px",
+    "fontWeight": "600",
+    "letterSpacing": "normal",
+    "lineHeight": "20.3px",
+    "color": "rgb(255, 255, 255)"
+  },
+  "activeItem": {
+    "borderLeft": "3px solid rgb(198, 185, 216)",
+    "backgroundColor": "rgba(255, 255, 255, 0.08)",
+    "color": "rgb(255, 255, 255)"
+  },
+  "itemDetails": [
+    {
+      "label": "Executive Overview",
+      "href": "/dashboard",
+      "width": 247,
+      "height": 44,
+      "fontSize": "14px",
+      "lineHeight": "20.3px",
+      "letterSpacing": "normal",
+      "fontWeight": "600",
+      "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif"
+    },
+    {
+      "label": "Facility Network",
+      "href": "/facilities",
+      "width": 247,
+      "height": 44,
+      "fontSize": "14px",
+      "lineHeight": "20.3px",
+      "letterSpacing": "normal",
+      "fontWeight": "500",
+      "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif"
+    },
+    {
+      "label": "Audit Management",
+      "href": "/audits",
+      "width": 247,
+      "height": 44,
+      "fontSize": "14px",
+      "lineHeight": "20.3px",
+      "letterSpacing": "normal",
+      "fontWeight": "500",
+      "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif"
+    },
+    {
+      "label": "Findings",
+      "href": "/findings",
+      "width": 247,
+      "height": 44,
+      "fontSize": "14px",
+      "lineHeight": "20.3px",
+      "letterSpacing": "normal",
+      "fontWeight": "500",
+      "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif"
+    },
+    {
+      "label": "Organizational Memory",
+      "href": "/memory",
+      "width": 247,
+      "height": 44,
+      "fontSize": "14px",
+      "lineHeight": "20.3px",
+      "letterSpacing": "normal",
+      "fontWeight": "500",
+      "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif"
+    },
+    {
+      "label": "Recurring Failures",
+      "href": "/recurring",
+      "width": 247,
+      "height": 44,
+      "fontSize": "14px",
+      "lineHeight": "20.3px",
+      "letterSpacing": "normal",
+      "fontWeight": "500",
+      "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif"
+    },
+    {
+      "label": "Compliance Intelligence",
+      "href": "/intelligence",
+      "width": 247,
+      "height": 44,
+      "fontSize": "14px",
+      "lineHeight": "20.3px",
+      "letterSpacing": "normal",
+      "fontWeight": "500",
+      "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif"
+    },
+    {
+      "label": "Corrective Actions",
+      "href": "/capa",
+      "width": 247,
+      "height": 44,
+      "fontSize": "14px",
+      "lineHeight": "20.3px",
+      "letterSpacing": "normal",
+      "fontWeight": "500",
+      "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif"
+    },
+    {
+      "label": "Evidence Explorer",
+      "href": "/evidence",
+      "width": 247,
+      "height": 44,
+      "fontSize": "14px",
+      "lineHeight": "20.3px",
+      "letterSpacing": "normal",
+      "fontWeight": "500",
+      "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif"
+    },
+    {
+      "label": "AI Compliance Agent",
+      "href": "/agent",
+      "width": 247,
+      "height": 44,
+      "fontSize": "14px",
+      "lineHeight": "20.3px",
+      "letterSpacing": "normal",
+      "fontWeight": "500",
+      "fontFamily": "Inter, \"Segoe UI\", system-ui, sans-serif"
+    }
+  ]
+}

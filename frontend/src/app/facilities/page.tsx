@@ -604,6 +604,22 @@ export default function FacilitiesPage() {
                 <p className="text-neutral-400">All non-conformances remediated and verified durable.</p>
               )}
             </div>
+
+            <div className="pt-3 border-t border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <Link
+                href={`/evidence?q=${encodeURIComponent(selectedFacility.facility_code)}`}
+                className="text-xs text-[#C6B9D8] hover:underline flex items-center gap-1 font-medium"
+              >
+                <span>View Facility Evidence &amp; Exhibits →</span>
+              </Link>
+              <Link
+                href="/agent"
+                className="text-xs text-white hover:text-[#C6B9D8] flex items-center gap-1 font-medium"
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>Investigate with AI Agent →</span>
+              </Link>
+            </div>
           </div>
         </Modal>
       )}

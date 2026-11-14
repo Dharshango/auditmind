@@ -421,9 +421,14 @@ export default function DashboardPage() {
           </div>
 
           {/* Metric 6 */}
-          <div className="p-3 md:p-4 space-y-1">
-            <div className="text-[10px] font-mono text-[#8E8E8E] uppercase tracking-[0.12em]">
-              Recurring Failures
+          <Link
+            href="/recurring"
+            className="p-3 md:p-4 space-y-1 block hover:bg-white/[0.04] transition rounded-lg group cursor-pointer"
+            title="Inspect Recurring Failure Intelligence"
+          >
+            <div className="text-[10px] font-mono text-[#8E8E8E] uppercase tracking-[0.12em] flex items-center justify-between">
+              <span>Recurring Failures</span>
+              <span className="text-[#D5A6B5] group-hover:translate-x-0.5 transition-transform text-[10px]">→</span>
             </div>
             <div className="text-2xl md:text-3xl font-mono font-semibold text-[#D5A6B5] tracking-tight">
               {filteredMetrics.recurringFindings}
@@ -431,7 +436,7 @@ export default function DashboardPage() {
             <div className="text-[11px] text-[#C6B9D8] font-mono">
               {filteredMetrics.recurrenceRate}% recurrence rate
             </div>
-          </div>
+          </Link>
         </div>
       </div>
 

@@ -232,13 +232,23 @@ function renderFormattedInlineText(
     // Standalone EVID-
     else if (token.startsWith("EVID-")) {
       parts.push(
-        <span
+        <button
           key={matchStart}
-          className="inline-flex items-center gap-1 px-1.5 py-0.5 mx-0.5 rounded font-mono text-[10.5px] bg-white/5 text-zinc-300 border border-white/15"
+          type="button"
+          onClick={() =>
+            onOpenCitation?.({
+              type: "evidence",
+              label: token,
+              id: token,
+              link: `/evidence?q=${encodeURIComponent(token)}`,
+            })
+          }
+          className="inline-flex items-center gap-1 px-1.5 py-0.5 mx-0.5 rounded font-mono text-[10.5px] bg-white/10 text-white border border-white/15 hover:border-white transition-colors cursor-pointer"
+          title={`Inspect Forensic Evidence ${token}`}
         >
           <FileText className="w-2.5 h-2.5 text-[#F3D0C0]" />
-          {token}
-        </span>
+          <span>{token}</span>
+        </button>
       );
     }
     // Regulatory Standards

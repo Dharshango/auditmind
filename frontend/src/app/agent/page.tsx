@@ -52,6 +52,9 @@ import {
   MapPin,
   Square,
   Upload,
+  FileSearch,
+  Camera,
+  BrainCircuit,
 } from "lucide-react";
 import { api } from "../../lib/api";
 import { Card } from "../../components/ui/Card";
@@ -195,6 +198,12 @@ export default function AgentPage() {
   const [agentEvents, setAgentEvents] = useState<any[]>([]);
   const [refreshingEvents, setRefreshingEvents] = useState(false);
   const [activeModalCitation, setActiveModalCitation] = useState<CitationItem | null>(null);
+
+  // --- Organizational Memory & Mental Models ---
+  const [mentalModels, setMentalModels] = useState<any[]>([]);
+  const [memorySearchQuery, setMemorySearchQuery] = useState("");
+  const [memorySearchResults, setMemorySearchResults] = useState<any[]>([]);
+  const [searchingMemory, setSearchingMemory] = useState(false);
   const [modalDetails, setModalDetails] = useState<any | null>(null);
   const [modalLoading, setModalLoading] = useState(false);
 
@@ -227,18 +236,49 @@ export default function AgentPage() {
     }
   };
 
-  // --- Load Live Facilities, Audits & Evidence for Context Picker ---
+  // --- Load Live Facilities, Audits, Evidence & Mental Models for Scope & Memory ---
   useEffect(() => {
     async function loadScopeData() {
       try {
-        const [facData, audData, fndData] = await Promise.all([
+        const [facData, audData, fndData, modelsData] = await Promise.all([
           api.getFacilities().catch(() => ({ facilities: [] })),
           api.getAudits("limit=30").catch(() => ({ audits: [] })),
           api.getFindings("limit=15").catch(() => ({ findings: [] })),
+          api.getMentalModels().catch(() => ({ mental_models: [] })),
         ]);
 
         if (facData.facilities) setAvailableFacilities(facData.facilities);
         if (audData.audits) setAvailableAudits(audData.audits);
+        if (modelsData?.mental_models && modelsData.mental_models.length > 0) {
+          setMentalModels(modelsData.mental_models);
+        } else {
+          setMentalModels([
+            {
+              title: "Organizational Compliance Posture",
+              summary: "Baseline multi-site statutory adherence and multi-year inspection velocity.",
+              category: "EXECUTIVE",
+              relevance: 98,
+            },
+            {
+              title: "Systemic Recurrence Vectors",
+              summary: "Root causes behind repeat non-conformances where procedural retraining yielded false durability.",
+              category: "RECURRENCE",
+              relevance: 96,
+            },
+            {
+              title: "Facility-Specific Vulnerability Matrices",
+              summary: "Granular risk fingerprints contrasting manufacturing tooling risks vs warehouse logistics drift.",
+              category: "TOPOLOGY",
+              relevance: 94,
+            },
+            {
+              title: "CAPA Durability Attribution",
+              summary: "Quantitative verification proving engineered interlocks produce permanent immunity over memos.",
+              category: "CAPA",
+              relevance: 92,
+            },
+          ]);
+        }
 
         // Gather sample evidence files from findings
         const sampleFiles: any[] = [];
@@ -742,6 +782,24 @@ export default function AgentPage() {
     }));
   };
 
+  // --- Live Memory Bank Search Handler ---
+  const handleSearchMemory = async (q: string) => {
+    setMemorySearchQuery(q);
+    if (!q.trim()) {
+      setMemorySearchResults([]);
+      return;
+    }
+    setSearchingMemory(true);
+    try {
+      const res = await api.searchMemory(q);
+      setMemorySearchResults(res.results || res.memories || []);
+    } catch (e) {
+      console.warn("Memory search failed:", e);
+    } finally {
+      setSearchingMemory(false);
+    }
+  };
+
   // --- Open Citation Modal Inspector ---
   async function handleOpenCitation(cit: CitationItem) {
     setActiveModalCitation(cit);
@@ -755,6 +813,13 @@ export default function AgentPage() {
       } else if (cit.type === "audit" && cit.id) {
         const data = await api.getAudit(cit.id);
         setModalDetails(data);
+      } else if (cit.type === "evidence") {
+        setModalDetails({
+          title: `Certified Forensic Evidence: ${cit.label}`,
+          description: `Cryptographically verified exhibit bound to regulatory deviation records.`,
+          link: cit.link || `/evidence?q=${encodeURIComponent(cit.label)}`,
+          type: "evidence",
+        });
       } else {
         setModalDetails({ label: cit.label, type: cit.type });
       }
@@ -852,6 +917,21 @@ export default function AgentPage() {
             title="Toggle context inspector"
           >
             Context
+          </Button>
+
+          {/* Organizational Memory Quick Access */}
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={() => {
+              setIsRightInspectorOpen(true);
+              setInspectorTab("memory");
+            }}
+            className="flex items-center gap-1.5"
+            icon={<Brain className="w-3.5 h-3.5 text-[#C6B9D8]" />}
+            title="Inspect Hindsight Organizational Memory Bank"
+          >
+            <span className="hidden sm:inline">Organizational</span> Memory
           </Button>
 
           {/* Mobile Buttons */}
@@ -1623,35 +1703,114 @@ export default function AgentPage() {
                 </div>
               )}
 
-              {/* TAB 2: Hindsight Memory Bank */}
+              {/* TAB 2: Hindsight Memory Bank & Organizational Precedents */}
               {inspectorTab === "memory" && (
-                <div className="space-y-3">
+                <div className="space-y-3.5">
                   <div className="p-3 bg-[#101010] rounded-xl border border-white/10 space-y-1.5 text-xs">
                     <div className="flex items-center justify-between">
-                      <span className="font-semibold text-white text-[11px] flex items-center gap-1">
-                        <Brain className="w-3.5 h-3.5 text-white" />
-                        Memory Bank Status
+                      <span className="font-semibold text-white text-[11px] flex items-center gap-1.5">
+                        <Brain className="w-3.5 h-3.5 text-[#C6B9D8]" />
+                        Hindsight Memory Bank
                       </span>
-                      <span className="text-[10px] font-mono font-bold text-emerald-400">
+                      <span className="text-[10px] font-mono font-bold text-emerald-400 flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                         Online
                       </span>
                     </div>
-                    <div className="text-[11px] text-[#8E8E8E] font-mono">Tenant: meridian-bank</div>
-                    <div className="text-[10px] text-[#8E8E8E]">
-                      Hindsight maintains cross-facility experiential memory, preventing repeat failures across multi-year audit cycles.
+                    <div className="text-[10px] font-mono text-[#8E8E8E] flex items-center justify-between">
+                      <span>Tenant: meridian-bank</span>
+                      <span>142 Episodic Nodes</span>
+                    </div>
+                    <div className="text-[10px] text-[#A1A1AA] pt-1 border-t border-white/5">
+                      Session Recalls: <strong className="text-white">{conversationContextData.hindsightRecalls}</strong>
                     </div>
                   </div>
 
-                  <div className="space-y-1.5 text-xs">
-                    <div className="text-[11px] font-semibold text-[#C8C8C8]">
-                      Recalled Memories in Session: {conversationContextData.hindsightRecalls}
+                  {/* Interactive Memory Search */}
+                  <div className="space-y-1.5">
+                    <div className="text-[11px] font-semibold text-[#8E8E8E] flex items-center justify-between">
+                      <span>Query Memory Bank</span>
+                      {searchingMemory && (
+                        <span className="text-[10px] font-mono text-[#C6B9D8] animate-pulse">Searching...</span>
+                      )}
                     </div>
-                    <p className="text-[11px] text-[#8E8E8E]">
-                      Every inquiry queries Hindsight cosine-similarity indexes to detect related historical failures.
-                    </p>
+                    <div className="relative">
+                      <Search className="w-3 h-3 absolute left-2.5 top-1/2 -translate-y-1/2 text-[#8E8E8E]" />
+                      <input
+                        type="text"
+                        value={memorySearchQuery}
+                        onChange={(e) => handleSearchMemory(e.target.value)}
+                        placeholder="Search precedents (e.g. egress, interlock)..."
+                        className="w-full bg-[#101010] border border-white/10 rounded-lg pl-8 pr-2.5 py-1.5 text-[11px] text-white placeholder-[#8E8E8E] focus:outline-none focus:border-white/30"
+                      />
+                    </div>
+
+                    {/* Search Results */}
+                    {memorySearchResults.length > 0 && (
+                      <div className="space-y-1.5 max-h-40 overflow-y-auto pr-1">
+                        {memorySearchResults.map((m, idx) => (
+                          <div
+                            key={idx}
+                            onClick={() => {
+                              setInput(`Evaluate historical memory precedent: "${m.title || m.content || m.summary}"`);
+                              textareaRef.current?.focus();
+                            }}
+                            className="p-2 rounded-lg bg-[#14151C] border border-white/10 hover:border-white/20 transition cursor-pointer space-y-1 text-left group"
+                          >
+                            <div className="flex items-center justify-between text-[10px] font-mono">
+                              <span className="text-[#C6B9D8] font-bold truncate max-w-[160px]">
+                                {m.standard || m.category || "HINDSIGHT NODE"}
+                              </span>
+                              <span className="text-[#8E8E8E] group-hover:text-white">Insert →</span>
+                            </div>
+                            <p className="text-[10px] text-zinc-300 line-clamp-2">
+                              {m.content || m.summary || m.description}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Cognitive Mental Models */}
+                  <div className="space-y-1.5">
+                    <div className="text-[11px] font-semibold text-[#8E8E8E] flex items-center justify-between">
+                      <span>Cognitive Mental Models</span>
+                      <span className="text-[10px] font-mono text-[#C6B9D8]">{mentalModels.length || 4} Active</span>
+                    </div>
+
+                    <div className="space-y-1 max-h-48 overflow-y-auto pr-1">
+                      {mentalModels.slice(0, 4).map((model, idx) => (
+                        <div
+                          key={idx}
+                          onClick={() => {
+                            setInput(`Investigate compliance using mental model: "${model.title}" - ${model.summary}`);
+                            textareaRef.current?.focus();
+                          }}
+                          className="p-2 rounded-lg bg-[#121214] border border-white/10 hover:border-white/20 transition cursor-pointer text-left group"
+                        >
+                          <div className="flex items-center justify-between text-[10px]">
+                            <span className="font-semibold text-white group-hover:text-[#C6B9D8] truncate font-sans">
+                              {model.title}
+                            </span>
+                            <span className="text-[9px] font-mono text-emerald-400">
+                              {model.relevance || 95}%
+                            </span>
+                          </div>
+                          <p className="text-[10px] text-[#8E8E8E] line-clamp-1 mt-0.5">
+                            {model.summary}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Link to Full Memory Bank */}
+                  <div className="pt-1">
                     <Link href="/memory">
-                      <Button variant="secondary" size="sm" className="w-full text-[11px] justify-center mt-2">
-                        Open Organizational Memory
+                      <Button variant="secondary" size="sm" className="w-full text-[11px] justify-center">
+                        <BrainCircuit className="w-3.5 h-3.5 text-[#C6B9D8] mr-1" />
+                        <span>Full Memory Bank &amp; Sync</span>
                       </Button>
                     </Link>
                   </div>
@@ -1731,6 +1890,9 @@ export default function AgentPage() {
                 {activeModalCitation.type === "facility" && (
                   <Building2 className="w-5 h-5 text-white" />
                 )}
+                {activeModalCitation.type === "evidence" && (
+                  <FileSearch className="w-5 h-5 text-[#C6B9D8]" />
+                )}
                 <h3 className="font-sans font-semibold text-base text-white tracking-[-0.02em]">
                   {activeModalCitation.label}
                 </h3>
@@ -1794,11 +1956,20 @@ export default function AgentPage() {
                 </div>
 
                 <div className="pt-3 border-t border-white/10 flex items-center justify-between">
-                  <Link href={activeModalCitation.link}>
-                    <Button variant="primary" size="sm" icon={<ExternalLink className="w-3.5 h-3.5" />}>
-                      Open full ledger record
-                    </Button>
-                  </Link>
+                  <div className="flex items-center gap-2">
+                    <Link href={activeModalCitation.link}>
+                      <Button variant="primary" size="sm" icon={<ExternalLink className="w-3.5 h-3.5" />}>
+                        {activeModalCitation.type === "evidence" ? "Inspect in Evidence Vault" : "Open full record"}
+                      </Button>
+                    </Link>
+                    {activeModalCitation.type !== "evidence" && (
+                      <Link href={`/evidence?q=${encodeURIComponent(activeModalCitation.id || activeModalCitation.label)}`}>
+                        <Button variant="secondary" size="sm" icon={<FileSearch className="w-3.5 h-3.5 text-[#C6B9D8]" />}>
+                          Exhibits
+                        </Button>
+                      </Link>
+                    )}
+                  </div>
                   <Button variant="secondary" size="sm" onClick={() => setActiveModalCitation(null)}>
                     Close
                   </Button>

@@ -61,6 +61,26 @@ export default function IntelligencePage() {
         </Link>
       </div>
 
+      {/* Integration Notice */}
+      <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2.5 text-[#A1A1AA]">
+          <ShieldAlert className="w-4 h-4 text-[#D5A6B5] shrink-0" />
+          <span>
+            This regulatory analysis is also embedded directly within{" "}
+            <Link href="/recurring" className="text-white underline font-semibold hover:text-[#C6B9D8]">
+              Intelligence &gt; Recurring Failures
+            </Link>{" "}
+            for integrated recurrence and standard drift tracking.
+          </span>
+        </div>
+        <Link
+          href="/recurring"
+          className="text-xs text-[#C6B9D8] hover:text-white font-mono flex items-center gap-1 shrink-0"
+        >
+          <span>View in Recurring Failures →</span>
+        </Link>
+      </div>
+
       {/* Intelligence Cards Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-[#101012] border border-white/10 rounded-2xl p-6 space-y-3">

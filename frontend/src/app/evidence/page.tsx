@@ -611,6 +611,17 @@ export default function EvidenceExplorerPage() {
   const [copiedHash, setCopiedHash] = useState<string | null>(null);
   const [refreshing, setRefreshing] = useState(false);
 
+  // Sync contextual query params from Audits, Findings, CAPA, or AI Agent
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const q = params.get("q") || params.get("finding") || params.get("audit") || params.get("capa");
+      if (q) {
+        setSearchQuery(q);
+      }
+    }
+  }, []);
+
   // Load reviews persisted in localStorage on mount
   useEffect(() => {
     try {
@@ -727,6 +738,23 @@ export default function EvidenceExplorerPage() {
             <ShieldCheck className="w-3.5 h-3.5" />
             <span>Review Exhibit</span>
           </button>
+        </div>
+      </div>
+
+      {/* Contextual Access Notice */}
+      <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2.5 text-[#A1A1AA]">
+          <FileSearch className="w-4 h-4 text-[#C6B9D8] shrink-0" />
+          <span>
+            Evidence Explorer is accessible contextually from{" "}
+            <Link href="/audits" className="text-white hover:underline font-semibold">Audits</Link>,{" "}
+            <Link href="/findings" className="text-white hover:underline font-semibold">Findings</Link>,{" "}
+            <Link href="/capa" className="text-white hover:underline font-semibold">Corrective Actions</Link>, and{" "}
+            <Link href="/agent" className="text-white hover:underline font-semibold">AI Agent</Link> responses.
+          </span>
+        </div>
+        <div className="flex items-center gap-2 text-xs font-mono text-[#8E8E8E]">
+          <span>{filteredItems.length} Exhibits Indexed</span>
         </div>
       </div>
 

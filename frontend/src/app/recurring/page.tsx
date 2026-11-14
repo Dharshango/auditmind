@@ -19,6 +19,8 @@ import {
   ArrowUpRight,
   Clock,
   HelpCircle,
+  BrainCircuit,
+  FileSearch,
 } from "lucide-react";
 import {
   BarChart,
@@ -35,6 +37,7 @@ import { api } from "@/lib/api";
 export default function RecurringFailuresPage() {
   const [analytics, setAnalytics] = useState<any>(null);
   const [recurringFindings, setRecurringFindings] = useState<any[]>([]);
+  const [driftMatrix, setDriftMatrix] = useState<any[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>("ALL");
   const [searchQuery, setSearchQuery] = useState("");
   const [loading, setLoading] = useState(true);
@@ -45,12 +48,14 @@ export default function RecurringFailuresPage() {
     try {
       setLoading(true);
       setError(null);
-      const [analyticsData, findingsData] = await Promise.all([
+      const [analyticsData, findingsData, driftData] = await Promise.all([
         api.getRecurrenceAnalytics(),
         api.getFindings("is_recurring=true&limit=100"),
+        api.getDriftMatrix().catch(() => ({ drift_matrix: [] })),
       ]);
       setAnalytics(analyticsData);
       setRecurringFindings(findingsData.findings || []);
+      setDriftMatrix(driftData?.drift_matrix || []);
     } catch (err: any) {
       console.error("Error loading recurrence analytics:", err);
       setError("Failed to load recurring failure intelligence from backend.");
@@ -285,16 +290,121 @@ export default function RecurringFailuresPage() {
         </div>
       </div>
 
-      {/* 4. RECURRING NON-CONFORMANCES LEDGER TABLE */}
+      {/* 4. STATUTORY EXPOSURE CLUSTERS & REGULATORY DRIFT MATRIX (Integrated from Compliance Intelligence) */}
+      <div className="bg-[#101010] border border-white/10 rounded-2xl p-6 shadow-2xl space-y-4">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+          <div>
+            <div className="text-[10px] font-mono uppercase tracking-[0.12em] text-[#8E8E8E] flex items-center gap-1.5">
+              <ShieldAlert className="w-3.5 h-3.5 text-[#D5A6B5]" />
+              STATUTORY EXPOSURE &amp; REGULATORY DRIFT
+            </div>
+            <h3 className="text-base font-semibold text-white tracking-tight font-sans mt-0.5">
+              Concentration of Deviations by Standard &amp; Category
+            </h3>
+          </div>
+          <div className="flex items-center gap-2">
+            <Link
+              href="/agent"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/15 text-xs text-[#C6B9D8] transition font-medium"
+            >
+              <Sparkles className="w-3 h-3 text-[#C6B9D8]" />
+              <span>Analyze Standard Exposure in AI Agent</span>
+            </Link>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          {driftMatrix.length > 0 ? (
+            driftMatrix.map((item, idx) => {
+              const recurrenceRate = Math.round(
+                (item.total_recurrences / (item.total_findings || 1)) * 100
+              );
+              const isSelected = selectedCategory === item.category;
+
+              return (
+                <div
+                  key={idx}
+                  onClick={() => {
+                    setSelectedCategory(isSelected ? "ALL" : item.category);
+                  }}
+                  className={`p-4 rounded-xl border transition cursor-pointer space-y-2 select-none ${
+                    isSelected
+                      ? "bg-white/10 border-white text-white shadow-lg"
+                      : "bg-[#171717] border-white/10 hover:border-white/20 text-[#A1A1AA]"
+                  }`}
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="text-[10px] font-mono uppercase tracking-wider text-[#8E8E8E] truncate">
+                      {item.category.includes("OSHA")
+                        ? "OSHA Standard"
+                        : item.category.includes("EPA")
+                        ? "EPA Standard"
+                        : item.category.includes("ISO")
+                        ? "ISO Standard"
+                        : "Operational SOP"}
+                    </span>
+                    <span
+                      className={`text-[10px] font-mono px-2 py-0.5 rounded-full font-semibold ${
+                        recurrenceRate > 25
+                          ? "bg-red-950/40 text-red-300 border border-red-500/30"
+                          : "bg-white/5 text-[#C8C8C8] border border-white/10"
+                      }`}
+                    >
+                      {recurrenceRate}% Drift
+                    </span>
+                  </div>
+
+                  <h4 className="text-xs font-semibold text-white line-clamp-1">
+                    {item.category}
+                  </h4>
+
+                  <div className="flex items-center justify-between text-[11px] font-mono text-[#8E8E8E] pt-1 border-t border-white/5">
+                    <span>Deviations: <strong className="text-white">{item.total_findings}</strong></span>
+                    <span>Repeats: <strong className="text-[#D5A6B5]">{item.total_recurrences}</strong></span>
+                  </div>
+                </div>
+              );
+            })
+          ) : (
+            <div className="col-span-full py-4 text-center text-xs text-[#8E8E8E]">
+              Aggregating multi-facility statutory drift matrix...
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* 5. RECURRING NON-CONFORMANCES LEDGER TABLE */}
       <div className="bg-[#101010] border border-white/10 rounded-2xl overflow-hidden shadow-2xl">
-        <div className="p-4 border-b border-white/10 flex items-center justify-between">
+        <div className="p-4 border-b border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
             <h3 className="font-semibold text-white text-sm font-sans">
-              Chronic Non-Conformance Inventory ({recurringFindings.length})
+              Chronic Non-Conformance Inventory ({filteredFindings.length})
             </h3>
             <p className="text-xs text-[#8E8E8E]">
               All statutory deviations flagged as recurring across multiple inspection cycles.
+              {selectedCategory !== "ALL" && (
+                <span className="ml-1 text-[#C6B9D8]">
+                  Filtered by standard: <strong>{selectedCategory}</strong> (
+                  <button
+                    onClick={() => setSelectedCategory("ALL")}
+                    className="underline hover:text-white ml-0.5"
+                  >
+                    Clear
+                  </button>
+                  )
+                </span>
+              )}
             </p>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <Link
+              href="/evidence"
+              className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-[#C8C8C8] hover:text-white transition border border-white/10 inline-flex items-center gap-1.5 font-medium"
+            >
+              <FileSearch className="w-3.5 h-3.5 text-[#C6B9D8]" />
+              <span>Evidence Vault</span>
+            </Link>
           </div>
         </div>
 
@@ -307,7 +417,7 @@ export default function RecurringFailuresPage() {
                 <th className="py-3 px-4 font-semibold">Operating Site</th>
                 <th className="py-3 px-4 font-semibold text-center">Recurrence Velocity</th>
                 <th className="py-3 px-4 font-semibold">Severity Rating</th>
-                <th className="py-3 px-4 font-semibold text-right">Root Cause Analysis</th>
+                <th className="py-3 px-4 font-semibold text-right">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
@@ -340,13 +450,23 @@ export default function RecurringFailuresPage() {
                     </span>
                   </td>
                   <td className="py-3 px-4 text-right">
-                    <Link
-                      href="/agent"
-                      className="px-2.5 py-1 rounded-lg bg-[#18181B] text-white hover:bg-white hover:text-black transition text-[11px] font-medium border border-white/10 inline-flex items-center gap-1"
-                    >
-                      <span>Investigate</span>
-                      <ArrowUpRight className="w-3 h-3" />
-                    </Link>
+                    <div className="inline-flex items-center gap-1.5 justify-end">
+                      <Link
+                        href={`/evidence?q=${encodeURIComponent(f.finding_code)}`}
+                        className="px-2 py-1 rounded-lg bg-white/5 hover:bg-white/10 text-white transition text-[11px] font-medium border border-white/10 inline-flex items-center gap-1"
+                        title="View Photo & Document Evidence"
+                      >
+                        <FileSearch className="w-3 h-3 text-[#C6B9D8]" />
+                        <span>Evidence</span>
+                      </Link>
+                      <Link
+                        href="/agent"
+                        className="px-2.5 py-1 rounded-lg bg-[#18181B] text-white hover:bg-white hover:text-black transition text-[11px] font-medium border border-white/10 inline-flex items-center gap-1"
+                      >
+                        <span>Investigate</span>
+                        <ArrowUpRight className="w-3 h-3" />
+                      </Link>
+                    </div>
                   </td>
                 </tr>
               ))}

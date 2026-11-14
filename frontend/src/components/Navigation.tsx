@@ -9,11 +9,8 @@ import {
   Building2,
   FileCheck2,
   AlertTriangle,
-  BrainCircuit,
   History,
-  ShieldAlert,
   CheckCircle2,
-  FileSearch,
   BotMessageSquare,
   ChevronLeft,
   ChevronRight,
@@ -38,25 +35,17 @@ export const NAV_GROUPS: { group: string; items: NavItem[] }[] = [
     ],
   },
   {
-    group: "AUDITS",
+    group: "AUDIT OPERATIONS",
     items: [
       { name: "Audit Management", href: "/audits", icon: FileCheck2 },
       { name: "Findings", href: "/findings", icon: AlertTriangle },
+      { name: "Corrective Actions", href: "/capa", icon: CheckCircle2 },
     ],
   },
   {
     group: "INTELLIGENCE",
     items: [
-      { name: "Organizational Memory", href: "/memory", icon: BrainCircuit },
       { name: "Recurring Failures", href: "/recurring", icon: History },
-      { name: "Compliance Intelligence", href: "/intelligence", icon: ShieldAlert },
-    ],
-  },
-  {
-    group: "OPERATIONS",
-    items: [
-      { name: "Corrective Actions", href: "/capa", icon: CheckCircle2 },
-      { name: "Evidence Explorer", href: "/evidence", icon: FileSearch },
     ],
   },
   {

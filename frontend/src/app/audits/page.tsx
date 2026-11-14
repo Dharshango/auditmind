@@ -23,6 +23,7 @@ import {
   TrendingDown,
   TrendingUp,
   FileCheck2,
+  FileSearch,
 } from "lucide-react";
 import { Modal } from "@/components/ui/Modal";
 import { UploadAuditModal } from "@/components/UploadAuditModal";
@@ -158,8 +159,17 @@ export default function AuditsPage() {
           </p>
         </div>
 
-        {/* Primary Upload Action */}
+        {/* Primary Actions */}
         <div className="flex items-center gap-3 shrink-0">
+          <Link
+            href="/evidence"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#101010] border border-white/10 hover:border-white/25 text-xs text-[#A1A1AA] hover:text-white transition shadow-sm"
+            title="Open Evidence Explorer"
+          >
+            <FileSearch className="w-3.5 h-3.5 text-[#C6B9D8]" />
+            <span>Evidence Vault</span>
+          </Link>
+
           <button
             onClick={handleRefresh}
             className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#101010] border border-white/10 hover:border-white/25 text-xs text-[#A1A1AA] hover:text-white transition shadow-sm"
@@ -415,7 +425,14 @@ export default function AuditsPage() {
               )}
             </div>
 
-            <div className="pt-2 flex items-center justify-between border-t border-white/10">
+            <div className="pt-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-t border-white/10">
+              <Link
+                href={`/evidence?audit=${encodeURIComponent(activeAudit.audit_code)}`}
+                className="text-xs text-white hover:text-[#C6B9D8] flex items-center gap-1.5 font-medium px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 transition"
+              >
+                <FileSearch className="w-3.5 h-3.5 text-[#C6B9D8]" />
+                <span>Examine Evidence Exhibits ({activeAudit.findings?.length || 0}) →</span>
+              </Link>
               <Link
                 href="/agent"
                 className="text-xs text-[#C6B9D8] hover:underline flex items-center gap-1 font-medium"

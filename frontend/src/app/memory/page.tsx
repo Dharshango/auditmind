@@ -156,6 +156,13 @@ export default function MemoryPage() {
 
         {/* Sync Action */}
         <div className="flex items-center gap-3 shrink-0">
+          <Link
+            href="/agent"
+            className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/15 text-xs text-white transition font-medium"
+          >
+            <Sparkles className="w-3.5 h-3.5 text-[#C6B9D8]" />
+            <span>Query in AI Agent</span>
+          </Link>
           <button
             onClick={handleSync}
             disabled={syncing}
@@ -165,6 +172,26 @@ export default function MemoryPage() {
             <span>{syncing ? "Synchronizing Bank..." : "Sync Memory Bank"}</span>
           </button>
         </div>
+      </div>
+
+      {/* Integration Notice */}
+      <div className="p-3.5 rounded-xl bg-white/[0.04] border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+        <div className="flex items-center gap-2.5 text-[#A1A1AA]">
+          <BrainCircuit className="w-4 h-4 text-[#C6B9D8] shrink-0" />
+          <span>
+            Hindsight episodic memories and cognitive mental models are integrated directly into{" "}
+            <Link href="/agent" className="text-white underline font-semibold hover:text-[#C6B9D8]">
+              AI &gt; AI Compliance Agent
+            </Link>{" "}
+            for autonomous precedent recall during audits.
+          </span>
+        </div>
+        <Link
+          href="/agent"
+          className="text-xs text-[#C6B9D8] hover:text-white font-mono flex items-center gap-1 shrink-0"
+        >
+          <span>Open in AI Agent →</span>
+        </Link>
       </div>
 
       {/* 2. KPI METRICS STRIP */}
